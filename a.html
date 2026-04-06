@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ARCHITECTURAL MONOLITH</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ff907f",
+                        "on-primary-fixed": "#410000",
+                        "surface-container-high": "#eaead1",
+                        "inverse-surface": "#303221",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "surface-variant": "#e4e4cc",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad4",
+                        "surface-container": "#efefd7",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#e3beb8",
+                        "on-primary-container": "#ff907f",
+                        "on-background": "#1b1d0e",
+                        "inverse-on-surface": "#f2f2d9",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "tertiary-container": "#8b0000",
+                        "on-tertiary-fixed-variant": "#920703",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "surface-tint": "#b52619",
+                        "on-error-container": "#93000a",
+                        "secondary": "#5e5e5e",
+                        "on-secondary-container": "#646464",
+                        "surface-bright": "#fbfbe2",
+                        "tertiary": "#610000",
+                        "surface": "#f5f5dc",
+                        "on-surface": "#1b1d0e",
+                        "on-primary-fixed-variant": "#920703",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#5a403c",
+                        "outline": "#8e706b",
+                        "surface-container-low": "#f5f5dc",
+                        "surface-container-highest": "#e4e4cc",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-secondary-fixed-variant": "#474747",
+                        "primary": "#610000",
+                        "on-tertiary-fixed": "#410000",
+                        "inverse-primary": "#ffb4a8",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdad4",
+                        "background": "#f5f5dc",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e2e2e2",
+                        "surface-dim": "#dbdcc3",
+                        "primary-container": "#8b0000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .monolith-shadow {
+            filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+        }
+
+        .text-outline {
+            -webkit-text-stroke: 1px #610000;
+            color: transparent;
+        }
+
+        .thin-border {
+            border: 0.5px solid rgba(97, 0, 0, 0.2);
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        .monolithic-text {
+            line-height: 0.85;
+        }
+
+        .tonal-step-bg {
+            background-color: #fbfbe2;
+        }
+
+        .tonal-shift-bg-cream {
+            background-color: #f5f5dc;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* Initial locked state */
+        .locked {
+            overflow: hidden !important;
+            height: 100vh !important;
+        }
+
+        /* Scroll Reveal 3D Effects */
+        .reveal-3d {
+            opacity: 0;
+            transform: translateY(100px) rotateX(15deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+        .reveal-3d.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px) rotateY(-10deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px) rotateY(10deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg);
+        }
+    </style>
+</head>
+
+<body id="mainBody" class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-white locked">
+
+    <!-- PORTAL (Only OPEN button) -->
+    <div id="portalOverlay" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-surface-container-low transition-all duration-[1200ms] ease-in-out">
+        <!-- Texture Overlay -->
+        <div class="absolute inset-0 pointer-events-none z-0 opacity-[0.02]"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBffoI5a4sERXwlBpREqxe5uhSFIVbm9-EetvUeUbccpJKx8ucH4O4Hw7jsKuYchiravjSj1nG3Js02r3xRod-cVmuoTk-XtYbJAVDSUvCIH0PJDcrjaaRZw8wFNbwneBv4IAJH_UukgWwUoVtXEp-jnwXlYlKo7DlyValCATlh8C5dO2sqR24CZrOnpB2UA-gUU70GWH_bNb9hgBrcmcZXvAmJLKuhW5HkkhZ6NH-Ey4V5y8lFIFgJ-S5VcwnvpS2gIpXYNaGnru4');">
+        </div>
+        
+        <!-- Open Button -->
+        <button id="openPortalBtn"
+            class="group relative w-56 h-56 md:w-64 md:h-64 bg-primary-container rounded-full flex items-center justify-center transform transition-all hover:scale-105 duration-500 active:scale-95 monolith-shadow z-10">
+            <span id="openText" class="font-headline text-3xl md:text-4xl font-bold tracking-[0.25em] text-white uppercase select-none relative z-20 transition-opacity duration-200">
+                OPEN
+            </span>
+            <!-- Subtle Inner Seal Ring -->
+            <div id="openRings" class="absolute inset-0 transition-opacity duration-200">
+                <div class="absolute inset-4 border border-white/10 rounded-full pointer-events-none"></div>
+                <div class="absolute inset-5 border border-white/5 rounded-full scale-110 group-hover:scale-100 transition-transform duration-700 pointer-events-none"></div>
+            </div>
+            
+            <!-- Expanding ripple effect on click -->
+            <div id="ripple" class="absolute inset-0 bg-primary-container rounded-full opacity-0 pointer-events-none transform scale-100"></div>
+        </button>
+    </div>
+
+    <!-- MAIN CONTENT (Hidden initially) -->
+    <div id="mainContent" class="opacity-0 translate-y-16 hidden transition-all duration-1000 delay-300 ease-[cubic-bezier(0.25, 1, 0.5, 1)]">
+        
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 bg-stone-50/70 backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-6 max-w-full tonal-step-bg border-b border-outline-variant/20">
+            <div class="text-xl md:text-2xl font-bold tracking-tighter text-black font-headline uppercase cursor-pointer" onclick="window.scrollTo(0,0)">
+                ARCHITECTURAL MONOLITH
+            </div>
+            <div class="hidden md:flex gap-12 items-center text-[11px] md:text-sm nav-links">
+                <a class="nav-link font-headline font-bold uppercase tracking-tighter text-black hover:text-red-800 transition-colors duration-300" href="#bio">BIO</a>
+                <a class="nav-link font-headline font-bold uppercase tracking-tighter text-black hover:text-red-800 transition-colors duration-300" href="#work">WORK</a>
+                <a class="nav-link font-headline font-bold uppercase tracking-tighter text-black hover:text-red-800 transition-colors duration-300" href="#contact">CONTACT</a>
+            </div>
+        </nav>
+
+        <!-- Bio Layer / Intro -->
+        <section id="bio" class="relative pt-48 pb-32 px-6 md:px-12">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-0 border-t border-primary/20 pt-12">
+                    <div class="md:col-span-12 mb-24">
+                        <h1 class="text-6xl md:text-[10rem] font-headline font-bold uppercase tracking-tighter leading-[0.85] text-on-surface">
+                            ABOUT<br />ME
+                        </h1>
+                    </div>
+                    <!-- Structural Image Slab -->
+                    <div class="md:col-span-7 relative overflow-hidden bg-surface-container-high h-[500px] md:h-[700px]">
+                        <img alt="Professional Profile" class="w-full h-full object-cover grayscale contrast-125"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTl4PiIHzxgnE-K_fEfOGgk-fqRYHX_MMl6ptmx3uA-KpmXDuQXneucWnMiDda9kDxexUzlb_WRCYnQUAzpvrL70mPNy2nraa59rwTL1OdnE8xGCUPRppihEnAbdHejYt6o-EsNfVvI8fG409hDu7WKhM_KnL3zuDWeO0dF-gzrJEg-LG3XWaMjSXz-CjtnIf--wkXXDJB6jIpnScxgouGg4VIrr57jPz6pc4Dp8q9Hh24nH4f_DSB52wzIEfuJYr3zNv949DCQ8U" />
+                        <div class="absolute inset-0 bg-primary/5 mix-blend-multiply"></div>
+                    </div>
+                    <!-- Minimal Detail Slab -->
+                    <div class="md:col-span-5 md:pl-24 pt-12 md:pt-0 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-headline font-bold text-3xl md:text-4xl uppercase tracking-tighter text-primary mb-6">
+                                CREATIVE<br />DIRECTOR
+                            </h3>
+                            <p class="font-body text-base md:text-lg text-on-surface-variant font-medium leading-relaxed reveal-3d">
+                                I am an architect of digital and physical experiences, blending monolithic aesthetics with functional systems. My approach strips away the unnecessary, focusing purely on raw materials, stark contrasts, and engineered perfection. I thrive at the intersection of design, technology, and brutalist philosophy to craft memorable, high-impact solutions.
+                            </p>
+                        </div>
+                        <div class="mt-12 md:mt-24 grid grid-cols-2 gap-8 border-t border-outline-variant/30 pt-12">
+                            <div class="flex flex-col reveal-left">
+                                <span class="font-headline font-bold text-sm md:text-lg uppercase tracking-[0.2em] text-primary mb-3">Location</span>
+                                <span class="font-body text-base md:text-xl font-bold uppercase">United Kingdom</span>
+                            </div>
+                            <div class="flex flex-col reveal-right">
+                                <span class="font-headline font-bold text-sm md:text-lg uppercase tracking-[0.2em] text-primary mb-3">Status</span>
+                                <span class="font-body text-base md:text-xl font-bold uppercase">Active Q3 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Principles -->
+            <div class="mt-32 md:mt-64 max-w-7xl mx-auto reveal-3d">
+                <div class="flex flex-col md:flex-row justify-between items-baseline mb-16 md:mb-24 gap-8 md:border-b border-primary/20 md:pb-12 border-none">
+                    <h2 class="text-4xl md:text-8xl font-headline font-bold uppercase tracking-tighter text-on-surface leading-none border-b md:border-none border-primary/20 pb-8 md:pb-0 w-full">
+                        CORE<br /><span class="text-primary">PRINCIPLES</span>
+                    </h2>
+                    <div class="font-headline font-bold text-[10px] uppercase tracking-[0.3em] text-tertiary hidden md:block">
+                        SYSTEM ANNOTATIONS.01
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-primary/10 border border-primary/10">
+                    <!-- Principle 01 -->
+                    <div class="bg-surface p-12 aspect-square flex flex-col justify-between group hover:bg-primary-container transition-colors duration-500 cursor-default">
+                        <span class="font-headline text-5xl md:text-6xl font-extrabold text-outline group-hover:text-white transition-colors">01</span>
+                        <div>
+                            <h4 class="font-headline font-bold text-lg md:text-xl uppercase tracking-tight group-hover:text-white">BRUTALIST HONESTY</h4>
+                        </div>
+                    </div>
+                    <!-- Principle 02 -->
+                    <div class="bg-surface p-12 aspect-square flex flex-col justify-between group hover:bg-primary-container transition-colors duration-500 cursor-default">
+                        <span class="font-headline text-5xl md:text-6xl font-extrabold text-outline group-hover:text-white transition-colors">02</span>
+                        <div>
+                            <h4 class="font-headline font-bold text-lg md:text-xl uppercase tracking-tight group-hover:text-white">MONOLITHIC WEIGHT</h4>
+                        </div>
+                    </div>
+                    <!-- Principle 03 -->
+                    <div class="bg-surface p-12 aspect-square flex flex-col justify-between group hover:bg-primary-container transition-colors duration-500 cursor-default">
+                        <span class="font-headline text-5xl md:text-6xl font-extrabold text-outline group-hover:text-white transition-colors">03</span>
+                        <div>
+                            <h4 class="font-headline font-bold text-lg md:text-xl uppercase tracking-tight group-hover:text-white">FLOW</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKILLS & TECHNOLOGY -->
+            <div class="mt-32 md:mt-48 max-w-7xl mx-auto reveal-3d">
+                <h2 class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
+                    TECHNOLOGY / <span class="text-primary">SKILLS</span>
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 min-h-[160px]">
+                    <div class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-bold text-lg mb-2 group-hover:text-primary">FRONTEND</h4>
+                        <p class="font-body text-xs uppercase text-stone-500 tracking-widest leading-relaxed">HTML, CSS, JS, React, Tailwind, Framer</p>
+                    </div>
+                    <div class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-bold text-lg mb-2 group-hover:text-primary">BACKEND</h4>
+                        <p class="font-body text-xs uppercase text-stone-500 tracking-widest leading-relaxed">Node.js, Express, Python, Django, SQL</p>
+                    </div>
+                    <div class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-bold text-lg mb-2 group-hover:text-primary">TOOLS</h4>
+                        <p class="font-body text-xs uppercase text-stone-500 tracking-widest leading-relaxed">Git, Docker, Webpack, Vite, Figma</p>
+                    </div>
+                    <div class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-bold text-lg mb-2 group-hover:text-primary">SYSTEMS</h4>
+                        <p class="font-body text-xs uppercase text-stone-500 tracking-widest leading-relaxed">AWS, Vercel, Linux, System Arch</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPERIENCE & EDUCATION -->
+            <div class="mt-32 md:mt-48 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 reveal-3d">
+                <!-- Experience -->
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
+                        EXPERIENCE
+                    </h2>
+                    <div class="space-y-12">
+                        <div class="relative pl-6 border-l-2 border-primary/30 reveal-left">
+                            <span class="absolute -left-[5px] top-1 w-2 h-2 bg-primary rounded-full"></span>
+                            <span class="font-headline text-[10px] tracking-widest text-primary font-bold uppercase">2022 - PRESENT</span>
+                            <h4 class="font-headline text-2xl font-bold uppercase mt-2">LEAD ARCHITECT</h4>
+                            <p class="font-body text-sm text-stone-500 mt-2">Monolithic Studios</p>
+                            <p class="font-body text-sm mt-4 leading-relaxed">Spearheaded the development of a unified brutalist design system. Led a team of 5 engineers to deploy scalable front-end solutions.</p>
+                        </div>
+                        <div class="relative pl-6 border-l-2 border-primary/30 reveal-left">
+                            <span class="absolute -left-[5px] top-1 w-2 h-2 bg-primary rounded-full"></span>
+                            <span class="font-headline text-[10px] tracking-widest text-primary font-bold uppercase">2019 - 2022</span>
+                            <h4 class="font-headline text-2xl font-bold uppercase mt-2">SENIOR UI/UX ENGINEER</h4>
+                            <p class="font-body text-sm text-stone-500 mt-2">Void Technologies</p>
+                            <p class="font-body text-sm mt-4 leading-relaxed">Architected interactive high-performance web applications using React and custom WebGL shaders.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
+                        EDUCATION
+                    </h2>
+                    <div class="space-y-12">
+                        <div class="relative pl-6 border-l-2 border-primary/30 reveal-right">
+                            <span class="absolute -left-[5px] top-1 w-2 h-2 bg-primary rounded-full"></span>
+                            <span class="font-headline text-[10px] tracking-widest text-primary font-bold uppercase">2015 - 2019</span>
+                            <h4 class="font-headline text-2xl font-bold uppercase mt-2">B.S. COMPUTER SCIENCE</h4>
+                            <p class="font-body text-sm text-stone-500 mt-2">University of Technology</p>
+                            <p class="font-body text-sm mt-4 leading-relaxed">Specialized in systems architecture and human-computer interaction.</p>
+                        </div>
+                        <div class="relative pl-6 border-l-2 border-primary/30 reveal-right">
+                            <span class="absolute -left-[5px] top-1 w-2 h-2 bg-primary rounded-full"></span>
+                            <span class="font-headline text-[10px] tracking-widest text-primary font-bold uppercase">2019</span>
+                            <h4 class="font-headline text-2xl font-bold uppercase mt-2">DESIGN THEORY DIPLOMA</h4>
+                            <p class="font-body text-sm text-stone-500 mt-2">Institute of Modern Arts</p>
+                            <p class="font-body text-sm mt-4 leading-relaxed">Focused on brutalism and minimalist communication through typography.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACHIEVEMENTS & CERTIFICATIONS -->
+            <div class="mt-32 md:mt-48 max-w-7xl mx-auto reveal-3d">
+                <h2 class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
+                    ACHIEVEMENTS / CERTIFICATIONS
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-surface-container-low p-8 border-l-4 border-primary">
+                        <p class="font-headline font-bold text-xl uppercase tracking-tighter">AWS Certified Solutions Architect</p>
+                        <p class="font-body text-xs tracking-widest text-stone-500 mt-2">AMAZON WEB SERVICES - 2023</p>
+                    </div>
+                    <div class="bg-surface-container-low p-8 border-l-4 border-primary">
+                        <p class="font-headline font-bold text-xl uppercase tracking-tighter">Awwwards Site of the Day</p>
+                        <p class="font-body text-xs tracking-widest text-stone-500 mt-2">OBSIDIAN VOID PROJECT - 2024</p>
+                    </div>
+                    <div class="bg-surface-container-low p-8 border-l-4 border-primary">
+                        <p class="font-headline font-bold text-xl uppercase tracking-tighter">Hackathon Grand Prize Winner</p>
+                        <p class="font-body text-xs tracking-widest text-stone-500 mt-2">GLOBAL FINTECH SUMMIT - 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work / Projects -->
+        <section id="work" class="pt-24 border-t border-outline-variant/30">
+            <!-- Section Header -->
+            <div class="px-6 md:px-12 mb-24 md:mb-48 flex flex-col justify-between items-start md:items-baseline gap-8">
+                <h1 class="text-5xl md:text-[8rem] font-headline font-bold uppercase tracking-tighter leading-[0.85] text-on-surface">
+                    SELECTED<br />PROJECTS
+                </h1>
+                <div class="mt-8 flex gap-2 items-center text-primary font-headline font-bold tracking-widest text-xs">
+                    <span class="w-12 h-[1px] bg-primary"></span>
+                    EXPLORATIONS
+                </div>
+            </div>
+
+            <!-- Project Grid: 3D Layout -->
+            <div class="px-6 md:px-12 space-y-48 md:space-y-96 pb-32 md:pb-64 perspective-1000">
+                <!-- Project 01: The Obsidian Void -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center preserve-3d reveal-3d">
+                    <div class="md:col-start-1 md:col-span-7 bg-surface-container-low p-2">
+                        <div class="aspect-[4/5] overflow-hidden bg-black group relative">
+                            <img alt="Brutalist concrete interior"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvzUcPaHYPfXmXGqrEKzdTTozf5yPHwEJFWw6Mq_R1Xxq3KxI4WQFtJU7yt1GuqQoK1akmMwX_YFpo8thLVdGumb5LTyz37w_GBgsLGU1Oq1PJxaSjZh8ffQsinnR1vtpOU8-PYqfQEQADKrWCLWyxyIxadhz7Re34vqwIQfE-vLVxmFGJdMDKT0m9ZkWixBVUIE_QK-IfNR_EYO28sUFiKRpMUXFqIxO2NUJtGSvmdyAXYH7kd6capJYdst8dX15pT7FadbZE9C0" />
+                        </div>
+                    </div>
+                    <div class="md:col-start-9 md:col-span-4 flex flex-col gap-4 transform md:translate-z-10 md:translate-x-4">
+                        <span class="font-headline font-bold text-xs tracking-[0.3em] text-primary">01 / 2024</span>
+                        <h2 class="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tighter text-on-surface">THE OBSIDIAN VOID</h2>
+                        <p class="text-on-surface-variant text-sm font-body uppercase tracking-wider leading-relaxed">
+                            A conceptual meditation on infinite space.
+                        </p>
+                        <div class="mt-4">
+                            <button class="border border-outline px-6 py-4 font-headline font-bold uppercase tracking-widest text-[10px] flex items-center gap-4 hover:bg-on-surface hover:text-surface transition-all">
+                                CASE STUDY
+                                <span class="material-symbols-outlined text-xs">arrow_outward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 02: Ivory Monolith -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center preserve-3d reveal-3d">
+                    <div class="md:col-start-2 md:col-span-4 flex flex-col gap-4 order-2 md:order-1 transform md:translate-z-20 md:-translate-x-8">
+                        <span class="font-headline font-bold text-xs tracking-[0.3em] text-primary">02 / 2023</span>
+                        <h2 class="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tighter text-on-surface">IVORY MONOLITH</h2>
+                        <p class="text-on-surface-variant text-sm font-body uppercase tracking-wider leading-relaxed">
+                            Minimalist boundaries of stone.
+                        </p>
+                        <div class="mt-4">
+                            <button class="border border-outline px-6 py-4 font-headline font-bold uppercase tracking-widest text-[10px] flex items-center gap-4 hover:bg-on-surface hover:text-surface transition-all">
+                                EXPLORE
+                                <span class="material-symbols-outlined text-xs">arrow_outward</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:col-start-6 md:col-span-7 bg-surface-container-highest p-2 order-1 md:order-2">
+                        <div class="aspect-[16/9] overflow-hidden bg-stone-200 group">
+                            <img alt="White minimalist villa"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-85 group-hover:opacity-100"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV7cdyYEStmhXgY1rUoRb2IOFvc-VRGLtQR9b1YMSlyHyR-Cx9RjjUGmB6OKlRhxAFx4QhaJiTUv1Ur_m7Y1DfuK-ZqGlBpB3bYVdIRWQNW4ybGgmvPXowpX2C5U5h-FYSqOX5QpL9kY--p97DkY6F7OcqFQbj5LIjvhRS1l_JiCFbf0CCYBqklZcU0xrufD-4GT0AtXQpzZH4RmR4tp0EbbGeFmWYCw4l482JENhAuq2wS1dbVwyLTklO4uBn7xTZpCj5w5fJ0dU" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 03: Crimson Tectonics -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center preserve-3d reveal-3d">
+                    <div class="md:col-start-3 md:col-span-8 bg-tertiary-container p-2 relative">
+                        <div class="aspect-[21/9] overflow-hidden group">
+                            <img alt="Deep red feature wall"
+                                class="w-full h-full object-cover mix-blend-multiply opacity-60 transition-all duration-1000 group-hover:opacity-100 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbsTAcsB_YzpLeo6fXIJ2PhovktLS88GCSUZ4c0k1xfJYuGJ6qlCJq-hGZ9BBYS8XiDw-P7hBtBffS1801ug1FM4NpItmMgdhS_eeGPpZbgDUE5XIvpGGMCDhWVx4cwxPG5EuUSEZGWxbSGRCdATWkKcSPkCaWxlhD6O7DUg9NqtDCN7Zkyb8qcbyJynrY87uXQs81ucsIfpw3Mg6TfIITU_O5asJfKg_Eau6eidESJPnek1hJ_tYQSA6mxnDJXVoHPxGbOG0UlHw" />
+                        </div>
+                        <!-- Inset Content Card -->
+                        <div class="absolute -bottom-8 -right-4 md:-bottom-16 md:-right-16 bg-surface p-8 md:p-12 w-[85%] md:max-w-sm shadow-2xl">
+                            <span class="font-headline font-bold text-xs tracking-[0.3em] text-primary">03 / 2023</span>
+                            <h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tighter mt-4 mb-4">CRIMSON TECTONICS</h2>
+                            <p class="text-[12px] md:text-sm font-body text-on-surface-variant uppercase tracking-widest leading-relaxed mb-6">
+                                Material aggression in timber and lacquer.
+                            </p>
+                            <a class="text-xs md:text-sm font-headline font-bold tracking-[0.2em] text-primary hover:text-on-surface transition-colors uppercase inline-flex items-center gap-1" href="#">
+                                PROJECT SPECS
+                                <span class="material-symbols-outlined text-[12px] md:text-sm">chevron_right</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="pt-24 border-t border-outline-variant/30">
+            <!-- Contact Hero -->
+            <div class="px-6 md:px-12 mb-16 md:mb-24">
+                <div class="grid grid-cols-12 gap-6">
+                    <div class="col-span-12 md:col-span-10">
+                        <h1 class="font-headline font-bold uppercase tracking-tighter text-5xl md:text-[10vw] monolithic-text text-black">
+                            LET'S WORK<br />TOGETHER
+                        </h1>
+                    </div>
+                    <div class="col-span-12 md:col-span-2 flex items-end justify-start md:justify-end mt-4 md:mt-0">
+                        <span class="material-symbols-outlined text-primary text-6xl"
+                            style="font-variation-settings: 'wght' 200;">arrow_downward</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Interaction Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t border-stone-200 reveal-3d">
+                <!-- Left Slab Image -->
+                <div class="bg-primary relative overflow-hidden flex items-center justify-center min-h-[300px] md:min-h-full">
+                    <img class="w-full h-full object-cover grayscale mix-blend-multiply opacity-40 absolute inset-0"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNZu2ukD3_jZD3u4VVo-gdpnNg-2Dc7ns_i5iD6kC6AcdrIkIvOvigL9JB2a8T3zhC8yItwk0fDwQqn2y5VZsRI26TdQNw2T5_QbBaELqZ97dlDu9aZskUbe4W_iPFftEsTl28pKwFWBkS6Xl0Y0aXx_idYo7wMRFdRChM5-pu9AC9xohewCSK-2FtOo2ogiF1-FWhfvwCO3eLo27A0i6ncw24bAkL_8kjNsK1lBpYvVMtJzUdaALx3QRit097ch2zFQfNh3UbK_c" />
+                </div>
+                <!-- Right Slab: Form -->
+                <div class="bg-surface-container-low p-8 md:p-24 flex flex-col justify-center">
+                    <div>
+                        <h3 class="font-headline text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-12 md:mb-16">START A CONVERSATION</h3>
+                        <form class="space-y-12">
+                            <div class="relative">
+                                <label class="block font-headline text-sm md:text-base tracking-widest uppercase mb-4 text-stone-500">YOUR NAME</label>
+                                <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-2 border-stone-300 focus:ring-0 focus:border-primary text-xl md:text-3xl font-headline uppercase p-0 pb-2 placeholder:text-stone-300"
+                                    placeholder="ALEXANDER VOID" type="text" />
+                            </div>
+                            <div class="relative">
+                                <label class="block font-headline text-sm md:text-base tracking-widest uppercase mb-4 text-stone-500">EMAIL ADDRESS</label>
+                                <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-2 border-stone-300 focus:ring-0 focus:border-primary text-xl md:text-3xl font-headline uppercase p-0 pb-2 placeholder:text-stone-300"
+                                    placeholder="HELLO@DOMAIN.COM" type="email" />
+                            </div>
+                            <div class="relative">
+                                <label class="block font-headline text-sm md:text-base tracking-widest uppercase mb-4 text-stone-500">PROJECT BRIEF</label>
+                                <textarea class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-2 border-stone-300 focus:ring-0 focus:border-primary text-xl md:text-3xl font-headline uppercase p-0 pb-2 placeholder:text-stone-300 resize-none"
+                                    placeholder="TELL US ABOUT THE VISION..." rows="3"></textarea>
+                            </div>
+                            <div class="pt-8">
+                                <button type="button" class="w-full md:w-auto text-base md:text-lg px-12 py-6 bg-primary text-on-primary font-headline font-bold uppercase tracking-widest transition-all hover:bg-black">
+                                    SEND INQUIRY
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Essential Contact Details Grid -->
+            <div class="bg-surface px-6 md:px-12 py-16 md:py-24">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+                    <div>
+                        <h4 class="font-headline text-xs tracking-widest uppercase text-stone-400 mb-6 underline decoration-primary decoration-2 underline-offset-8">
+                            DIRECT CONTACT
+                        </h4>
+                        <p class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter mb-2">HELLO@ARCHMONOLITH.COM</p>
+                        <p class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter">+1 (800) 555-0192</p>
+                    </div>
+                    <div>
+                        <h4 class="font-headline text-xs tracking-widest uppercase text-stone-400 mb-6 underline decoration-primary decoration-2 underline-offset-8">
+                            OFFICE LOCATION
+                        </h4>
+                        <p class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter">72 BRUTALIST WAY</p>
+                        <p class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter">CONCRETE DISTRICT, NY</p>
+                    </div>
+                    <div>
+                        <h4 class="font-headline text-xs tracking-widest uppercase text-stone-400 mb-6 underline decoration-primary decoration-2 underline-offset-8">
+                            AVAILABILITY
+                        </h4>
+                        <p class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter">Q3 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Footer -->
+        <footer class="w-full py-16 px-6 md:px-12 tonal-shift-bg-cream flex flex-col md:flex-row justify-between items-end border-t border-outline-variant/30">
+            <div class="flex flex-col gap-6 md:gap-8 w-full md:w-auto items-start mb-12 md:mb-0">
+                <div class="text-lg font-bold text-black font-headline tracking-tighter uppercase">
+                    ARCHITECTURAL MONOLITH
+                </div>
+                <div class="flex gap-8">
+                    <!-- GitHub -->
+                    <a class="text-stone-500 hover:text-black transition-all duration-300 transform hover:scale-110" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a class="text-stone-500 hover:text-black transition-all duration-300 transform hover:scale-110" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a class="text-stone-500 hover:text-black transition-all duration-300 transform hover:scale-110" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a class="text-stone-500 hover:text-black transition-all duration-300 transform hover:scale-110" href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+                    </a>
+                </div>
+                <p class="font-manrope text-[10px] md:text-xs tracking-widest uppercase text-stone-500 pt-4">
+                    ©2024 Aryan Surya S. ALL RIGHTS RESERVED.
+                </p>
+            </div>
+            <div class="flex flex-col items-start md:items-end w-full md:w-auto gap-6 mt-8 md:mt-0 pt-8 md:pt-0 border-t border-outline/20 md:border-none">
+                <button onclick="window.scrollTo(0,0)" class="group flex items-center gap-4 font-headline font-bold uppercase tracking-tighter text-red-900 border-none bg-transparent cursor-pointer">
+                    <span class="text-sm">BACK TO TOP</span>
+                    <div class="w-12 h-12 flex items-center justify-center bg-black group-hover:bg-primary transition-colors">
+                        <span class="material-symbols-outlined text-white" style="font-variation-settings: 'wght' 700;">arrow_upward</span>
+                    </div>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script for Opening Animation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const openBtn = document.getElementById("openPortalBtn");
+            const portalOverlay = document.getElementById("portalOverlay");
+            const mainContent = document.getElementById("mainContent");
+            const body = document.getElementById("mainBody");
+            const ripple = document.getElementById("ripple");
+
+            // Setup Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.reveal-3d, .reveal-left, .reveal-right').forEach(el => {
+                observer.observe(el);
+            });
+
+            const openText = document.getElementById("openText");
+            const openRings = document.getElementById("openRings");
+
+            openBtn.addEventListener("click", () => {
+                // 1. Instantly hide the TEXT and RINGS of the open button
+                openText.style.opacity = "0";
+                openRings.style.opacity = "0";
+                
+                // Clear the button's background and shadow so it effectively disappears
+                openBtn.classList.remove('bg-primary-container', 'monolith-shadow');
+                openBtn.classList.add('bg-transparent');
+
+                // 2. Smoothly transition the entire screen from cream to red
+                portalOverlay.style.transition = "background-color 1s ease-in-out";
+                portalOverlay.classList.remove("bg-surface-container-low");
+                portalOverlay.classList.add("bg-primary-container");
+
+                // 3. Hide portal completely by fading it slowly with a deep backdrop blur
+                setTimeout(() => {
+                   portalOverlay.style.transition = "all 1.5s cubic-bezier(0.4, 0, 0.2, 1)";
+                   portalOverlay.style.backdropFilter = "blur(15px)";
+                   portalOverlay.style.opacity = "0";
+                   portalOverlay.style.transform = "scale(1.05)";
+                }, 800); // Wait for red transition
+
+                // 4. Remove locking & Reveal content sliding down more elegantly
+                setTimeout(() => {
+                    portalOverlay.style.display = "none";
+                    body.classList.remove("locked");
+                    
+                    // Render Main Content
+                    mainContent.classList.remove("hidden");
+                    
+                    // Trigger reflow to apply transition
+                    void mainContent.offsetWidth;
+
+                    // Slide down and fade in the whole content wrapper
+                    mainContent.classList.remove("opacity-0", "translate-y-16");
+                    mainContent.classList.add("opacity-100", "translate-y-0");
+
+                }, 1200); // Smoother, longer delay for entry
+            });
+
+            // Smooth Scroll active navigation state
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    // Provide a little offset so it highlights before we hit the absolute top
+                    if (scrollY >= sectionTop - 250) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('text-red-900');
+                    link.classList.add('text-black');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.remove('text-black');
+                        link.classList.add('text-red-900');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
