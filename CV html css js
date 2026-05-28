@@ -76,23 +76,7 @@
 
         /* --- ENTRIES (Education, Projects) --- */
         .entry {
-            margin-bottom: 20px;
-        }
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 5px;
-        }
-
-        .title {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #000;
-        }
-
-        .subtitle {
-            font-style: italic;
+            mars
             color: #444;
         }
 
