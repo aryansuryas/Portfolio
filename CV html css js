@@ -55,22 +55,7 @@
         }
 
         h2.role-title {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin: 0 0 15px 0;
-            color: var(--light-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }ss
-            gap: 5px;
-        }
-.contact-line a {
-            colors
-        }
-
-        .separator {
-            margin: 0 8px;
-            color: #999;
+ s
             font-weight: 300;
         }
 
