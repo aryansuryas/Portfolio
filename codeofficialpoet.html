@@ -8,17 +8,271 @@
 
     <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700&amp;family=Montserrat:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Tailwind CSS -->
-    <script src="script.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ff907f",
+                        "on-primary-fixed": "#410000",
+                        "surface-container-high": "#eaead1",
+                        "inverse-surface": "#303221",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "surface-variant": "#e4e4cc",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad4",
+                        "surface-container": "#efefd7",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#e3beb8",
+                        "on-primary-container": "#ff907f",
+                        "on-background": "#1b1d0e",
+                        "inverse-on-surface": "#f2f2d9",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "tertiary-container": "#8b0000",
+                        "on-tertiary-fixed-variant": "#920703",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "surface-tint": "#b52619",
+                        "on-error-container": "#93000a",
+                        "secondary": "#5e5e5e",
+                        "on-secondary-container": "#646464",
+                        "surface-bright": "#fbfbe2",
+                        "tertiary": "#610000",
+                        "surface": "#f5f5dc",
+                        "on-surface": "#1b1d0e",
+                        "on-primary-fixed-variant": "#920703",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#5a403c",
+                        "outline": "#8e706b",
+                        "surface-container-low": "#f5f5dc",
+                        "surface-container-highest": "#e4e4cc",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-secondary-fixed-variant": "#474747",
+                        "primary": "#610000",
+                        "on-tertiary-fixed": "#410000",
+                        "inverse-primary": "#ffb4a8",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdad4",
+                        "background": "#f5f5dc",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e2e2e2",
+                        "surface-dim": "#dbdcc3",
+                        "primary-container": "#8b0000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
 
-    <link rel="stylesheet" href="style.css" />
+        .monolith-shadow {
+            filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+        }
+
+        .text-outline {
+            -webkit-text-stroke: 1px #610000;
+            color: transparent;
+        }
+
+        .thin-border {
+            border: 0.5px solid rgba(97, 0, 0, 0.2);
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        .monolithic-text {
+            line-height: 0.85;
+        }
+
+        .tonal-step-bg {
+            background-color: #fbfbe2;
+        }
+
+        .tonal-shift-bg-cream {
+            background-color: #f5f5dc;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* Initial locked state */
+        .locked {
+            overflow: hidden !important;
+            height: 100vh !important;
+        }
+
+        /* Scroll Reveal 3D Effects */
+        .reveal-3d {
+            opacity: 0;
+            transform: translateY(100px) rotateX(15deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+
+        .reveal-3d.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px) rotateY(-10deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px) rotateY(10deg);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg);
+        }
+
+        /* ── Pill Navigation Bar (A.HTML style) ── */
+        .pill-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            pointer-events: none;
+            width: auto;
+        }
+
+        .pill-nav ul {
+            pointer-events: auto;
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin: 0;
+            border: 1px solid rgba(97, 0, 0, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .pill-nav li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pill-nav li.pill-active {
+            background-color: black;
+            padding: 10px 15px;
+        }
+
+        .pill-nav li a {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .pill-nav li .pill-icon {
+            font-size: 14px;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .pill-nav li.pill-active a,
+        .pill-nav li.pill-active .pill-icon {
+            color: white;
+        }
+
+        .pill-nav li:not(.pill-active):hover {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 10px 15px;
+        }
+
+        /* Responsive pill nav */
+        @media (max-width: 768px) {
+            .pill-nav ul {
+                gap: 0.8rem;
+                padding: 8px 15px;
+            }
+
+            .pill-nav li a {
+                font-size: 12px;
+            }
+
+            .pill-nav li .pill-icon {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pill-nav ul {
+                gap: 0.3rem;
+                padding: 6px 10px;
+            }
+
+            .pill-nav li a {
+                font-size: 10px;
+            }
+
+            .pill-nav li .pill-icon {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body id="mainBody"
@@ -33,57 +287,48 @@
         </div>
 
         <!-- Open Button -->
-        <button id="openPortalBtn" class="wax-seal-button relative z-10">
-            <img src="watermarked_img_15462945499227691851.png" alt="Wax Seal Open Button">
+        <button id="openPortalBtn"
+            class="group relative w-56 h-56 md:w-64 md:h-64 bg-primary-container rounded-full flex items-center justify-center transform transition-all hover:scale-105 duration-500 active:scale-95 monolith-shadow z-10">
+            <span id="openText"
+                class="font-headline text-3xl md:text-4xl font-bold tracking-[0.25em] text-white uppercase select-none relative z-20 transition-opacity duration-200">
+                OPEN
+            </span>
+            <!-- Subtle Inner Seal Ring -->
+            <div id="openRings" class="absolute inset-0 transition-opacity duration-200">
+                <div class="absolute inset-4 border border-white/10 rounded-full pointer-events-none"></div>
+                <div
+                    class="absolute inset-5 border border-white/5 rounded-full scale-110 group-hover:scale-100 transition-transform duration-700 pointer-events-none">
+                </div>
+            </div>
+
+            <!-- Expanding ripple effect on click -->
+            <div id="ripple"
+                class="absolute inset-0 bg-primary-container rounded-full opacity-0 pointer-events-none transform scale-100">
+            </div>
         </button>
     </div>
-
-    <!-- Navigation (Fixed to viewport) -->
-    <nav id="mainNav"
-        class="opacity-0 -translate-y-full hidden fixed top-0 left-0 w-full z-[1000] flex justify-center items-center py-6 pointer-events-none transition-all duration-1000 ease-[cubic-bezier(0.25, 1, 0.5, 1)]">
-        <ul id="pillNav"
-            class="pointer-events-auto flex items-center justify-between gap-2 md:gap-4 lg:gap-8 bg-surface-container-highest shadow-md px-4 py-2 md:px-8 md:py-3 rounded-full border border-outline-variant/30 font-headline uppercase text-xs md:text-sm font-bold w-[95%] md:w-auto max-w-4xl">
-            <li class="nav-item rounded-full transition-all duration-300 active">
-                <a href="#mainBody"
-                    class="flex items-center justify-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full text-on-surface transition-all duration-300 hover:bg-black hover:text-white">
-                    <span class="material-symbols-outlined text-base md:text-lg">home</span>
-                    <span class="hidden md:inline">Home</span>
-                </a>
-            </li>
-            <li class="nav-item rounded-full transition-all duration-300">
-                <a href="#bio"
-                    class="flex items-center justify-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full text-on-surface transition-all duration-300 hover:bg-black hover:text-white">
-                    <span class="material-symbols-outlined text-base md:text-lg">person</span>
-                    <span class="hidden md:inline">About</span>
-                </a>
-            </li>
-            <li class="nav-item rounded-full transition-all duration-300">
-                <a href="#work"
-                    class="flex items-center justify-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full text-on-surface transition-all duration-300 hover:bg-black hover:text-white">
-                    <span class="material-symbols-outlined text-base md:text-lg">folder_open</span>
-                    <span class="hidden md:inline">Projects</span>
-                </a>
-            </li>
-            <li class="nav-item rounded-full transition-all duration-300">
-                <a href="#services"
-                    class="flex items-center justify-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full text-on-surface transition-all duration-300 hover:bg-black hover:text-white">
-                    <span class="material-symbols-outlined text-base md:text-lg">code</span>
-                    <span class="hidden md:inline">Services</span>
-                </a>
-            </li>
-            <li class="nav-item rounded-full transition-all duration-300">
-                <a href="#contact"
-                    class="flex items-center justify-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full text-on-surface transition-all duration-300 hover:bg-black hover:text-white">
-                    <span class="material-symbols-outlined text-base md:text-lg">mail</span>
-                    <span class="hidden md:inline">Contact</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 
     <!-- MAIN CONTENT (Hidden initially) -->
     <div id="mainContent"
         class="opacity-0 translate-y-16 hidden transition-all duration-1000 delay-300 ease-[cubic-bezier(0.25, 1, 0.5, 1)]">
+
+        <!-- Pill Navigation Bar -->
+        <nav class="pill-nav" id="pillNav">
+            <ul>
+                <li class="pill-active" data-section="bio">
+                    <i class="fa-solid fa-house pill-icon"></i>
+                    <a href="#bio" class="nav-link">Home</a>
+                </li>
+                <li data-section="work">
+                    <i class="fa-solid fa-folder-open pill-icon"></i>
+                    <a href="#work" class="nav-link">Projects</a>
+                </li>
+                <li data-section="contact">
+                    <i class="fa-regular fa-envelope pill-icon"></i>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </nav>
 
         <!-- Bio Layer / Intro -->
         <section id="bio" class="relative pt-48 pb-32 px-6 md:px-12">
@@ -105,8 +350,9 @@
                     <!-- Minimal Detail Slab -->
                     <div class="md:col-span-5 md:pl-24 pt-12 md:pt-0 flex flex-col justify-between">
                         <div>
-                            <h3 id="typing-title"
-                                class="font-headline font-bold text-3xl md:text-4xl uppercase tracking-tighter text-primary mb-6 min-h-[4rem] md:min-h-[5rem]">
+                            <h3
+                                class="font-headline font-bold text-3xl md:text-4xl uppercase tracking-tighter text-primary mb-6">
+                                CREATIVE<br />DIRECTOR
                             </h3>
                             <p
                                 class="font-body text-base md:text-lg text-on-surface-variant font-medium leading-relaxed reveal-3d">
@@ -182,7 +428,63 @@
                 </div>
             </div>
 
-
+            <!-- SKILLS & TECHNOLOGY -->
+            <div class="mt-32 md:mt-48 max-w-7xl mx-auto reveal-3d">
+                <h2
+                    class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
+                    TECHNOLOGY / <span class="text-primary">SKILLS</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[160px]">
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
+                            FRONTEND</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            React, Vue, Tailwind CSS, Framer, HTML5/CSS3</p>
+                    </div>
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
+                            BACKEND</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            Node.js, Express, Python, Django, REST APIs</p>
+                    </div>
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
+                            DATABASES</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            PostgreSQL, MongoDB, MySQL, Redis, Supabase</p>
+                    </div>
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">AI
+                            TOOLS</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            OpenAI API, LangChain, HuggingFace, TensorFlow</p>
+                    </div>
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
+                            SOFTWARE</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            Figma, Adobe CC, Git, Webpack, Vite</p>
+                    </div>
+                    <div
+                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
+                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
+                            SYSTEMS</h4>
+                        <p
+                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
+                            AWS Core, Docker, Vercel, Linux, CI/CD</p>
+                    </div>
+                </div>
+            </div>
 
             <!-- EXPERIENCE & EDUCATION -->
             <div class="mt-32 md:mt-48 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 reveal-3d">
@@ -377,66 +679,6 @@
             </div>
         </section>
 
-        <!-- SKILLS & TECHNOLOGY (Services) -->
-        <section id="services" class="pt-24 pb-24 border-t border-outline-variant/30">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 reveal-3d">
-                <h2
-                    class="text-3xl md:text-5xl font-headline font-bold uppercase tracking-tighter border-b border-primary/20 pb-4 mb-12">
-                    TECHNOLOGY / <span class="text-primary">SKILLS</span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[160px]">
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
-                            FRONTEND</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            React, Vue, Tailwind CSS, Framer, HTML5/CSS3</p>
-                    </div>
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
-                            BACKEND</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            Node.js, Express, Python, Django, REST APIs</p>
-                    </div>
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
-                            DATABASES</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            PostgreSQL, MongoDB, MySQL, Redis, Supabase</p>
-                    </div>
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">AI
-                            TOOLS</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            OpenAI API, LangChain, HuggingFace, TensorFlow</p>
-                    </div>
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
-                            SOFTWARE</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            Figma, Adobe CC, Git, Webpack, Vite</p>
-                    </div>
-                    <div
-                        class="border border-outline-variant/30 p-8 hover:bg-surface-container transition-colors duration-300 group flex flex-col justify-center">
-                        <h4 class="font-headline font-extrabold text-xl md:text-2xl mb-4 group-hover:text-primary">
-                            SYSTEMS</h4>
-                        <p
-                            class="font-body text-sm md:text-base text-stone-500 tracking-widest leading-relaxed uppercase">
-                            AWS Core, Docker, Vercel, Linux, CI/CD</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="pt-24 border-t border-outline-variant/30">
             <!-- Contact Hero -->
@@ -613,7 +855,110 @@
         </footer>
     </div>
 
+    <!-- Script for Opening Animation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const openBtn = document.getElementById("openPortalBtn");
+            const portalOverlay = document.getElementById("portalOverlay");
+            const mainContent = document.getElementById("mainContent");
+            const body = document.getElementById("mainBody");
+            const ripple = document.getElementById("ripple");
 
+            // Setup Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-3d, .reveal-left, .reveal-right').forEach(el => {
+                observer.observe(el);
+            });
+
+            const openText = document.getElementById("openText");
+            const openRings = document.getElementById("openRings");
+
+            openBtn.addEventListener("click", () => {
+                // 1. Instantly hide the TEXT and RINGS of the open button
+                openText.style.opacity = "0";
+                openRings.style.opacity = "0";
+
+                // Clear the button's background and shadow so it effectively disappears
+                openBtn.classList.remove('bg-primary-container', 'monolith-shadow');
+                openBtn.classList.add('bg-transparent');
+
+                // 2. Smoothly transition the entire screen from cream to red
+                portalOverlay.style.transition = "background-color 1s ease-in-out";
+                portalOverlay.classList.remove("bg-surface-container-low");
+                portalOverlay.classList.add("bg-primary-container");
+
+                // 3. Hide portal completely by fading it slowly with a deep backdrop blur
+                setTimeout(() => {
+                    portalOverlay.style.transition = "all 1.5s cubic-bezier(0.4, 0, 0.2, 1)";
+                    portalOverlay.style.backdropFilter = "blur(15px)";
+                    portalOverlay.style.opacity = "0";
+                    portalOverlay.style.transform = "scale(1.05)";
+                }, 800); // Wait for red transition
+
+                // 4. Remove locking & Reveal content sliding down more elegantly
+                setTimeout(() => {
+                    portalOverlay.style.display = "none";
+                    body.classList.remove("locked");
+
+                    // Render Main Content
+                    mainContent.classList.remove("hidden");
+
+                    // Trigger reflow to apply transition
+                    void mainContent.offsetWidth;
+
+                    // Slide down and fade in the whole content wrapper
+                    mainContent.classList.remove("opacity-0", "translate-y-16");
+                    mainContent.classList.add("opacity-100", "translate-y-0");
+
+                }, 1200); // Smoother, longer delay for entry
+            });
+
+            // ── Pill Nav: smooth scroll on click ──
+            const pillItems = document.querySelectorAll('.pill-nav li');
+            pillItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = item.dataset.section;
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        window.scrollTo({ top: targetEl.offsetTop - 80, behavior: 'smooth' });
+                    }
+                    pillItems.forEach(i => i.classList.remove('pill-active'));
+                    item.classList.add('pill-active');
+                });
+            });
+
+            // ── Pill Nav: scroll-spy active state ──
+            const sections = document.querySelectorAll('section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    if (scrollY >= section.offsetTop - 250) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                pillItems.forEach(item => {
+                    item.classList.remove('pill-active');
+                    if (item.dataset.section === current) {
+                        item.classList.add('pill-active');
+                    }
+                });
+            });
+        });
+
+    </script>
 </body>
 
 </html>
