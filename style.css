@@ -1,0 +1,140 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.monolith-shadow {
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.text-outline {
+    -webkit-text-stroke: 1px #610000;
+    color: transparent;
+}
+
+.thin-border {
+    border: 0.5px solid rgba(97, 0, 0, 0.2);
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+.monolithic-text {
+    line-height: 0.85;
+}
+
+.tonal-step-bg {
+    background-color: #fbfbe2;
+}
+
+.tonal-shift-bg-cream {
+    background-color: #f5f5dc;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* The Wax Seal Button Base */
+.wax-seal-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    background-repeat: no-repeat;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+    animation: floatSeal 4s ease-in-out infinite;
+}
+
+/* Tiny detail adjustments for the image inside */
+.wax-seal-button img {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@media (min-width: 768px) {
+    .wax-seal-button img {
+        max-width: 350px;
+    }
+}
+
+/* Hover Effect: Seal expands slightly and gains depth shadow */
+.wax-seal-button:hover {
+    transform: scale(1.06);
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+}
+
+/* Click/Active Effect: Mimics physically pressing down on the wax stamp */
+.wax-seal-button:active {
+    transform: scale(0.94);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.1s ease;
+}
+
+/* Continuous gentle floating animation */
+@keyframes floatSeal {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Initial locked state */
+.locked {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
+/* Scroll Reveal 3D Effects */
+.reveal-3d {
+    opacity: 0;
+    transform: translateY(100px) rotateX(15deg);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+}
+
+.reveal-3d.active {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px) rotateY(-10deg);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px) rotateY(10deg);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+}
+
+/* Pill Navbar styles */
+.nav-item.active a {
+    background-color: #1b1b1b !important;
+    color: #ffffff !important;
+}
