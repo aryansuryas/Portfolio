@@ -21,3 +21,5 @@ Minimal Grid Matrix: If you like the grid theme, use a highly faint, low-opacity
 
 1. UI Alignment & Card Polishing De-box the Core Principles: Instead of big bold boxes labeled 01, 02, 03, make it a seamless 3-column layout with clean typography. Let the whitespace do the work.
 Fix Card Layouts: For CodeSense and CS Battle Plan, use solid, slightly rounded corners (border-radius: 12px or Tailwind's rounded-xl) with a very subtle border or drop shadow rather than sharp, harsh geometric edges. Add clean code-snippet syntax highlighting if you are showcasing code inside the cards. 6. Change the cursor style I want you to change the cursor style and make it a new unique simple premium 1 I have uploaded the whole code in the Redmi file of aas project Okay I want you to access it and do the changes in the create a file a html and commit it inside the project and do all the changes and save it Make all things clear and upgrade if you want Do cheque the other things website wherever you can do you do analysis and give me the perfect
+
+portfolio to edit
