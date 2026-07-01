@@ -1,5 +1,8 @@
 # Portfolio
+
+
  This is My Professional Portfolio  
+to add this
 1. Clean Up the Layout & Remove Clutter Remove "PORTFOLIO / 2025": You don't need this tag taking up premium space above your name. Drop it completely to let your name sit cleanly at the top.
 Remove the "Architectural Monolith" Branding: Get rid of the text lines at the bottom like ARCHITECTURAL MONOLITH · ARYAN SURYA S ©2025 ALL RIGHTS RESERVED. It adds unnecessary noise. A clean © 2026 Aryan Surya S is plenty.
 Fix the Navigation Bar: Right now, the navigation links are crammed into a pill shape that sits awkwardly over a massive wireframe cross-section. We will move the socials here to solve your scrolling issue.
