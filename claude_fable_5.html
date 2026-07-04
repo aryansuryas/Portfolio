@@ -1,947 +1,972 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aryan Surya S — CSE Student, Full Stack Developer & AI Builder from Bengaluru.">
-  <title>Aryan Surya S — Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aryan Surya S — CSE student, full-stack developer and AI builder from Bengaluru.">
+<title>Aryan Surya S — Portfolio</title>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Manrope:wght@300;400;500;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
 
-  <!-- Font Awesome 6.5.1 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --paper:#FBF7EC;
+    --paper-panel:#F1E9D8;
+    --paper-line:rgba(30,25,18,0.10);
+    --ink:#1E1912;
+    --ink-soft:#4A3A2E;
+    --ink-faint:rgba(30,25,18,0.45);
+    --wine:#7A1220;
+    --wine-dark:#530C16;
+    --wine-glow:rgba(122,18,32,0.35);
+    --brass:#A6813F;
+    --paper-rgb:251,247,236;
+    --gap-xxs: clamp(0.5rem, 1vw, 0.75rem);
+    --gap-xs: clamp(0.75rem, 1.5vw, 1.25rem);
+    --gap-sm: clamp(1.25rem, 2.5vw, 2rem);
+    --gap-md: clamp(2rem, 4vw, 3.5rem);
+    --gap-lg: clamp(3rem, 6vw, 5.5rem);
+    --gap-xl: clamp(4.5rem, 9vw, 8rem);
+    --pad-section: clamp(5rem, 10vw, 9rem);
+    --edge: clamp(1.25rem, 5vw, 4.5rem);
+    --container: 1360px;
+  }
 
-  <!-- Material Symbols Outlined -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; background:var(--paper); }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Manrope",sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.locked{ overflow:hidden; height:100vh; }
+  ::selection{ background:var(--wine); color:var(--paper); }
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            surface: "#f5f5dc",
-            primary: "#610000",
-            "primary-dark": "#8b0000",
-            "on-surface": "#1b1d0e",
-            "surface-muted": "#efefd7",
-            stone2: "#5a403c",
-          },
-          fontFamily: {
-            headline: ['"Space Grotesk"', "sans-serif"],
-            body: ['"Manrope"', "sans-serif"],
-            label: ['"Montserrat"', "sans-serif"],
-          },
-        },
-      },
-    };
-  </script>
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
 
-  <style>
-    /* ============ ROOT VARIABLES ============ */
-    :root {
-      --surface: #f5f5dc;
-      --primary: #610000;
-      --primary-dark: #8b0000;
-      --on-surface: #1b1d0e;
-      --surface-muted: #efefd7;
-      --stone: #5a403c;
-      --white: #ffffff;
-    }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--wine);
+    outline-offset:3px;
+  }
 
-    * { border-radius: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--surface);
-      color: var(--on-surface);
-      font-family: "Manrope", sans-serif;
-      overflow-x: hidden;
-    }
-    body.locked { overflow: hidden; }
+  .font-head{ font-family:"Space Grotesk",sans-serif; }
+  .font-mono{ font-family:"IBM Plex Mono",monospace; }
 
-    ::selection { background: var(--primary); color: var(--surface); }
+  .wrap{ max-width:var(--container); margin:0 auto; padding-inline:var(--edge); }
 
-    /* Focus states */
-    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-      outline: 2px solid #610000;
-      outline-offset: 3px;
-    }
+  /* ============ REGISTRATION MARKS (blueprint corner ticks) ============ */
+  .reg-mark{ position:relative; }
+  .reg-mark::before, .reg-mark::after{
+    content:'';
+    position:absolute;
+    width:14px; height:14px;
+    border:1px solid var(--brass);
+    opacity:0.55;
+  }
+  .reg-mark::before{ top:0; left:0; border-right:none; border-bottom:none; }
+  .reg-mark::after{ bottom:0; right:0; border-left:none; border-top:none; }
 
-    /* ============ PORTAL ENTRANCE ============ */
-    #portal {
-      position: fixed; inset: 0; z-index: 100;
-      background: var(--surface);
-      display: flex; align-items: center; justify-content: center;
-    }
-    #portal-btn {
-      width: 140px; height: 140px; border-radius: 50%;
-      background: var(--primary); color: var(--surface);
-      font-family: "Montserrat", sans-serif; font-weight: 700;
-      letter-spacing: 0.3em; font-size: 0.75rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; border: none;
-      transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1), background 0.3s;
-      will-change: transform;
-    }
-    #portal-btn:hover { background: var(--primary-dark); }
-    #portal-btn.expand {
-      transform: scale(50);
-      transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
-    }
-    #portal-btn.expand span { opacity: 0; }
-    #portal-btn span { transition: opacity 0.25s; }
-    #portal.flash { background: var(--primary); }
-    #portal.gone { display: none; }
+  /* ============ GRAIN + BLUEPRINT GRID BACKDROP ============ */
+  #grid-backdrop{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 90%);
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 90%);
+  }
+  #noise-overlay{
+    position:fixed; inset:0; z-index:1000; pointer-events:none; opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:256px 256px;
+  }
 
-    #main-wrap {
-      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    #main-wrap.revealed {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-      opacity: 1;
-      transform: translateY(0);
-      transition: clip-path 0.8s ease-in-out, opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-    }
-    #main-wrap.done { clip-path: none; }
+  /* ============ 3D DRAFTED SOLID (real CSS 3D, fixed behind hero) ============ */
+  .solid-stage{
+    position:absolute; top:50%; right:-6%;
+    width:min(46vw, 620px); height:min(46vw, 620px);
+    transform:translateY(-50%);
+    perspective:1400px;
+    z-index:0;
+    opacity:0.9;
+  }
+  @media (max-width:1023px){ .solid-stage{ display:none; } }
+  .solid{
+    width:100%; height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:solidSpin 34s linear infinite;
+  }
+  @keyframes solidSpin{
+    from{ transform:rotateX(-18deg) rotateY(0deg) rotateZ(4deg); }
+    to{ transform:rotateX(-18deg) rotateY(360deg) rotateZ(4deg); }
+  }
+  .face{
+    position:absolute; inset:0;
+    border:1px solid rgba(122,18,32,0.55);
+    background:rgba(122,18,32,0.025);
+  }
+  .face.f-front { transform:translateZ(160px); }
+  .face.f-back  { transform:translateZ(-160px) rotateY(180deg); }
+  .face.f-right { transform:rotateY(90deg) translateZ(160px); }
+  .face.f-left  { transform:rotateY(-90deg) translateZ(160px); }
+  .face.f-top   { transform:rotateX(90deg) translateZ(160px); }
+  .face.f-bottom{ transform:rotateX(-90deg) translateZ(160px); }
+  .ring3d{
+    position:absolute; top:50%; left:50%;
+    border:1px solid rgba(166,129,63,0.5);
+    border-radius:50%;
+    transform-style:preserve-3d;
+  }
+  .ring3d.r1{ width:440px; height:440px; margin:-220px 0 0 -220px; transform:rotateX(78deg); }
+  .ring3d.r2{ width:340px; height:340px; margin:-170px 0 0 -170px; transform:rotateX(78deg) rotateZ(35deg); }
+  .crosshair-node{
+    position:absolute; width:10px; height:10px;
+    border:1px solid var(--wine);
+    transform:translate(-50%,-50%);
+  }
 
-    /* ============ CUSTOM CURSOR ============ */
-    #cursor-dot, #cursor-ring { display: none; }
-    @media (pointer: fine) {
-      body.cursor-active, body.cursor-active a, body.cursor-active button,
-      body.cursor-active input, body.cursor-active textarea { cursor: none; }
-      #cursor-dot {
-        display: block; position: fixed; top: 0; left: 0;
-        width: 8px; height: 8px; border-radius: 50%;
-        background: var(--primary); pointer-events: none; z-index: 200;
-        transform: translate(-50%, -50%);
-      }
-      #cursor-ring {
-        display: block; position: fixed; top: 0; left: 0;
-        width: 32px; height: 32px; border-radius: 50%;
-        border: 1.5px solid var(--primary); pointer-events: none; z-index: 200;
-        transform: translate(-50%, -50%);
-        transition: width 0.25s, height 0.25s, background 0.25s;
-      }
-      #cursor-ring.hovered {
-        width: 56px; height: 56px;
-        background: rgba(97, 0, 0, 0.08);
-      }
-    }
+  /* ============ AMBIENT ORBS (soft depth, restrained) ============ */
+  .ambient-orb{
+    position:fixed; border-radius:50%; filter:blur(140px);
+    opacity:0.10; pointer-events:none; z-index:0;
+    animation:orbFloat 26s ease-in-out infinite;
+  }
+  .ambient-orb.o1{ width:520px; height:520px; background:radial-gradient(circle,var(--wine) 0%,transparent 70%); top:-180px; left:-160px; }
+  .ambient-orb.o2{ width:460px; height:460px; background:radial-gradient(circle,var(--brass) 0%,transparent 70%); bottom:-140px; right:-120px; animation-delay:-9s; }
+  @keyframes orbFloat{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(40px,-50px) scale(1.08); }
+  }
 
-    /* ============ SCROLL PROGRESS ============ */
-    #progress {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: var(--primary); width: 0%;
-      z-index: 150;
-    }
+  /* ============ PORTAL ENTRANCE ============ */
+  #portal{
+    position:fixed; inset:0; z-index:300;
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    transition:background-color .5s ease, opacity .6s ease;
+  }
+  #portal::before{
+    content:''; position:absolute; width:220%; height:220%; top:-60%; left:-60%;
+    background:repeating-conic-gradient(from 0deg, transparent 0deg 9deg, rgba(122,18,32,0.05) 9deg 10.5deg);
+    animation:portalRotate 70s linear infinite;
+  }
+  @keyframes portalRotate{ to{ transform:rotate(360deg); } }
+  .portal-ring{
+    position:absolute; border:1px solid rgba(122,18,32,0.4);
+    border-radius:50%;
+    animation:portalPulse 3.4s ease-in-out infinite;
+  }
+  .portal-ring:nth-child(2){ width:180px; height:180px; }
+  .portal-ring:nth-child(3){ width:280px; height:280px; animation-delay:.4s; border-color:rgba(122,18,32,0.28); }
+  .portal-ring:nth-child(4){ width:400px; height:400px; animation-delay:.8s; border-color:rgba(122,18,32,0.18); }
+  .portal-ring:nth-child(5){ width:540px; height:540px; animation-delay:1.2s; border-color:rgba(122,18,32,0.1); }
+  .portal-tick{
+    position:absolute; width:1px; height:14px; background:rgba(166,129,63,0.4);
+    top:50%; left:50%; transform-origin:0 220px;
+  }
+  @keyframes portalPulse{
+    0%,100%{ transform:scale(1); opacity:.5; }
+    50%{ transform:scale(1.06); opacity:1; }
+  }
+  #portal-btn{
+    width:132px; height:132px; border-radius:50%;
+    background:var(--wine); color:var(--paper);
+    font-family:"IBM Plex Mono",monospace; font-weight:600;
+    letter-spacing:.14em; font-size:.78rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; border:none; z-index:10;
+    transition:transform 1.1s cubic-bezier(.65,0,.35,1), background .3s;
+    box-shadow:0 0 50px var(--wine-glow);
+    animation:btnGlow 2.2s ease-in-out infinite alternate;
+  }
+  @keyframes btnGlow{
+    from{ box-shadow:0 0 34px rgba(122,18,32,.3); }
+    to{ box-shadow:0 0 70px rgba(122,18,32,.55); }
+  }
+  #portal-btn:hover{ background:var(--wine-dark); transform:scale(1.08); }
+  #portal-btn.expand{ transform:scale(58); box-shadow:none; }
+  #portal-btn.expand span{ opacity:0; }
+  #portal-btn span{ transition:opacity .2s; }
+  #portal.flash{ background:var(--wine); }
+  #portal.gone{ display:none; }
 
-    /* ============ PILL NAV ============ */
-    #pill-nav {
-      position: fixed; top: 1.25rem; left: 50%;
-      transform: translateX(-50%);
-      z-index: 90;
-      background: rgba(245, 245, 220, 0.85);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(97, 0, 0, 0.15);
-      border-radius: 999px;
-      padding: 0.375rem;
-      display: flex; gap: 0.125rem;
-    }
-    .nav-item {
-      position: relative;
-      font-family: "Montserrat", sans-serif;
-      font-size: 0.625rem; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 0.5rem 0.875rem;
-      border-radius: 999px;
-      color: var(--stone);
-      transition: color 0.3s, background 0.3s, transform 0.15s ease-out;
-      white-space: nowrap;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-    }
-    .nav-item.active {
-      background: var(--on-surface);
-      color: var(--surface);
-    }
-    .nav-item:not(.active):hover { color: var(--primary); }
-    @media (max-width: 767px) {
-      .nav-item .nav-text { display: none; }
-      .nav-item { padding: 0.5rem 0.7rem; font-size: 0.75rem; }
-    }
+  #main-wrap{
+    clip-path:polygon(0 0,0 0,0 100%,0 100%);
+    opacity:0; transform:translateY(50px);
+    position:relative; z-index:2;
+  }
+  #main-wrap.revealed{
+    clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+    opacity:1; transform:translateY(0);
+    transition:clip-path 1s ease-in-out, opacity 1s ease-in-out, transform 1s ease-in-out;
+  }
+  #main-wrap.done{ clip-path:none; }
 
-    /* ============ REVEAL ANIMATIONS ============ */
-    .reveal-up, .reveal-left, .reveal-right {
-      opacity: 0;
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform, opacity;
+  /* ============ CURSOR — drafting compass ============ */
+  #cur-dot, #cur-ring{ display:none; }
+  @media (pointer:fine){
+    body.cursor-on, body.cursor-on a, body.cursor-on button, body.cursor-on input, body.cursor-on textarea{ cursor:none; }
+    #cur-dot{
+      display:block; position:fixed; top:0; left:0;
+      width:5px; height:5px; border-radius:50%;
+      background:var(--wine); pointer-events:none; z-index:400;
+      transform:translate(-50%,-50%);
     }
-    .reveal-up { transform: translateY(40px); }
-    .reveal-left { transform: translateX(-40px); }
-    .reveal-right { transform: translateX(40px); }
-    .reveal-up.active, .reveal-left.active, .reveal-right.active {
-      opacity: 1; transform: translate(0, 0);
+    #cur-ring{
+      display:flex; align-items:center; justify-content:center;
+      position:fixed; top:0; left:0;
+      width:34px; height:34px; pointer-events:none; z-index:400;
+      transform:translate(-50%,-50%);
+      transition:width .28s cubic-bezier(.22,1,.36,1), height .28s cubic-bezier(.22,1,.36,1);
     }
+    #cur-ring::before{
+      content:''; position:absolute; inset:0;
+      border:1px solid var(--wine); border-radius:50%;
+      border-top-color:transparent; border-left-color:transparent;
+      animation:curSpin 3.5s linear infinite;
+    }
+    #cur-ring::after{
+      content:''; position:absolute; width:1px; height:9px; background:var(--wine); top:-9px;
+    }
+    @keyframes curSpin{ to{ transform:rotate(360deg); } }
+    #cur-ring.hovered{ width:58px; height:58px; }
+    #cur-ring.hovered::before{ border-color:var(--brass); border-top-color:transparent; border-left-color:transparent; }
+    #cur-dot.clicking{ width:9px; height:9px; }
+  }
 
-    .reveal-img { overflow: hidden; }
-    .reveal-img .img-inner {
-      transform: scale(1.05);
-      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal-img.active .img-inner { transform: scale(1); }
+  /* ============ SCROLL PROGRESS ============ */
+  #progress{
+    position:fixed; top:0; left:0; height:2px;
+    background:var(--wine);
+    width:0%; z-index:250;
+  }
 
-    /* Hero word split */
-    .word-mask { display: inline-block; overflow: hidden; vertical-align: bottom; }
-    .word-mask > span {
-      display: inline-block;
-      transform: translateY(110%);
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: var(--d, 0ms);
-    }
-    .words-active .word-mask > span { transform: translateY(0); }
+  /* ============ PILL NAV ============ */
+  #pill-nav{
+    position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
+    z-index:90;
+    background:rgba(251,247,236,0.68);
+    -webkit-backdrop-filter:blur(20px) saturate(1.6);
+    backdrop-filter:blur(20px) saturate(1.6);
+    border:1px solid rgba(30,25,18,0.10);
+    border-radius:999px; padding:.35rem;
+    display:flex; gap:.1rem;
+    box-shadow:0 8px 28px rgba(30,25,18,0.08);
+  }
+  .nav-item{
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase;
+    padding:.5rem .85rem; border-radius:999px; color:var(--ink-soft);
+    transition:color .3s, background .3s;
+    display:inline-flex; align-items:center; gap:.4rem; white-space:nowrap;
+  }
+  .nav-item.active{ background:var(--ink); color:var(--paper); }
+  .nav-item:not(.active):hover{ color:var(--wine); }
+  @media (max-width:767px){
+    .nav-item .nav-text{ display:none; }
+    .nav-item{ padding:.5rem .65rem; font-size:.72rem; }
+  }
 
-    /* Timeline draw-in */
-    .tl-item {
-      position: relative;
-      padding-left: 1.75rem;
-    }
-    .tl-item::before {
-      content: "";
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 2px; background: var(--primary);
-      transform: scaleY(0); transform-origin: top;
-      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .tl-item::after {
-      content: "";
-      position: absolute; left: -4px; top: 6px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--primary);
-      opacity: 0; transition: opacity 0.4s 0.4s;
-    }
-    .tl-item.active::before { transform: scaleY(1); }
-    .tl-item.active::after { opacity: 1; }
+  /* ============ REVEALS ============ */
+  .rv{
+    opacity:0; filter:blur(3px);
+    transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s;
+  }
+  .rv-up{ transform:translateY(46px); }
+  .rv-left{ transform:translateX(-46px); }
+  .rv-right{ transform:translateX(46px); }
+  .rv-scale{ transform:scale(.92); }
+  .rv.active{ opacity:1; transform:translate(0,0) scale(1); filter:blur(0); }
 
-    /* ============ MARQUEE ============ */
-    .marquee {
-      overflow: hidden;
-      background: var(--primary);
-      white-space: nowrap;
-    }
-    .marquee-track {
-      display: inline-block;
-      animation: marquee 25s linear infinite;
-      will-change: transform;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+  .stagger > *:nth-child(1){ transition-delay:0ms; }
+  .stagger > *:nth-child(2){ transition-delay:90ms; }
+  .stagger > *:nth-child(3){ transition-delay:180ms; }
+  .stagger > *:nth-child(4){ transition-delay:270ms; }
+  .stagger > *:nth-child(5){ transition-delay:360ms; }
+  .stagger > *:nth-child(6){ transition-delay:450ms; }
 
-    /* ============ BUTTON WIPE ============ */
-    .btn-wipe {
-      position: relative; overflow: hidden;
-      isolation: isolate;
-      transition: color 0.4s;
-    }
-    .btn-wipe::before {
-      content: "";
-      position: absolute; inset: 0; z-index: -1;
-      background: var(--primary-dark);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-    }
-    .btn-wipe:hover::before { transform: scaleX(1); }
-    .btn-wipe-outline::before { background: var(--primary); }
-    .btn-wipe-outline:hover { color: var(--surface) !important; }
+  .word-mask{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  .word-mask > span{
+    display:inline-block; transform:translateY(115%);
+    transition:transform 1s cubic-bezier(.22,1,.36,1);
+    transition-delay:var(--d,0ms);
+  }
+  .words-on .word-mask > span{ transform:translateY(0); }
 
-    /* ============ TEXT OUTLINE ============ */
-    .text-outline {
-      -webkit-text-stroke: 1.5px var(--primary);
-      color: transparent;
-    }
-    .text-outline-cream {
-      -webkit-text-stroke: 1.5px rgba(245, 245, 220, 0.6);
-      color: transparent;
-    }
+  /* ============ TIMELINE ============ */
+  .tl-item{ position:relative; padding-left:1.6rem; }
+  .tl-item::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:1px;
+    background:var(--wine); transform:scaleY(0); transform-origin:top;
+    transition:transform .9s cubic-bezier(.22,1,.36,1);
+  }
+  .tl-item::after{
+    content:''; position:absolute; left:-3px; top:5px; width:7px; height:7px; border-radius:50%;
+    background:var(--wine); opacity:0; transform:scale(0);
+    transition:opacity .3s .4s, transform .4s .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .tl-item.active::before{ transform:scaleY(1); }
+  .tl-item.active::after{ opacity:1; transform:scale(1); }
 
-    /* ============ PRINCIPLE CARDS ============ */
-    .principle-card {
-      border: 0.5px solid rgba(97, 0, 0, 0.15);
-      transition: background 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .principle-card .p-num { transition: -webkit-text-stroke 0.5s, color 0.5s; }
-    .principle-card .p-title, .principle-card .p-desc { transition: color 0.5s; }
-    .principle-card:hover { background: var(--primary); }
-    .principle-card:hover .p-num { -webkit-text-stroke: 1.5px var(--white); }
-    .principle-card:hover .p-title { color: var(--white); }
-    .principle-card:hover .p-desc { color: rgba(245, 245, 220, 0.8); }
-    @media (min-width: 768px) { .principle-card { aspect-ratio: 1 / 1; } }
+  /* ============ MARQUEE ============ */
+  .marquee{ overflow:hidden; background:var(--ink); white-space:nowrap; position:relative; }
+  .marquee-track{ display:inline-block; animation:marquee 26s linear infinite; will-change:transform; }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-    /* ============ SKILL CARDS ============ */
-    .skill-card {
-      border: 1px solid rgba(97, 0, 0, 0.15);
-      border-left: 0px solid var(--primary);
-      transition: border-left-width 0.3s ease, padding-left 0.3s ease;
-    }
-    .skill-card:hover { border-left-width: 4px; }
-    .skill-card h3 { transition: color 0.3s; }
-    .skill-card:hover h3 { color: var(--primary); }
+  /* ============ BUTTONS ============ */
+  .btn{
+    position:relative; overflow:hidden; isolation:isolate;
+    display:inline-flex; align-items:center; gap:.55rem;
+    font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:.7rem;
+    letter-spacing:.12em; text-transform:uppercase;
+    padding:1rem 1.9rem;
+    transition:color .4s, transform .3s;
+  }
+  .btn-solid{ background:var(--wine); color:var(--paper); }
+  .btn-solid::before{
+    content:''; position:absolute; inset:0; z-index:-1; background:var(--wine-dark);
+    transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.65,0,.35,1);
+  }
+  .btn-solid:hover::before{ transform:scaleX(1); }
+  .btn-solid:hover{ transform:translateY(-2px); }
+  .btn-outline{ border:1px solid var(--wine); color:var(--wine); }
+  .btn-outline::before{
+    content:''; position:absolute; inset:0; z-index:-1; background:var(--wine);
+    transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.65,0,.35,1);
+  }
+  .btn-outline:hover{ color:var(--paper) !important; transform:translateY(-2px); }
+  .btn-outline:hover::before{ transform:scaleX(1); }
 
-    /* ============ PROJECT CARDS ============ */
-    .proj-img-wrap { overflow: hidden; position: relative; }
-    .proj-img-wrap .img-inner {
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .proj-img-wrap:hover .img-inner { transform: scale(1.08) !important; }
-    .proj-overlay {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      background: var(--primary); color: var(--surface);
-      padding: 0.875rem 1.25rem;
-      font-family: "Montserrat", sans-serif;
-      font-size: 0.625rem; font-weight: 600;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      transform: translateY(100%);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .proj-img-wrap:hover .proj-overlay { transform: translateY(0); }
+  /* ============ TEXT TREATMENTS ============ */
+  .outline-type{ -webkit-text-stroke:1.5px var(--wine); color:transparent; }
+  .section-eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:500;
+    letter-spacing:.32em; text-transform:uppercase; color:var(--wine);
+    display:flex; align-items:center; gap:.7rem;
+  }
+  .section-eyebrow::before{ content:''; width:26px; height:1px; background:var(--brass); }
 
-    /* ============ ACHIEVEMENT CARDS ============ */
-    .ach-card {
-      border: 1px solid rgba(97, 0, 0, 0.12);
-      border-left: 4px solid var(--primary);
-      background: var(--surface-muted);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .ach-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-      box-shadow: 0 12px 30px rgba(97, 0, 0, 0.1);
-    }
+  /* ============ FIGURE CARDS (formerly "principle" 01/02/03) ============ */
+  .fig-card{
+    border:1px solid var(--paper-line);
+    padding:2rem;
+    display:flex; flex-direction:column; justify-content:space-between;
+    min-height:250px;
+    position:relative; overflow:hidden;
+    transition:background .55s cubic-bezier(.22,1,.36,1), transform .45s, box-shadow .45s;
+  }
+  .fig-card:hover{
+    background:var(--wine); transform:translateY(-6px);
+    box-shadow:0 22px 50px rgba(122,18,32,0.22);
+  }
+  .fig-tag{ font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.14em; color:var(--brass); }
+  .fig-title{ font-family:"Space Grotesk",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:-0.01em; font-size:1.3rem; margin-top:.9rem; transition:color .5s; }
+  .fig-desc{ font-family:"Manrope",sans-serif; color:var(--ink-soft); font-size:.99rem; line-height:1.6; margin-top:.6rem; transition:color .5s; }
+  .fig-card:hover .fig-tag{ color:rgba(251,247,236,0.65); }
+  .fig-card:hover .fig-title{ color:var(--paper); }
+  .fig-card:hover .fig-desc{ color:rgba(251,247,236,0.82); }
 
-    /* ============ SOCIAL ICONS ============ */
-    .social-icon {
-      color: var(--stone);
-      transition: color 0.15s ease, transform 0.15s ease, filter 0.15s ease;
-      display: inline-flex;
-    }
-    .social-icon:hover {
-      transform: translateY(-4px);
-      filter: drop-shadow(0 6px 8px rgba(97, 0, 0, 0.25));
-    }
-    .social-icon.github:hover { color: #181717; }
-    .social-icon.linkedin:hover { color: #0a66c2; }
-    .social-icon.instagram:hover { color: #e4405f; }
-    .social-icon.email:hover { color: #610000; }
-    .social-icon.youtube:hover { color: #ff0000; }
-    .social-icon.bluesky:hover { color: #0285ff; }
+  /* ============ SKILL CARDS ============ */
+  .skill-card{
+    border:1px solid var(--paper-line); border-left:1px solid var(--paper-line);
+    padding:1.6rem; background:var(--paper);
+    transition:border-left-color .4s, border-left-width .4s, transform .4s, box-shadow .4s;
+    position:relative;
+  }
+  .skill-card:hover{
+    border-left-color:var(--wine); border-left-width:3px;
+    transform:translateY(-4px);
+    box-shadow:0 14px 34px rgba(30,25,18,0.08);
+  }
+  .skill-card h3{ transition:color .3s; }
+  .skill-card:hover h3{ color:var(--wine); }
 
-    /* ============ CONTACT FORM ============ */
-    .brutal-input {
-      background: transparent;
-      border: none;
-      border-bottom: 1.5px solid rgba(27, 29, 14, 0.3);
-      padding: 0.75rem 0;
-      width: 100%;
-      font-family: "Manrope", sans-serif;
-      color: var(--on-surface);
-      transition: border-color 0.3s;
-    }
-    .brutal-input:focus {
-      outline: none;
-      border-bottom-color: var(--primary);
-    }
-    .brutal-input::placeholder { color: rgba(90, 64, 60, 0.55); }
+  /* ============ PROJECT MEDIA ============ */
+  .proj-media{
+    position:relative; overflow:hidden;
+    box-shadow:0 20px 50px rgba(30,25,18,0.10);
+    transition:transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s;
+  }
+  .proj-media:hover{ box-shadow:0 30px 70px rgba(122,18,32,0.16); }
+  .proj-media .img-inner{ transition:transform .8s cubic-bezier(.22,1,.36,1); }
+  .proj-media:hover .img-inner{ transform:scale(1.06); }
+  .proj-overlay{
+    position:absolute; left:0; right:0; bottom:0;
+    background:linear-gradient(180deg,transparent,rgba(30,25,18,0.9) 55%);
+    color:var(--paper); padding:2rem 1.25rem .9rem;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; font-weight:500;
+    letter-spacing:.12em; text-transform:uppercase;
+    transform:translateY(100%);
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .proj-media:hover .proj-overlay{ transform:translateY(0); }
+  .proj-number{ font-family:"Space Grotesk",sans-serif; }
 
-    .spinner {
-      width: 14px; height: 14px;
-      border: 2px solid rgba(245, 245, 220, 0.3);
-      border-top-color: var(--surface);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+  /* ============ ACHIEVEMENT CARDS ============ */
+  .ach-card{
+    border:1px solid var(--paper-line); border-left:3px solid var(--wine);
+    background:var(--paper-panel); padding:1.9rem;
+    transition:transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s;
+  }
+  .ach-card:hover{ transform:translateY(-6px); box-shadow:0 20px 44px rgba(30,25,18,0.1); }
 
-    /* Hero image */
-    .hero-img {
-      filter: grayscale(100%) contrast(1.2);
-      transition: filter 0.6s ease;
-    }
-    .hero-img:hover { filter: grayscale(0%) contrast(1); }
+  /* ============ SOCIAL ICONS ============ */
+  .social-icon{ color:var(--ink-soft); transition:color .2s, transform .3s cubic-bezier(.34,1.56,.64,1); display:inline-flex; }
+  .social-icon:hover{ transform:translateY(-6px); color:var(--wine); }
 
-    /* Arrow bounce */
-    @keyframes arrow-nudge {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(6px, -6px); }
-    }
-    .arrow-anim { animation: arrow-nudge 1.8s ease-in-out infinite; display: inline-block; }
+  /* ============ FORM ============ */
+  .field-input{
+    background:transparent; border:none; border-bottom:1px solid rgba(30,25,18,0.25);
+    padding:.75rem 0; width:100%; font-family:"Manrope",sans-serif; color:var(--ink);
+    transition:border-color .3s;
+  }
+  .field-input:focus{ outline:none; border-bottom-color:var(--wine); }
+  .field-input::placeholder{ color:rgba(91,74,63,0.5); }
+  .spinner{
+    width:12px; height:12px; border:2px solid rgba(251,247,236,0.35); border-top-color:var(--paper);
+    border-radius:50%; animation:spin .7s linear infinite; display:inline-block;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
 
-    /* ============ REDUCED MOTION ============ */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      html { scroll-behavior: auto; }
-      .reveal-up, .reveal-left, .reveal-right, .word-mask > span {
-        opacity: 1 !important; transform: none !important;
-      }
-      .tl-item::before { transform: scaleY(1); }
-      .tl-item::after { opacity: 1; }
-      .marquee-track { animation: none; }
+  /* ============ MISC ============ */
+  .hairline{ height:1px; background:var(--paper-line); }
+  .stat-box{ padding:1.4rem 1rem; text-align:center; }
+  .stat-num{ font-family:"Space Grotesk",sans-serif; font-weight:700; color:var(--wine); }
+
+  .back-to-top{ transition:transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s; }
+  .back-to-top:hover{ transform:translateY(-5px); }
+
+  section{ position:relative; z-index:2; }
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms !important; animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
     }
-  </style>
+    html{ scroll-behavior:auto; }
+    .rv{ opacity:1 !important; transform:none !important; filter:none !important; }
+    .word-mask > span{ transform:translateY(0) !important; }
+    .tl-item::before{ transform:scaleY(1); } .tl-item::after{ opacity:1; transform:scale(1); }
+    .marquee-track{ animation:none; } .ambient-orb{ animation:none; }
+    .solid{ animation:none; }
+  }
+</style>
 </head>
 <body class="locked">
 
-  <!-- Scroll progress -->
-  <div id="progress"></div>
+<div id="grid-backdrop" aria-hidden="true"></div>
+<div id="noise-overlay" aria-hidden="true"></div>
+<div class="ambient-orb o1" aria-hidden="true"></div>
+<div class="ambient-orb o2" aria-hidden="true"></div>
 
-  <!-- Custom cursor -->
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
+<div id="progress"></div>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
 
-  <!-- ============ PORTAL ============ -->
-  <div id="portal">
-    <button id="portal-btn" aria-label="Open portfolio"><span>OPEN</span></button>
-  </div>
+<div id="portal">
+  <div class="portal-ring" aria-hidden="true"></div>
+  <div class="portal-ring" aria-hidden="true"></div>
+  <div class="portal-ring" aria-hidden="true"></div>
+  <div class="portal-ring" aria-hidden="true"></div>
+  <button id="portal-btn" aria-label="Open portfolio"><span>ENTER</span></button>
+</div>
 
-  <!-- ============ PILL NAV ============ -->
-  <nav id="pill-nav" aria-label="Primary">
-    <a href="#hero" class="nav-item active" data-spy="hero"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="nav-text">Home</span></a>
-    <a href="#skills" class="nav-item" data-spy="skills"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span class="nav-text">Skills</span></a>
-    <a href="#work" class="nav-item" data-spy="work"><i class="fa-solid fa-cube" aria-hidden="true"></i><span class="nav-text">Work</span></a>
-    <a href="#contact" class="nav-item" data-spy="contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="nav-text">Contact</span></a>
-  </nav>
+<nav id="pill-nav" aria-label="Primary">
+  <a href="#hero" class="nav-item active" data-spy="hero"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="nav-text">Home</span></a>
+  <a href="#skills" class="nav-item" data-spy="skills"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span class="nav-text">Skills</span></a>
+  <a href="#work" class="nav-item" data-spy="work"><i class="fa-solid fa-cube" aria-hidden="true"></i><span class="nav-text">Work</span></a>
+  <a href="#contact" class="nav-item" data-spy="contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="nav-text">Contact</span></a>
+</nav>
 
-  <div id="main-wrap">
+<div id="main-wrap">
 
-    <!-- ============ SECTION 1: HERO ============ -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center px-5 sm:px-8 lg:px-16 pt-28 pb-10">
-      <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center w-full max-w-[1600px] mx-auto">
-        <!-- Left -->
-        <div class="col-span-12 lg:col-span-7">
-          <p class="font-label text-[0.625rem] tracking-[0.3em] uppercase text-stone2 mb-6 reveal-up">Portfolio / 2025</p>
-          <h1 id="hero-title" class="font-headline font-800 font-extrabold uppercase tracking-tighter text-on-surface" style="font-size: clamp(4rem, 12vw, 14rem); line-height: 0.82;">
-            <span class="block" data-split>ARYAN</span>
-            <span class="block" data-split>SURYA S</span>
-          </h1>
-          <h2 class="font-headline font-bold uppercase tracking-tight text-primary mt-4" data-split style="font-size: clamp(1.25rem, 3vw, 2.75rem); line-height: 1;">
-            FULL STACK DEVELOPER &amp; AI BUILDER
-          </h2>
-          <p class="font-body font-normal text-stone2 mt-6 text-base lg:text-lg reveal-up" style="transition-delay: 300ms;">
-            CSE Student · Dayananda Sagar University · Bengaluru
-          </p>
-          <div class="flex flex-wrap gap-4 mt-8 reveal-up" style="transition-delay: 450ms;">
-            <a href="#work" class="btn-wipe bg-primary text-surface font-label font-bold text-xs tracking-[0.25em] uppercase px-8 py-4 inline-block hoverable">VIEW PROJECTS</a>
-            <a href="#" class="btn-wipe btn-wipe-outline border-2 border-primary text-primary font-label font-bold text-xs tracking-[0.25em] uppercase px-8 py-4 inline-block hoverable">DOWNLOAD CV</a>
-          </div>
-        </div>
-
-        <!-- Right: hero image -->
-        <div class="col-span-12 lg:col-span-8 lg:col-start-8 lg:col-span-5 reveal-img reveal-up" style="grid-column: span 12 / span 12;">
-          <div class="relative max-w-md mx-auto lg:ml-auto lg:mr-0" style="aspect-ratio: 3/4;">
-            <div class="img-inner hero-img w-full h-full hoverable" aria-label="Geometric brutalist artwork">
-              <svg viewBox="0 0 300 400" preserveAspectRatio="none" class="w-full h-full block" role="img" aria-label="Abstract brutalist line pattern">
-                <rect width="300" height="400" fill="#efefd7"/>
-                <g stroke="#610000" stroke-width="1.5" fill="none">
-                  <line x1="0" y1="60" x2="300" y2="60"/>
-                  <line x1="0" y1="340" x2="300" y2="340"/>
-                  <line x1="60" y1="0" x2="60" y2="400"/>
-                  <line x1="240" y1="0" x2="240" y2="400"/>
-                  <circle cx="150" cy="200" r="90"/>
-                  <circle cx="150" cy="200" r="60"/>
-                  <rect x="90" y="140" width="120" height="120"/>
-                  <line x1="0" y1="0" x2="300" y2="400"/>
-                  <line x1="300" y1="0" x2="0" y2="400"/>
-                </g>
-                <rect x="120" y="170" width="60" height="60" fill="#610000"/>
-                <circle cx="240" cy="60" r="8" fill="#8b0000"/>
-                <circle cx="60" cy="340" r="8" fill="#8b0000"/>
-                <g fill="#610000" font-family="monospace" font-size="9" opacity="0.6">
-                  <text x="68" y="52">ASRY.001</text>
-                  <text x="68" y="358">BLR/IND</text>
-                </g>
-              </svg>
-            </div>
-            <div class="absolute -bottom-4 -left-4 w-[60px] h-[60px] bg-primary" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stat row -->
-      <div class="w-full max-w-[1600px] mx-auto mt-16 border-t border-b border-primary/20 reveal-up" style="transition-delay: 600ms;">
-        <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-primary/20">
-          <div class="py-5 px-4 text-center font-label text-[0.7rem] tracking-[0.3em] uppercase text-on-surface"><span class="text-primary font-bold">3+</span> YEARS CODING</div>
-          <div class="py-5 px-4 text-center font-label text-[0.7rem] tracking-[0.3em] uppercase text-on-surface"><span class="text-primary font-bold">10+</span> PROJECTS BUILT</div>
-          <div class="py-5 px-4 text-center font-label text-[0.7rem] tracking-[0.3em] uppercase text-on-surface">ACTIVE <span class="text-primary font-bold">CONTRIBUTOR</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SECTION 2: MARQUEE ============ -->
-    <div class="marquee py-4" aria-hidden="true">
-      <div class="marquee-track font-label font-bold uppercase tracking-widest text-surface text-sm">
-        <span>ARYAN SURYA S · CSE STUDENT · FULL STACK DEVELOPER · AI BUILDER · CONTENT CREATOR · COMPETITIVE PROGRAMMER ·&nbsp;</span><span>ARYAN SURYA S · CSE STUDENT · FULL STACK DEVELOPER · AI BUILDER · CONTENT CREATOR · COMPETITIVE PROGRAMMER ·&nbsp;</span>
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="min-h-screen" style="min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:7rem; padding-bottom:3rem;">
+    <div class="solid-stage" aria-hidden="true">
+      <div class="solid">
+        <div class="face f-front"></div>
+        <div class="face f-back"></div>
+        <div class="face f-right"></div>
+        <div class="face f-left"></div>
+        <div class="face f-top"></div>
+        <div class="face f-bottom"></div>
+        <div class="ring3d r1"></div>
+        <div class="ring3d r2"></div>
       </div>
     </div>
 
-    <!-- ============ SECTION 3: CORE PRINCIPLES ============ -->
-    <section id="principles" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36">
-      <div class="max-w-[1600px] mx-auto">
-        <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(2.5rem, 6vw, 7rem); line-height: 0.9;">
-          CORE <span class="text-primary">/</span> PRINCIPLES
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 mt-14">
-          <div class="principle-card p-8 flex flex-col justify-between reveal-up hoverable" style="transition-delay: 0ms;">
-            <span class="p-num font-headline font-extrabold text-6xl text-outline">01</span>
-            <div class="mt-12">
-              <h3 class="p-title font-headline font-bold uppercase text-xl lg:text-2xl tracking-tight">RELENTLESS BUILDER</h3>
-              <p class="p-desc font-body text-stone2 mt-3 text-sm leading-relaxed">Ship fast, iterate faster.</p>
-            </div>
+    <div class="wrap" style="position:relative; z-index:2;">
+      <p class="section-eyebrow rv rv-up">FIG. 01 — PORTFOLIO / 2026</p>
+
+      <h1 id="hero-title" class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.03em; font-size:clamp(3.2rem,10vw,9.5rem); line-height:0.88; margin-top:1.4rem;">
+        <span class="word-mask" data-split><span>ARYAN</span></span><br>
+        <span class="word-mask" data-split><span>SURYA&nbsp;S</span></span>
+      </h1>
+
+      <h2 class="font-mono rv rv-up" style="transition-delay:150ms; font-weight:500; letter-spacing:.02em; color:var(--wine); text-transform:uppercase; font-size:clamp(1rem,2vw,1.4rem); margin-top:1.6rem;">
+        Full-stack developer &amp; AI builder
+      </h2>
+
+      <p class="rv rv-up" style="transition-delay:280ms; color:var(--ink-soft); font-size:clamp(1rem,1.3vw,1.15rem); margin-top:1.4rem; max-width:32ch;">
+        CSE student, Dayananda Sagar University — Bengaluru, India.
+      </p>
+
+      <div class="rv rv-up" style="transition-delay:400ms; display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.2rem;">
+        <a href="#work" class="btn btn-solid">View projects</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="wrap rv rv-up" style="transition-delay:550ms; margin-top:clamp(3rem,6vw,5rem);">
+      <div class="hairline"></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr);">
+        <div class="stat-box" style="border-right:1px solid var(--paper-line);">
+          <span class="stat-num" style="font-size:1.4rem;">3+</span>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">Years coding</p>
+        </div>
+        <div class="stat-box" style="border-right:1px solid var(--paper-line);">
+          <span class="stat-num" style="font-size:1.4rem;">10+</span>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">Projects built</p>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" style="font-size:1.4rem;">228</span>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">DSA concepts mapped</p>
+        </div>
+      </div>
+      <div class="hairline"></div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" style="padding-block:.9rem;" aria-hidden="true">
+    <div class="marquee-track font-mono" style="letter-spacing:.3em; text-transform:uppercase; color:var(--paper); font-size:.72rem;">
+      <span>ARYAN SURYA S &nbsp;·&nbsp; CSE STUDENT &nbsp;·&nbsp; FULL-STACK DEVELOPER &nbsp;·&nbsp; AI BUILDER &nbsp;·&nbsp; CONTENT CREATOR &nbsp;·&nbsp; COMPETITIVE PROGRAMMER &nbsp;·&nbsp; </span><span>ARYAN SURYA S &nbsp;·&nbsp; CSE STUDENT &nbsp;·&nbsp; FULL-STACK DEVELOPER &nbsp;·&nbsp; AI BUILDER &nbsp;·&nbsp; CONTENT CREATOR &nbsp;·&nbsp; COMPETITIVE PROGRAMMER &nbsp;·&nbsp; </span>
+    </div>
+  </div>
+
+  <!-- ============ FIGURES (formerly generic 01/02/03 principle cards) ============ -->
+  <section style="padding-block:var(--pad-section);">
+    <div class="wrap">
+      <p class="section-eyebrow rv rv-up">FIG. 02 — WORKING PRINCIPLES</p>
+      <h2 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;" class="rv rv-up">
+        How I build
+      </h2>
+      <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--paper-line); margin-top:var(--gap-md); border:1px solid var(--paper-line);">
+        <div class="fig-card rv rv-up">
+          <span class="fig-tag">FIG. A</span>
+          <div>
+            <h3 class="fig-title">Relentless builder</h3>
+            <p class="fig-desc">Ship fast, iterate faster — every line of code is a step toward something real.</p>
           </div>
-          <div class="principle-card p-8 flex flex-col justify-between reveal-up hoverable" style="transition-delay: 100ms;">
-            <span class="p-num font-headline font-extrabold text-6xl text-outline">02</span>
-            <div class="mt-12">
-              <h3 class="p-title font-headline font-bold uppercase text-xl lg:text-2xl tracking-tight">SYSTEMS THINKER</h3>
-              <p class="p-desc font-body text-stone2 mt-3 text-sm leading-relaxed">Architecture before aesthetics.</p>
-            </div>
+        </div>
+        <div class="fig-card rv rv-up">
+          <span class="fig-tag">FIG. B</span>
+          <div>
+            <h3 class="fig-title">Systems thinker</h3>
+            <p class="fig-desc">Architecture before aesthetics. Scalable foundations matter more than a quick fix.</p>
           </div>
-          <div class="principle-card p-8 flex flex-col justify-between reveal-up hoverable" style="transition-delay: 200ms;">
-            <span class="p-num font-headline font-extrabold text-6xl text-outline">03</span>
-            <div class="mt-12">
-              <h3 class="p-title font-headline font-bold uppercase text-xl lg:text-2xl tracking-tight">ALWAYS LEARNING</h3>
-              <p class="p-desc font-body text-stone2 mt-3 text-sm leading-relaxed">DSA, AI, and beyond.</p>
-            </div>
+        </div>
+        <div class="fig-card rv rv-up">
+          <span class="fig-tag">FIG. C</span>
+          <div>
+            <h3 class="fig-title">Always learning</h3>
+            <p class="fig-desc">DSA, AI, and whatever comes next — the roadmap keeps extending.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ SECTION 4: SKILLS ============ -->
-    <section id="skills" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36 bg-surface-muted">
-      <div class="max-w-[1600px] mx-auto">
-        <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(2.5rem, 6vw, 7rem); line-height: 0.9;">
-          TECHNOLOGY <span class="text-primary">/</span> SKILLS
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mt-14">
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 0ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">FRONTEND</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">React, Tailwind CSS, HTML5/CSS3, Framer Motion</p>
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" style="padding-block:var(--pad-section); background:var(--paper-panel);">
+    <div class="wrap">
+      <p class="section-eyebrow rv rv-up">FIG. 03 — TOOLKIT</p>
+      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        Technology stack
+      </h2>
+      <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1rem; margin-top:var(--gap-md);">
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Frontend</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">React, Tailwind CSS, HTML5/CSS3, Framer Motion</p>
+        </div>
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Backend</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Node.js, Firebase, REST APIs, Express</p>
+        </div>
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Languages</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">C++, JavaScript, Apex (Salesforce)</p>
+        </div>
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">AI &amp; LLMs</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Claude API, OpenAI API, LangChain, prompt engineering</p>
+        </div>
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Platforms</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Salesforce Trailhead, Vercel, GitHub, Cursor IDE</p>
+        </div>
+        <div class="skill-card rv rv-up">
+          <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Dev tools</h3>
+          <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Git, VS Code, Vite, Figma, Lovable</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY ============ -->
+  <section id="journey" style="padding-block:var(--pad-section);">
+    <div class="wrap" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:var(--gap-lg);">
+      <div>
+        <p class="section-eyebrow rv rv-up">FIG. 04 — EXPERIENCE</p>
+        <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:2.8rem;">
+          <div class="tl-item rv rv-up">
+            <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024 – PRESENT</p>
+            <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1.1rem; margin-top:.5rem;">Full-stack developer <span style="color:var(--ink-soft); font-weight:500; text-transform:none;">(personal projects)</span></h3>
+            <p class="font-mono" style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">Self-directed / open source</p>
+            <p style="color:var(--ink-soft); font-size:.98rem; line-height:1.6; margin-top:.7rem;">Building CodeSense, an AI code review tool, using React, Firebase and the Claude API — exploring agentic AI workflows and full-stack product development.</p>
           </div>
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 80ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">BACKEND</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">Node.js, Firebase, REST APIs, Express</p>
-          </div>
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 160ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">LANGUAGES</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">C++, JavaScript, Apex (Salesforce)</p>
-          </div>
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 240ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">AI &amp; LLMS</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">Claude API, OpenAI API, LangChain, Prompt Engineering</p>
-          </div>
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 320ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">PLATFORMS</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">Salesforce (Trailhead), Vercel, GitHub, Cursor IDE</p>
-          </div>
-          <div class="skill-card bg-surface p-6 reveal-up hoverable" style="transition-delay: 400ms;">
-            <h3 class="font-label font-bold text-[0.7rem] tracking-[0.3em] uppercase text-primary">DEV TOOLS</h3>
-            <p class="font-body text-stone2 text-sm mt-4 leading-relaxed">Git, VS Code, Vite, Figma, Lovable</p>
+          <div class="tl-item rv rv-up" style="transition-delay:150ms;">
+            <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2023 – PRESENT</p>
+            <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1.1rem; margin-top:.5rem;">Content creator</h3>
+            <p class="font-mono" style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">CassGX — YouTube / Instagram</p>
+            <p style="color:var(--ink-soft); font-size:.98rem; line-height:1.6; margin-top:.7rem;">Gaming and tech short-form content — AI-generated video production, branding, and audience growth.</p>
           </div>
         </div>
       </div>
-    </section>
+      <div>
+        <p class="section-eyebrow rv rv-up">FIG. 05 — EDUCATION</p>
+        <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:2.8rem;">
+          <div class="tl-item rv rv-up">
+            <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2022 – PRESENT</p>
+            <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1.1rem; margin-top:.5rem;">B.E. Computer Science Engineering</h3>
+            <p class="font-mono" style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">Dayananda Sagar University, Bengaluru</p>
+            <p style="color:var(--ink-soft); font-size:.98rem; line-height:1.6; margin-top:.7rem;">Focus on DSA in C++, full-stack web development, Salesforce, and competitive programming.</p>
+          </div>
+          <div class="tl-item rv rv-up" style="transition-delay:150ms;">
+            <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024</p>
+            <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1.1rem; margin-top:.5rem;">Salesforce Developer path</h3>
+            <p class="font-mono" style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;">Trailhead, Salesforce</p>
+            <p style="color:var(--ink-soft); font-size:.98rem; line-height:1.6; margin-top:.7rem;">Apex, LWC, admin fundamentals, and platform architecture.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============ SECTION 5: EXPERIENCE & EDUCATION ============ -->
-    <section id="journey" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36">
-      <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <!-- Experience -->
+  <!-- ============ PROJECTS ============ -->
+  <section id="work" style="padding-block:var(--pad-section); background:var(--paper-panel);">
+    <div class="wrap">
+      <p class="section-eyebrow rv rv-up">FIG. 06 — SELECTED WORK</p>
+      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        Projects
+      </h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:center; gap:var(--gap-lg); margin-top:var(--gap-xl);">
+        <div class="rv rv-left" style="position:relative;">
+          <span class="proj-number outline-type" style="position:absolute; top:-2.6rem; left:-.3rem; font-weight:800; font-size:clamp(3rem,6vw,5.5rem); z-index:2; user-select:none;" aria-hidden="true">01</span>
+          <div class="proj-media" style="aspect-ratio:16/10;">
+            <div class="img-inner" style="width:100%; height:100%;">
+              <svg viewBox="0 0 640 400" preserveAspectRatio="none" style="display:block; width:100%; height:100%;" role="img" aria-label="Abstract code editor pattern">
+                <rect width="640" height="400" fill="#1a1512"/>
+                <rect x="0" y="0" width="640" height="30" fill="#221c17"/>
+                <circle cx="20" cy="15" r="5" fill="#7A1220"/><circle cx="38" cy="15" r="5" fill="#A6813F"/><circle cx="56" cy="15" r="5" fill="#5B4A3F"/>
+                <g font-family="monospace" font-size="13">
+                  <text x="30" y="68" fill="#7A1220">const</text><text x="85" y="68" fill="#FBF7EC">review = await claude.analyze(code);</text>
+                  <text x="30" y="98" fill="#5B4A3F">// structured feedback engine</text>
+                  <text x="30" y="128" fill="#7A1220">function</text><text x="105" y="128" fill="#FBF7EC">scoreQuality(ast) {</text>
+                  <text x="55" y="158" fill="#FBF7EC">return rules.map(r =&gt; r.check(ast));</text>
+                  <text x="30" y="188" fill="#FBF7EC">}</text>
+                </g>
+                <g stroke="#7A1220" stroke-width="0.5" opacity="0.3">
+                  <line x1="0" y1="280" x2="640" y2="280"/><line x1="160" y1="260" x2="160" y2="400"/><line x1="320" y1="260" x2="320" y2="400"/><line x1="480" y1="260" x2="480" y2="400"/>
+                </g>
+                <rect x="480" y="300" width="120" height="14" fill="#7A1220" opacity="0.7"/>
+                <rect x="40" y="340" width="200" height="14" fill="#A6813F" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="proj-overlay">React · Firebase · Claude API · Tailwind CSS</div>
+          </div>
+        </div>
+        <div class="rv rv-right">
+          <p class="font-mono" style="font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024 · AI TOOL</p>
+          <h3 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.01em; font-size:clamp(1.7rem,3vw,3rem); margin-top:.7rem;">CodeSense</h3>
+          <p style="color:var(--ink-soft); line-height:1.65; margin-top:1rem; font-size:1.02rem;">An AI-powered code review assistant. Paste in code, get structured feedback on quality, bugs, and improvements — powered by Claude.</p>
+          <a href="#" class="btn btn-solid" style="margin-top:1.8rem;">View project</a>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:center; gap:var(--gap-lg); margin-top:var(--gap-xl);">
+        <div class="rv rv-left" style="order:2;">
+          <p class="font-mono" style="font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024 · BRAND</p>
+          <h3 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.01em; font-size:clamp(1.7rem,3vw,3rem); margin-top:.7rem;">CassGX Brand</h3>
+          <p style="color:var(--ink-soft); line-height:1.65; margin-top:1rem; font-size:1.02rem;">Built a full gaming and tech content brand from scratch — logo, channel identity, AI-generated shorts, and a viral clip strategy.</p>
+          <a href="https://youtube.com/@TheCassGX" target="_blank" rel="noopener" class="btn btn-solid" style="margin-top:1.8rem;">View channel</a>
+        </div>
+        <div class="rv rv-right" style="position:relative; order:1;">
+          <span class="proj-number outline-type" style="position:absolute; top:-2.6rem; right:-.3rem; font-weight:800; font-size:clamp(3rem,6vw,5.5rem); z-index:2; user-select:none;" aria-hidden="true">02</span>
+          <div class="proj-media" style="aspect-ratio:16/10;">
+            <div class="img-inner" style="width:100%; height:100%;">
+              <svg viewBox="0 0 640 400" preserveAspectRatio="none" style="display:block; width:100%; height:100%;" role="img" aria-label="Dark gaming grid pattern">
+                <rect width="640" height="400" fill="#100d0b"/>
+                <g stroke="#7A1220" stroke-width="0.6" opacity="0.4">
+                  <line x1="0" y1="100" x2="640" y2="100"/><line x1="0" y1="200" x2="640" y2="200"/><line x1="0" y1="300" x2="640" y2="300"/>
+                  <line x1="160" y1="0" x2="160" y2="400"/><line x1="320" y1="0" x2="320" y2="400"/><line x1="480" y1="0" x2="480" y2="400"/>
+                </g>
+                <polygon points="320,120 380,220 260,220" fill="none" stroke="#A6813F" stroke-width="2.5"/>
+                <polygon points="320,150 355,210 285,210" fill="#7A1220"/>
+                <text x="320" y="270" text-anchor="middle" font-family="monospace" font-weight="700" font-size="26" letter-spacing="9" fill="#FBF7EC">CASSGX</text>
+                <text x="320" y="294" text-anchor="middle" font-family="monospace" font-size="9" letter-spacing="4" fill="#A6813F">GAMING · TECH · AI SHORTS</text>
+              </svg>
+            </div>
+            <div class="proj-overlay">Branding · AI video · Short-form content · YouTube</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:center; gap:var(--gap-lg); margin-top:var(--gap-xl);">
+        <div class="rv rv-left" style="position:relative;">
+          <span class="proj-number outline-type" style="position:absolute; top:-2.6rem; left:-.3rem; font-weight:800; font-size:clamp(3rem,6vw,5.5rem); z-index:2; user-select:none;" aria-hidden="true">03</span>
+          <div class="proj-media" style="aspect-ratio:16/10;">
+            <div class="img-inner" style="width:100%; height:100%;">
+              <svg viewBox="0 0 640 400" preserveAspectRatio="none" style="display:block; width:100%; height:100%;" role="img" aria-label="Graph node network pattern">
+                <rect width="640" height="400" fill="#F1E9D8"/>
+                <g stroke="#7A1220" stroke-width="1" opacity="0.55">
+                  <line x1="100" y1="100" x2="250" y2="60"/><line x1="100" y1="100" x2="200" y2="220"/>
+                  <line x1="250" y1="60" x2="400" y2="130"/><line x1="200" y1="220" x2="400" y2="130"/>
+                  <line x1="400" y1="130" x2="540" y2="80"/><line x1="400" y1="130" x2="480" y2="280"/>
+                  <line x1="200" y1="220" x2="320" y2="330"/><line x1="320" y1="330" x2="480" y2="280"/>
+                </g>
+                <g fill="#7A1220">
+                  <circle cx="100" cy="100" r="9"/><circle cx="250" cy="60" r="6"/><circle cx="400" cy="130" r="11"/>
+                  <circle cx="200" cy="220" r="7"/><circle cx="540" cy="80" r="5"/><circle cx="480" cy="280" r="8"/><circle cx="320" cy="330" r="6"/>
+                </g>
+                <text x="320" y="385" text-anchor="middle" font-family="monospace" font-weight="700" font-size="11" letter-spacing="5" fill="#7A1220">228 CONCEPTS · 15 PHASES · 9 WEEKS</text>
+              </svg>
+            </div>
+            <div class="proj-overlay">C++ · DSA · 9-week curriculum · Open source</div>
+          </div>
+        </div>
+        <div class="rv rv-right">
+          <p class="font-mono" style="font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024 · OPEN SOURCE</p>
+          <h3 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.01em; font-size:clamp(1.7rem,3vw,3rem); margin-top:.7rem;">CS Battle Plan</h3>
+          <p style="color:var(--ink-soft); line-height:1.65; margin-top:1rem; font-size:1.02rem;">A comprehensive 228-concept DSA roadmap and full CS fundamentals study system — 15 phases, competitive programming prep, shared on GitHub.</p>
+          <a href="https://github.com/aryansuryas" target="_blank" rel="noopener" class="btn btn-solid" style="margin-top:1.8rem;">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACHIEVEMENTS ============ -->
+  <section id="achievements" style="padding-block:var(--pad-section);">
+    <div class="wrap">
+      <p class="section-eyebrow rv rv-up">FIG. 07 — MILESTONES</p>
+      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        Achievements
+      </h2>
+      <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; margin-top:var(--gap-md);">
+        <div class="ach-card rv rv-up">
+          <i class="fa-solid fa-cloud" style="color:var(--wine); font-size:1.4rem;" aria-hidden="true"></i>
+          <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1rem; margin-top:1rem;">Salesforce Trailhead</h3>
+          <p style="color:var(--ink-soft); font-size:.96rem; margin-top:.4rem;">Active Developer path</p>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); margin-top:1rem; font-weight:600;">2024</p>
+        </div>
+        <div class="ach-card rv rv-up">
+          <i class="fa-solid fa-rocket" style="color:var(--wine); font-size:1.4rem;" aria-hidden="true"></i>
+          <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1rem; margin-top:1rem;">CodeSense shipped</h3>
+          <p style="color:var(--ink-soft); font-size:.96rem; margin-top:.4rem;">Built and deployed using AI-first tooling</p>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); margin-top:1rem; font-weight:600;">2024</p>
+        </div>
+        <div class="ach-card rv rv-up">
+          <i class="fa-solid fa-trophy" style="color:var(--wine); font-size:1.4rem;" aria-hidden="true"></i>
+          <h3 class="font-head" style="font-weight:700; text-transform:uppercase; font-size:1rem; margin-top:1rem;">Competitive programmer</h3>
+          <p style="color:var(--ink-soft); font-size:.96rem; margin-top:.4rem;">C++ · DSA · LeetCode</p>
+          <p class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); margin-top:1rem; font-weight:600;">2023 – Present</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" style="padding-block:var(--pad-section); background:var(--paper-panel);">
+    <div class="wrap" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:var(--gap-lg);">
+      <div class="rv rv-left">
+        <p class="section-eyebrow">FIG. 08 — CONTACT</p>
+        <h2 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2.2rem,5vw,4.6rem); line-height:1.02; margin-top:1rem;">
+          Let's work<br>together
+        </h2>
+        <div style="margin-top:2.4rem; display:flex; flex-direction:column; gap:1.1rem;">
+          <p><span class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.25rem;">Email</span>
+            <a href="mailto:aryansurya752006@gmail.com" style="color:var(--wine); font-weight:600;">aryansurya752006@gmail.com</a></p>
+          <p><span class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.25rem;">Location</span>Bengaluru, India</p>
+          <p><span class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.25rem;">Availability</span>Open to internships and collaborations</p>
+        </div>
+      </div>
+      <form id="contact-form" class="rv rv-right" style="display:flex; flex-direction:column; gap:1.8rem; justify-content:center;" novalidate>
         <div>
-          <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(1.5rem, 3vw, 3rem);">EXPERIENCE</h2>
-          <div class="mt-10 space-y-12">
-            <div class="tl-item reveal-up">
-              <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2024 – PRESENT</p>
-              <h3 class="font-headline font-bold uppercase text-lg mt-2">FULL STACK DEVELOPER <span class="text-stone2 font-medium normal-case">(Personal Projects)</span></h3>
-              <p class="font-label text-[0.65rem] tracking-[0.2em] uppercase text-stone2 mt-1">Self-directed / Open Source</p>
-              <p class="font-body text-stone2 text-sm leading-relaxed mt-3">Building CodeSense (AI code review tool) using React, Firebase, and the Claude API. Exploring agentic AI workflows and full-stack product development.</p>
-            </div>
-            <div class="tl-item reveal-up" style="transition-delay: 150ms;">
-              <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2023 – PRESENT</p>
-              <h3 class="font-headline font-bold uppercase text-lg mt-2">CONTENT CREATOR</h3>
-              <p class="font-label text-[0.65rem] tracking-[0.2em] uppercase text-stone2 mt-1">CassGX · YouTube / Instagram</p>
-              <p class="font-body text-stone2 text-sm leading-relaxed mt-3">Gaming &amp; tech short-form content. AI-generated video production, branding, and audience growth.</p>
-            </div>
-          </div>
+          <label for="f-name" class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.3rem;">Your name</label>
+          <input id="f-name" type="text" class="field-input" placeholder="Jane Doe" required>
         </div>
-        <!-- Education -->
         <div>
-          <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(1.5rem, 3vw, 3rem);">EDUCATION</h2>
-          <div class="mt-10 space-y-12">
-            <div class="tl-item reveal-up">
-              <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2022 – PRESENT</p>
-              <h3 class="font-headline font-bold uppercase text-lg mt-2">B.E. COMPUTER SCIENCE ENGINEERING</h3>
-              <p class="font-label text-[0.65rem] tracking-[0.2em] uppercase text-stone2 mt-1">Dayananda Sagar University, Bengaluru</p>
-              <p class="font-body text-stone2 text-sm leading-relaxed mt-3">Focus on DSA (C++), full-stack web development, Salesforce, competitive programming.</p>
-            </div>
-            <div class="tl-item reveal-up" style="transition-delay: 150ms;">
-              <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2024</p>
-              <h3 class="font-headline font-bold uppercase text-lg mt-2">SALESFORCE DEVELOPER PATH</h3>
-              <p class="font-label text-[0.65rem] tracking-[0.2em] uppercase text-stone2 mt-1">Trailhead · Salesforce</p>
-              <p class="font-body text-stone2 text-sm leading-relaxed mt-3">Apex, LWC, Admin fundamentals, platform architecture.</p>
-            </div>
-          </div>
+          <label for="f-email" class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.3rem;">Email address</label>
+          <input id="f-email" type="email" class="field-input" placeholder="jane@studio.com" required>
         </div>
+        <div>
+          <label for="f-brief" class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.3rem;">Project brief</label>
+          <textarea id="f-brief" rows="4" class="field-input" style="resize:none;" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-solid" style="width:fit-content;">Send message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="padding-top:5rem; padding-bottom:2rem;">
+    <div class="wrap">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem;">
+        <div style="display:flex; align-items:center; gap:1.6rem;">
+          <a href="https://github.com/aryansuryas" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github" style="font-size:24px;"></i></a>
+          <a href="https://linkedin.com/in/aryansuryas" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" style="font-size:24px;"></i></a>
+          <a href="https://instagram.com/aryansuryasgowda" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram" style="font-size:24px;"></i></a>
+          <a href="mailto:aryansurya752006@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope" style="font-size:24px;"></i></a>
+          <a href="https://youtube.com/@TheCassGX" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube" style="font-size:24px;"></i></a>
+          <a href="https://bsky.app/profile/aryansuryas" target="_blank" rel="noopener" class="social-icon" aria-label="Bluesky"><i class="fa-brands fa-bluesky" style="font-size:24px;"></i></a>
+        </div>
+        <a href="#hero" class="back-to-top" aria-label="Back to top" style="background:var(--ink); color:var(--paper); width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
       </div>
-    </section>
-
-    <!-- ============ SECTION 6: PROJECTS ============ -->
-    <section id="work" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36 bg-surface-muted">
-      <div class="max-w-[1600px] mx-auto">
-        <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(2.5rem, 6vw, 7rem); line-height: 0.9;">
-          SELECTED <span class="text-primary">/</span> PROJECTS
-        </h2>
-
-        <!-- Project 01 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-20">
-          <div class="relative reveal-left">
-            <span class="absolute -top-10 -left-2 lg:-left-8 font-headline font-extrabold text-outline z-10 select-none" style="font-size: clamp(4rem, 8vw, 8rem); line-height: 1;" aria-hidden="true">01</span>
-            <div class="proj-img-wrap reveal-img hoverable" style="aspect-ratio: 16/10;">
-              <div class="img-inner w-full h-full">
-                <svg viewBox="0 0 640 400" preserveAspectRatio="none" class="w-full h-full block" role="img" aria-label="Abstract code editor pattern">
-                  <rect width="640" height="400" fill="#161310"/>
-                  <rect x="0" y="0" width="640" height="32" fill="#1f1a16"/>
-                  <circle cx="20" cy="16" r="5" fill="#8b0000"/><circle cx="38" cy="16" r="5" fill="#610000"/><circle cx="56" cy="16" r="5" fill="#5a403c"/>
-                  <g font-family="monospace" font-size="13">
-                    <text x="30" y="70" fill="#8b0000">const</text><text x="85" y="70" fill="#f5f5dc">review = await claude.analyze(code);</text>
-                    <text x="30" y="100" fill="#5a403c">// structured feedback engine</text>
-                    <text x="30" y="130" fill="#8b0000">function</text><text x="105" y="130" fill="#f5f5dc">scoreQuality(ast) {</text>
-                    <text x="55" y="160" fill="#f5f5dc">return rules.map(r =&gt; r.check(ast));</text>
-                    <text x="30" y="190" fill="#f5f5dc">}</text>
-                    <text x="30" y="230" fill="#8b0000">export</text><text x="95" y="230" fill="#f5f5dc">default CodeSense;</text>
-                  </g>
-                  <g stroke="#610000" stroke-width="0.5" opacity="0.35">
-                    <line x1="0" y1="280" x2="640" y2="280"/><line x1="0" y1="320" x2="640" y2="320"/><line x1="0" y1="360" x2="640" y2="360"/>
-                    <line x1="160" y1="260" x2="160" y2="400"/><line x1="320" y1="260" x2="320" y2="400"/><line x1="480" y1="260" x2="480" y2="400"/>
-                  </g>
-                  <rect x="480" y="300" width="120" height="14" fill="#8b0000" opacity="0.7"/>
-                  <rect x="40" y="340" width="200" height="14" fill="#610000" opacity="0.7"/>
-                </svg>
-              </div>
-              <div class="proj-overlay">React · Firebase · Claude API · Tailwind CSS</div>
-            </div>
-          </div>
-          <div class="reveal-right">
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2024 · AI TOOL</p>
-            <h3 class="font-headline font-extrabold uppercase tracking-tight mt-3" style="font-size: clamp(1.75rem, 3.5vw, 3.5rem);">CODESENSE</h3>
-            <p class="font-body text-stone2 leading-relaxed mt-5 text-base lg:text-lg">An AI-powered code review assistant. Paste code, get structured feedback on quality, bugs, and improvements powered by Claude.</p>
-            <a href="#" class="btn-wipe bg-primary text-surface font-label font-bold text-xs tracking-[0.25em] uppercase px-8 py-4 inline-block mt-8 hoverable">VIEW PROJECT</a>
-          </div>
-        </div>
-
-        <!-- Project 02 (reversed) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-28">
-          <div class="reveal-left lg:order-1 order-2">
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2024 · BRAND</p>
-            <h3 class="font-headline font-extrabold uppercase tracking-tight mt-3" style="font-size: clamp(1.75rem, 3.5vw, 3.5rem);">CASSGX BRAND</h3>
-            <p class="font-body text-stone2 leading-relaxed mt-5 text-base lg:text-lg">Built a full gaming &amp; tech content brand from scratch. Logo, channel identity, AI-generated shorts, and viral clip strategy.</p>
-            <a href="https://youtube.com/@TheCassGX" target="_blank" rel="noopener" class="btn-wipe bg-primary text-surface font-label font-bold text-xs tracking-[0.25em] uppercase px-8 py-4 inline-block mt-8 hoverable">VIEW CHANNEL</a>
-          </div>
-          <div class="relative reveal-right lg:order-2 order-1">
-            <span class="absolute -top-10 -right-2 lg:-right-8 font-headline font-extrabold text-outline z-10 select-none" style="font-size: clamp(4rem, 8vw, 8rem); line-height: 1;" aria-hidden="true">02</span>
-            <div class="proj-img-wrap reveal-img hoverable" style="aspect-ratio: 16/10;">
-              <div class="img-inner w-full h-full">
-                <svg viewBox="0 0 640 400" preserveAspectRatio="none" class="w-full h-full block" role="img" aria-label="Dark gaming grid pattern">
-                  <rect width="640" height="400" fill="#100d0b"/>
-                  <g stroke="#610000" stroke-width="0.6" opacity="0.5">
-                    <line x1="0" y1="50" x2="640" y2="50"/><line x1="0" y1="100" x2="640" y2="100"/><line x1="0" y1="150" x2="640" y2="150"/><line x1="0" y1="200" x2="640" y2="200"/><line x1="0" y1="250" x2="640" y2="250"/><line x1="0" y1="300" x2="640" y2="300"/><line x1="0" y1="350" x2="640" y2="350"/>
-                    <line x1="80" y1="0" x2="80" y2="400"/><line x1="160" y1="0" x2="160" y2="400"/><line x1="240" y1="0" x2="240" y2="400"/><line x1="320" y1="0" x2="320" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="480" y1="0" x2="480" y2="400"/><line x1="560" y1="0" x2="560" y2="400"/>
-                  </g>
-                  <polygon points="320,120 380,220 260,220" fill="none" stroke="#8b0000" stroke-width="3"/>
-                  <polygon points="320,150 355,210 285,210" fill="#610000"/>
-                  <text x="320" y="270" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" letter-spacing="10" fill="#f5f5dc">CASSGX</text>
-                  <text x="320" y="295" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="4" fill="#8b0000">GAMING · TECH · AI SHORTS</text>
-                  <circle cx="80" cy="50" r="4" fill="#8b0000"/><circle cx="560" cy="350" r="4" fill="#8b0000"/><circle cx="560" cy="50" r="4" fill="#610000"/><circle cx="80" cy="350" r="4" fill="#610000"/>
-                </svg>
-              </div>
-              <div class="proj-overlay">Branding · AI Video · Short-form Content · YouTube</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 03 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-28">
-          <div class="relative reveal-left">
-            <span class="absolute -top-10 -left-2 lg:-left-8 font-headline font-extrabold text-outline z-10 select-none" style="font-size: clamp(4rem, 8vw, 8rem); line-height: 1;" aria-hidden="true">03</span>
-            <div class="proj-img-wrap reveal-img hoverable" style="aspect-ratio: 16/10;">
-              <div class="img-inner w-full h-full">
-                <svg viewBox="0 0 640 400" preserveAspectRatio="none" class="w-full h-full block" role="img" aria-label="Graph node network pattern">
-                  <rect width="640" height="400" fill="#efefd7"/>
-                  <g stroke="#610000" stroke-width="1" opacity="0.6">
-                    <line x1="100" y1="100" x2="250" y2="60"/><line x1="100" y1="100" x2="200" y2="220"/><line x1="250" y1="60" x2="400" y2="130"/><line x1="200" y1="220" x2="400" y2="130"/><line x1="400" y1="130" x2="540" y2="80"/><line x1="400" y1="130" x2="480" y2="280"/><line x1="200" y1="220" x2="320" y2="330"/><line x1="320" y1="330" x2="480" y2="280"/><line x1="480" y1="280" x2="560" y2="340"/><line x1="100" y1="100" x2="80" y2="300"/><line x1="80" y1="300" x2="320" y2="330"/>
-                  </g>
-                  <g fill="#610000">
-                    <circle cx="100" cy="100" r="10"/><circle cx="250" cy="60" r="7"/><circle cx="400" cy="130" r="12"/><circle cx="200" cy="220" r="8"/><circle cx="540" cy="80" r="6"/><circle cx="480" cy="280" r="9"/><circle cx="320" cy="330" r="7"/><circle cx="80" cy="300" r="6"/><circle cx="560" cy="340" r="5"/>
-                  </g>
-                  <g fill="#8b0000" font-family="monospace" font-size="10">
-                    <text x="118" y="96">ARRAYS</text><text x="265" y="56">GRAPHS</text><text x="418" y="126">DP</text><text x="215" y="216">TREES</text><text x="495" y="276">GREEDY</text><text x="335" y="326">TRIES</text>
-                  </g>
-                  <text x="320" y="385" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="12" letter-spacing="6" fill="#610000">228 CONCEPTS · 15 PHASES · 9 WEEKS</text>
-                </svg>
-              </div>
-              <div class="proj-overlay">C++ · DSA · 9-Week Curriculum · Open Source</div>
-            </div>
-          </div>
-          <div class="reveal-right">
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary font-bold">2024 · OPEN SOURCE</p>
-            <h3 class="font-headline font-extrabold uppercase tracking-tight mt-3" style="font-size: clamp(1.75rem, 3.5vw, 3.5rem);">CS BATTLE PLAN</h3>
-            <p class="font-body text-stone2 leading-relaxed mt-5 text-base lg:text-lg">A comprehensive 228-concept DSA roadmap and full CS fundamentals study system. 15 phases, competitive programming prep, shared on GitHub.</p>
-            <a href="https://github.com/aryansuryas" target="_blank" rel="noopener" class="btn-wipe bg-primary text-surface font-label font-bold text-xs tracking-[0.25em] uppercase px-8 py-4 inline-block mt-8 hoverable">VIEW ON GITHUB</a>
-          </div>
-        </div>
+      <div class="hairline" style="margin-top:3rem;"></div>
+      <div style="padding-top:1.4rem; display:flex; flex-wrap:wrap; justify-content:space-between; gap:.6rem;" class="font-mono">
+        <span style="font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);">Architectural monolith · Aryan Surya S</span>
+        <span style="font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);">© 2026 all rights reserved</span>
       </div>
-    </section>
+    </div>
+  </footer>
 
-    <!-- ============ SECTION 7: ACHIEVEMENTS ============ -->
-    <section id="achievements" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36">
-      <div class="max-w-[1600px] mx-auto">
-        <h2 class="font-headline font-extrabold uppercase tracking-tighter reveal-up" style="font-size: clamp(2.5rem, 6vw, 7rem); line-height: 0.9;">
-          ACHIEVEMENTS <span class="text-primary">/</span>
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
-          <div class="ach-card p-8 reveal-up hoverable" style="transition-delay: 0ms;">
-            <span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">cloud</span>
-            <h3 class="font-headline font-bold uppercase text-base mt-4">Salesforce Trailhead</h3>
-            <p class="font-body text-stone2 text-sm leading-relaxed mt-2">Active Developer Path</p>
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary mt-4 font-bold">2024</p>
-          </div>
-          <div class="ach-card p-8 reveal-up hoverable" style="transition-delay: 100ms;">
-            <span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">rocket_launch</span>
-            <h3 class="font-headline font-bold uppercase text-base mt-4">CodeSense Shipped</h3>
-            <p class="font-body text-stone2 text-sm leading-relaxed mt-2">Built &amp; deployed CodeSense using AI-first tooling</p>
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary mt-4 font-bold">2024</p>
-          </div>
-          <div class="ach-card p-8 reveal-up hoverable" style="transition-delay: 200ms;">
-            <span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">trophy</span>
-            <h3 class="font-headline font-bold uppercase text-base mt-4">Competitive Programmer</h3>
-            <p class="font-body text-stone2 text-sm leading-relaxed mt-2">C++ · DSA · LeetCode</p>
-            <p class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-primary mt-4 font-bold">2023 – PRESENT</p>
-          </div>
-        </div>
-      </div>
-    </section>
+</div><!-- /main-wrap -->
 
-    <!-- ============ SECTION 8: CONTACT ============ -->
-    <section id="contact" class="px-5 sm:px-8 lg:px-16 py-24 lg:py-36 bg-surface-muted">
-      <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <!-- Left -->
-        <div class="reveal-left">
-          <h2 class="font-headline font-extrabold uppercase tracking-tighter" style="font-size: clamp(2.5rem, 6vw, 7rem); line-height: 0.9;">
-            LET'S<span class="text-primary"> /</span><br>WORK<span class="text-primary"> /</span><br>TOGETHER
-            <span class="arrow-anim text-primary ml-2" aria-hidden="true">
-              <svg width="0.5em" height="0.5em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
-            </span>
-          </h2>
-          <div class="mt-12 space-y-5 font-body">
-            <p><span class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">Email</span>
-              <a href="mailto:aryansurya752006@gmail.com" class="text-primary font-semibold hoverable underline-offset-4 hover:underline">aryansurya752006@gmail.com</a></p>
-            <p><span class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">Location</span>Bengaluru, India</p>
-            <p><span class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">Availability</span>Open to internships &amp; collabs</p>
-          </div>
-        </div>
-        <!-- Right: form -->
-        <form id="contact-form" class="reveal-right flex flex-col gap-8 justify-center" novalidate>
-          <div>
-            <label for="f-name" class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">YOUR NAME</label>
-            <input id="f-name" type="text" class="brutal-input hoverable" placeholder="Jane Doe" required>
-          </div>
-          <div>
-            <label for="f-email" class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">EMAIL ADDRESS</label>
-            <input id="f-email" type="email" class="brutal-input hoverable" placeholder="jane@studio.com" required>
-          </div>
-          <div>
-            <label for="f-brief" class="font-label text-[0.65rem] tracking-[0.3em] uppercase text-stone2 block mb-1">PROJECT BRIEF</label>
-            <textarea id="f-brief" rows="4" class="brutal-input hoverable resize-none" placeholder="Tell me about your project..." required></textarea>
-          </div>
-          <button id="submit-btn" type="submit" class="btn-wipe bg-primary text-surface font-label font-bold text-xs tracking-[0.25em] uppercase px-10 py-4 w-full sm:w-auto self-start hoverable">
-            SEND MESSAGE
-          </button>
-        </form>
-      </div>
-    </section>
+<script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
 
-    <!-- ============ SECTION 9: CONNECT & FOOTER ============ -->
-    <footer class="px-5 sm:px-8 lg:px-16 pt-20 pb-8">
-      <div class="max-w-[1600px] mx-auto">
-        <div class="flex flex-wrap items-center justify-between gap-8">
-          <div class="flex items-center gap-7">
-            <a href="https://github.com/aryansuryas" target="_blank" rel="noopener" class="social-icon github hoverable" aria-label="GitHub"><i class="fa-brands fa-github" style="font-size: 28px;"></i></a>
-            <a href="https://linkedin.com/in/aryansuryas" target="_blank" rel="noopener" class="social-icon linkedin hoverable" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" style="font-size: 28px;"></i></a>
-            <a href="https://instagram.com/aryansuryasgowda" target="_blank" rel="noopener" class="social-icon instagram hoverable" aria-label="Instagram"><i class="fa-brands fa-instagram" style="font-size: 28px;"></i></a>
-            <a href="mailto:aryansurya752006@gmail.com" class="social-icon email hoverable" aria-label="Email"><i class="fa-solid fa-envelope" style="font-size: 28px;"></i></a>
-            <a href="https://youtube.com/@TheCassGX" target="_blank" rel="noopener" class="social-icon youtube hoverable" aria-label="YouTube"><i class="fa-brands fa-youtube" style="font-size: 28px;"></i></a>
-            <a href="https://bsky.app/profile/aryansuryas" target="_blank" rel="noopener" class="social-icon bluesky hoverable" aria-label="Bluesky"><i class="fa-brands fa-bluesky" style="font-size: 28px;"></i></a>
-          </div>
-          <a href="#hero" class="bg-on-surface text-white w-12 h-12 flex items-center justify-center hoverable" aria-label="Back to top">
-            <i class="fa-solid fa-arrow-up"></i>
-          </a>
-        </div>
-        <div class="border-t border-primary mt-12 pt-6 flex flex-col sm:flex-row justify-between gap-3 font-label text-[0.625rem] tracking-[0.3em] uppercase text-stone2">
-          <span>ARCHITECTURAL MONOLITH · ARYAN SURYA S</span>
-          <span>©2025 ALL RIGHTS RESERVED</span>
-        </div>
-      </div>
-    </footer>
+  /* ===== LENIS SMOOTH SCROLL ===== */
+  if (!reduced && window.Lenis) {
+    var lenis = new Lenis({ duration: 1.1, smoothWheel: true, autoRaf: true });
+  }
 
-  </div><!-- /main-wrap -->
+  /* ===== TEXT SPLIT ===== */
+  document.querySelectorAll("[data-split]").forEach(function(el){
+    var inner = el.querySelector("span");
+    var text = inner.textContent;
+    inner.style.setProperty("--d", "0ms");
+  });
 
-  <script>
-    (function () {
-      "use strict";
-      var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* ===== PORTAL ===== */
+  var portal = document.getElementById("portal");
+  var portalBtn = document.getElementById("portal-btn");
+  var mainWrap = document.getElementById("main-wrap");
+  function openPortal(){
+    portalBtn.classList.add("expand");
+    document.querySelectorAll(".portal-ring,.portal-text").forEach(function(el){
+      el.style.transition = "opacity .4s"; el.style.opacity = "0";
+    });
+    setTimeout(function(){ portal.classList.add("flash"); }, 750);
+    setTimeout(function(){
+      mainWrap.classList.add("revealed");
+      document.getElementById("hero").classList.add("words-on");
+      portal.style.transition = "opacity .6s";
+      portal.style.opacity = "0";
+      document.body.classList.remove("locked");
+      setTimeout(function(){ portal.classList.add("gone"); mainWrap.classList.add("done"); }, 900);
+    }, 1150);
+  }
+  portalBtn.addEventListener("click", openPortal, { once:true });
 
-      /* ===== TEXT SPLIT (hero) ===== */
-      document.querySelectorAll("[data-split]").forEach(function (el) {
-        var words = el.textContent.trim().split(/\s+/);
-        el.textContent = "";
-        words.forEach(function (w, i) {
-          var mask = document.createElement("span");
-          mask.className = "word-mask";
-          var inner = document.createElement("span");
-          inner.textContent = w;
-          inner.style.setProperty("--d", (i * 80) + "ms");
-          mask.appendChild(inner);
-          el.appendChild(mask);
-          if (i < words.length - 1) el.appendChild(document.createTextNode("\u00A0"));
-        });
-      });
-
-      /* ===== PORTAL ===== */
-      var portal = document.getElementById("portal");
-      var portalBtn = document.getElementById("portal-btn");
-      var mainWrap = document.getElementById("main-wrap");
-
-      function openPortal() {
-        portalBtn.classList.add("expand");
-        setTimeout(function () { portal.classList.add("flash"); }, 600);
-        setTimeout(function () {
-          mainWrap.classList.add("revealed");
-          document.getElementById("hero").classList.add("words-active");
-          portal.style.transition = "opacity 0.5s";
-          portal.style.opacity = "0";
-          document.body.classList.remove("locked");
-          setTimeout(function () {
-            portal.classList.add("gone");
-            mainWrap.classList.add("done");
-          }, 850);
-        }, 1000);
-      }
-      portalBtn.addEventListener("click", openPortal, { once: true });
-
-      /* ===== CUSTOM CURSOR ===== */
-      var finePointer = window.matchMedia("(pointer: fine)").matches;
-      if (finePointer && !reducedMotion) {
-        document.body.classList.add("cursor-active");
-        var dot = document.getElementById("cursor-dot");
-        var ring = document.getElementById("cursor-ring");
-        var mx = -100, my = -100, rx = -100, ry = -100;
-        document.addEventListener("mousemove", function (e) { mx = e.clientX; my = e.clientY; });
-        (function cursorLoop() {
-          dot.style.transform = "translate(" + (mx - 4) + "px," + (my - 4) + "px)";
-          rx += (mx - rx) * 0.18; /* ~80ms lag */
-          ry += (my - ry) * 0.18;
-          ring.style.transform = "translate(" + (rx - ring.offsetWidth / 2) + "px," + (ry - ring.offsetHeight / 2) + "px)";
-          requestAnimationFrame(cursorLoop);
-        })();
-        document.addEventListener("mouseover", function (e) {
-          if (e.target.closest("a, button, input, textarea, .hoverable")) ring.classList.add("hovered");
-        });
-        document.addEventListener("mouseout", function (e) {
-          if (e.target.closest("a, button, input, textarea, .hoverable")) ring.classList.remove("hovered");
-        });
-      }
-
-      /* ===== SCROLL PROGRESS ===== */
-      var progress = document.getElementById("progress");
-      var ticking = false;
-      function updateProgress() {
-        var h = document.documentElement;
-        var max = h.scrollHeight - h.clientHeight;
-        progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
-        ticking = false;
-      }
-      window.addEventListener("scroll", function () {
-        if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
-      }, { passive: true });
-      updateProgress();
-
-      /* ===== INTERSECTION OBSERVER REVEALS ===== */
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right, .reveal-img, .tl-item").forEach(function (el) {
-        io.observe(el);
-      });
-
-      /* ===== SCROLL-SPY ===== */
-      var navItems = document.querySelectorAll(".nav-item");
-      var spyMap = { hero: "hero", skills: "skills", work: "work", contact: "contact" };
-      var spySections = Object.keys(spyMap).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-      var spy = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            navItems.forEach(function (n) {
-              n.classList.toggle("active", n.getAttribute("data-spy") === entry.target.id);
-            });
-          }
-        });
-      }, { rootMargin: "-40% 0px -55% 0px" });
-      spySections.forEach(function (s) { spy.observe(s); });
-
-      /* ===== MAGNETIC NAV HOVER ===== */
-      if (finePointer && !reducedMotion) {
-        navItems.forEach(function (item) {
-          item.addEventListener("mousemove", function (e) {
-            var r = item.getBoundingClientRect();
-            var dx = ((e.clientX - r.left) / r.width - 0.5) * 8;  /* ±4px */
-            var dy = ((e.clientY - r.top) / r.height - 0.5) * 8;
-            item.style.transform = "translate(" + dx + "px," + dy + "px)";
-          });
-          item.addEventListener("mouseleave", function () {
-            item.style.transform = "translate(0,0)";
-          });
-        });
-      }
-
-      /* ===== CONTACT FORM UI STATE ===== */
-      var form = document.getElementById("contact-form");
-      var submitBtn = document.getElementById("submit-btn");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (submitBtn.disabled) return;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="spinner"></span>&nbsp;&nbsp;SENDING...';
-        setTimeout(function () {
-          submitBtn.innerHTML = "MESSAGE SENT ✓";
-          submitBtn.style.background = "#1b1d0e";
-        }, 1800);
-      });
+  /* ===== CURSOR ===== */
+  if (finePointer && !reduced) {
+    document.body.classList.add("cursor-on");
+    var dot = document.getElementById("cur-dot");
+    var ring = document.getElementById("cur-ring");
+    var mx=-100,my=-100,rx=-100,ry=-100;
+    document.addEventListener("mousemove", function(e){ mx=e.clientX; my=e.clientY; });
+    document.addEventListener("mousedown", function(){ dot.classList.add("clicking"); });
+    document.addEventListener("mouseup", function(){ dot.classList.remove("clicking"); });
+    (function loop(){
+      dot.style.transform = "translate("+mx+"px,"+my+"px) translate(-50%,-50%)";
+      rx += (mx-rx)*0.16; ry += (my-ry)*0.16;
+      ring.style.transform = "translate("+rx+"px,"+ry+"px) translate(-50%,-50%)";
+      requestAnimationFrame(loop);
     })();
-  </script>
+    document.addEventListener("mouseover", function(e){
+      if (e.target.closest("a,button,input,textarea")) ring.classList.add("hovered");
+    });
+    document.addEventListener("mouseout", function(e){
+      if (e.target.closest("a,button,input,textarea")) ring.classList.remove("hovered");
+    });
+  }
+
+  /* ===== SCROLL PROGRESS ===== */
+  var progress = document.getElementById("progress");
+  var ticking = false;
+  function updateProgress(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max>0 ? (h.scrollTop/max)*100 : 0) + "%";
+    ticking = false;
+  }
+  window.addEventListener("scroll", function(){
+    if(!ticking){ requestAnimationFrame(updateProgress); ticking=true; }
+  }, { passive:true });
+  updateProgress();
+
+  /* ===== REVEALS ===== */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add("active"); io.unobserve(entry.target); }
+    });
+  }, { threshold:0.1 });
+  document.querySelectorAll(".rv,.tl-item").forEach(function(el){ io.observe(el); });
+
+  /* ===== SCROLL SPY ===== */
+  var navItems = document.querySelectorAll(".nav-item");
+  var spySections = ["hero","skills","work","contact"].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navItems.forEach(function(n){ n.classList.toggle("active", n.getAttribute("data-spy")===entry.target.id); });
+      }
+    });
+  }, { rootMargin:"-40% 0px -55% 0px" });
+  spySections.forEach(function(s){ spy.observe(s); });
+
+  /* ===== CONTACT FORM ===== */
+  var form = document.getElementById("contact-form");
+  var submitBtn = document.getElementById("submit-btn");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(submitBtn.disabled) return;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>&nbsp;&nbsp;Sending...';
+    setTimeout(function(){
+      submitBtn.innerHTML = "Message sent";
+      submitBtn.style.background = "#1E1912";
+    }, 1600);
+  });
+})();
+</script>
 </body>
 </html>
