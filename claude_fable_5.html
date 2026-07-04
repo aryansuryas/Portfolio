@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
 
@@ -16,10 +16,10 @@
   :root{
     --paper:#FBF7EC;
     --paper-panel:#F1E9D8;
-    --paper-line:rgba(30,25,18,0.10);
+    --paper-line:rgba(30,25,18,0.14);
     --ink:#1E1912;
-    --ink-soft:#4A3A2E;
-    --ink-faint:rgba(30,25,18,0.45);
+    --ink-soft:#40311F;
+    --ink-faint:rgba(30,25,18,0.5);
     --wine:#7A1220;
     --wine-dark:#530C16;
     --wine-glow:rgba(122,18,32,0.35);
@@ -31,7 +31,7 @@
     --gap-md: clamp(2rem, 4vw, 3.5rem);
     --gap-lg: clamp(3rem, 6vw, 5.5rem);
     --gap-xl: clamp(4.5rem, 9vw, 8rem);
-    --pad-section: clamp(5rem, 10vw, 9rem);
+    --pad-section: clamp(6rem, 11vw, 10.5rem);
     --edge: clamp(1.25rem, 5vw, 4.5rem);
     --container: 1360px;
   }
@@ -59,6 +59,14 @@
 
   .font-head{ font-family:"Space Grotesk",sans-serif; }
   .font-mono{ font-family:"IBM Plex Mono",monospace; }
+  .sec-head{
+    font-family:"Fraunces",serif;
+    font-weight:600;
+    text-transform:none;
+    letter-spacing:-0.01em;
+    font-style:normal;
+  }
+  .sec-head em{ font-style:italic; font-weight:500; color:var(--wine); }
 
   .wrap{ max-width:var(--container); margin:0 auto; padding-inline:var(--edge); }
 
@@ -254,28 +262,34 @@
 
   /* ============ PILL NAV ============ */
   #pill-nav{
-    position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
+    position:fixed; top:1.4rem; left:50%; transform:translateX(-50%);
     z-index:90;
-    background:rgba(251,247,236,0.68);
-    -webkit-backdrop-filter:blur(20px) saturate(1.6);
-    backdrop-filter:blur(20px) saturate(1.6);
-    border:1px solid rgba(30,25,18,0.10);
-    border-radius:999px; padding:.35rem;
-    display:flex; gap:.1rem;
-    box-shadow:0 8px 28px rgba(30,25,18,0.08);
+    background:rgba(251,247,236,0.78);
+    -webkit-backdrop-filter:blur(18px) saturate(1.4);
+    backdrop-filter:blur(18px) saturate(1.4);
+    border:1px solid rgba(30,25,18,0.08);
+    border-radius:999px; padding:.5rem;
+    display:flex; flex-wrap:nowrap; align-items:center; gap:.15rem;
+    max-width:calc(100vw - 1.5rem);
+    overflow-x:auto;
+    -ms-overflow-style:none; scrollbar-width:none;
+    box-shadow:0 14px 40px rgba(30,25,18,0.10);
   }
+  #pill-nav::-webkit-scrollbar{ display:none; }
   .nav-item{
-    font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:500;
-    letter-spacing:.18em; text-transform:uppercase;
-    padding:.5rem .85rem; border-radius:999px; color:var(--ink-soft);
+    font-family:"Manrope",sans-serif; font-size:.95rem; font-weight:500;
+    letter-spacing:normal; text-transform:none;
+    padding:.7rem 1.15rem; border-radius:999px; color:#3a352f;
     transition:color .3s, background .3s;
-    display:inline-flex; align-items:center; gap:.4rem; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:.55rem; white-space:nowrap;
+    flex-shrink:0;
   }
+  .nav-item i{ font-size:1rem; line-height:1; color:inherit; width:1em; text-align:center; }
   .nav-item.active{ background:var(--ink); color:var(--paper); }
   .nav-item:not(.active):hover{ color:var(--wine); }
   @media (max-width:767px){
     .nav-item .nav-text{ display:none; }
-    .nav-item{ padding:.5rem .65rem; font-size:.72rem; }
+    .nav-item{ padding:.7rem .8rem; font-size:.95rem; }
   }
 
   /* ============ REVEALS ============ */
@@ -381,16 +395,33 @@
   .skill-card{
     border:1px solid var(--paper-line); border-left:1px solid var(--paper-line);
     padding:1.6rem; background:var(--paper);
-    transition:border-left-color .4s, border-left-width .4s, transform .4s, box-shadow .4s;
+    transition:border-left-color .4s, border-left-width .4s, transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s;
     position:relative;
+    perspective:900px;
+    transform-style:preserve-3d;
   }
   .skill-card:hover{
     border-left-color:var(--wine); border-left-width:3px;
-    transform:translateY(-4px);
-    box-shadow:0 14px 34px rgba(30,25,18,0.08);
+    transform:translateY(-6px) rotateX(5deg) rotateY(-4deg);
+    box-shadow:0 22px 44px rgba(30,25,18,0.14);
   }
   .skill-card h3{ transition:color .3s; }
   .skill-card:hover h3{ color:var(--wine); }
+  .skill-icons{
+    display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem;
+    opacity:0; transform:translateY(10px) scale(.85) rotateX(-12deg);
+    transform-origin:left bottom;
+    transition:opacity .4s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+  }
+  .skill-card:hover .skill-icons{ opacity:1; transform:translateY(0) scale(1) rotateX(0deg); }
+  .skill-icons i{
+    font-size:1.15rem; color:var(--wine);
+    width:2.1rem; height:2.1rem; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--paper-panel); border:1px solid var(--paper-line);
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .skill-icons i:hover{ transform:translateY(-3px) scale(1.08); }
 
   /* ============ PROJECT MEDIA ============ */
   .proj-media{
@@ -484,8 +515,9 @@
 
 <nav id="pill-nav" aria-label="Primary">
   <a href="#hero" class="nav-item active" data-spy="hero"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="nav-text">Home</span></a>
-  <a href="#skills" class="nav-item" data-spy="skills"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span class="nav-text">Skills</span></a>
-  <a href="#work" class="nav-item" data-spy="work"><i class="fa-solid fa-cube" aria-hidden="true"></i><span class="nav-text">Work</span></a>
+  <a href="#journey" class="nav-item" data-spy="journey"><i class="fa-solid fa-id-card" aria-hidden="true"></i><span class="nav-text">About</span></a>
+  <a href="#work" class="nav-item" data-spy="work"><i class="fa-solid fa-folder-open" aria-hidden="true"></i><span class="nav-text">Projects</span></a>
+  <a href="#skills" class="nav-item" data-spy="skills"><i class="fa-solid fa-code" aria-hidden="true"></i><span class="nav-text">services</span></a>
   <a href="#contact" class="nav-item" data-spy="contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="nav-text">Contact</span></a>
 </nav>
 
@@ -507,7 +539,6 @@
     </div>
 
     <div class="wrap" style="position:relative; z-index:2;">
-      <p class="section-eyebrow rv rv-up">FIG. 01 — PORTFOLIO / 2026</p>
 
       <h1 id="hero-title" class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.03em; font-size:clamp(3.2rem,10vw,9.5rem); line-height:0.88; margin-top:1.4rem;">
         <span class="word-mask" data-split><span>ARYAN</span></span><br>
@@ -558,9 +589,8 @@
   <!-- ============ FIGURES (formerly generic 01/02/03 principle cards) ============ -->
   <section style="padding-block:var(--pad-section);">
     <div class="wrap">
-      <p class="section-eyebrow rv rv-up">FIG. 02 — WORKING PRINCIPLES</p>
-      <h2 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;" class="rv rv-up">
-        How I build
+      <h2 class="sec-head rv rv-up" style="font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        How I <em>build</em>
       </h2>
       <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--paper-line); margin-top:var(--gap-md); border:1px solid var(--paper-line);">
         <div class="fig-card rv rv-up">
@@ -591,34 +621,51 @@
   <!-- ============ SKILLS ============ -->
   <section id="skills" style="padding-block:var(--pad-section); background:var(--paper-panel);">
     <div class="wrap">
-      <p class="section-eyebrow rv rv-up">FIG. 03 — TOOLKIT</p>
-      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
-        Technology stack
+      <h2 class="sec-head rv rv-up" style="font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        Technology <em>stack</em>
       </h2>
       <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1rem; margin-top:var(--gap-md);">
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Frontend</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">React, Tailwind CSS, HTML5/CSS3, Framer Motion</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-brands fa-react"></i><i class="fa-brands fa-html5"></i><i class="fa-brands fa-css3-alt"></i><i class="fa-solid fa-wind"></i>
+          </div>
         </div>
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Backend</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Node.js, Firebase, REST APIs, Express</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-brands fa-node-js"></i><i class="fa-solid fa-fire"></i><i class="fa-solid fa-arrow-right-arrow-left"></i><i class="fa-solid fa-server"></i>
+          </div>
         </div>
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Languages</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">C++, JavaScript, Apex (Salesforce)</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-solid fa-code"></i><i class="fa-brands fa-js"></i><i class="fa-brands fa-salesforce"></i>
+          </div>
         </div>
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">AI &amp; LLMs</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Claude API, OpenAI API, LangChain, prompt engineering</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-solid fa-robot"></i><i class="fa-solid fa-link"></i><i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
         </div>
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Platforms</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Salesforce Trailhead, Vercel, GitHub, Cursor IDE</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-brands fa-salesforce"></i><i class="fa-brands fa-github"></i><i class="fa-solid fa-i-cursor"></i>
+          </div>
         </div>
         <div class="skill-card rv rv-up">
           <h3 class="font-mono" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine);">Dev tools</h3>
           <p style="color:var(--ink-soft); font-size:.98rem; margin-top:.9rem; line-height:1.6;">Git, VS Code, Vite, Figma, Lovable</p>
+          <div class="skill-icons" aria-hidden="true">
+            <i class="fa-brands fa-git-alt"></i><i class="fa-solid fa-code"></i><i class="fa-solid fa-bolt"></i><i class="fa-brands fa-figma"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -628,7 +675,6 @@
   <section id="journey" style="padding-block:var(--pad-section);">
     <div class="wrap" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:var(--gap-lg);">
       <div>
-        <p class="section-eyebrow rv rv-up">FIG. 04 — EXPERIENCE</p>
         <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:2.8rem;">
           <div class="tl-item rv rv-up">
             <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2024 – PRESENT</p>
@@ -645,7 +691,6 @@
         </div>
       </div>
       <div>
-        <p class="section-eyebrow rv rv-up">FIG. 05 — EDUCATION</p>
         <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:2.8rem;">
           <div class="tl-item rv rv-up">
             <p class="font-mono" style="font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--wine); font-weight:600;">2022 – PRESENT</p>
@@ -667,9 +712,8 @@
   <!-- ============ PROJECTS ============ -->
   <section id="work" style="padding-block:var(--pad-section); background:var(--paper-panel);">
     <div class="wrap">
-      <p class="section-eyebrow rv rv-up">FIG. 06 — SELECTED WORK</p>
-      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
-        Projects
+      <h2 class="sec-head rv rv-up" style="font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        <em>Projects</em>
       </h2>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); align-items:center; gap:var(--gap-lg); margin-top:var(--gap-xl);">
@@ -770,9 +814,8 @@
   <!-- ============ ACHIEVEMENTS ============ -->
   <section id="achievements" style="padding-block:var(--pad-section);">
     <div class="wrap">
-      <p class="section-eyebrow rv rv-up">FIG. 07 — MILESTONES</p>
-      <h2 class="font-head rv rv-up" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
-        Achievements
+      <h2 class="sec-head rv rv-up" style="font-size:clamp(2rem,5vw,4.6rem); margin-top:1rem;">
+        <em>Achievements</em>
       </h2>
       <div class="stagger" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; margin-top:var(--gap-md);">
         <div class="ach-card rv rv-up">
@@ -801,9 +844,8 @@
   <section id="contact" style="padding-block:var(--pad-section); background:var(--paper-panel);">
     <div class="wrap" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:var(--gap-lg);">
       <div class="rv rv-left">
-        <p class="section-eyebrow">FIG. 08 — CONTACT</p>
-        <h2 class="font-head" style="font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(2.2rem,5vw,4.6rem); line-height:1.02; margin-top:1rem;">
-          Let's work<br>together
+        <h2 class="sec-head" style="font-size:clamp(2.2rem,5vw,4.6rem); line-height:1.05; margin-top:1rem;">
+          Let's work<br><em>together</em>
         </h2>
         <div style="margin-top:2.4rem; display:flex; flex-direction:column; gap:1.1rem;">
           <p><span class="font-mono" style="font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:.25rem;">Email</span>
@@ -943,7 +985,7 @@
 
   /* ===== SCROLL SPY ===== */
   var navItems = document.querySelectorAll(".nav-item");
-  var spySections = ["hero","skills","work","contact"].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var spySections = ["hero","journey","work","skills","contact"].map(function(id){ return document.getElementById(id); }).filter(Boolean);
   var spy = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
