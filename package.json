@@ -1,9 +1,9 @@
 {
   "name": "aryan-surya-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "description": "Aryan Surya S — full-stack developer & AI builder portfolio. React + Vite, Three.js hero scene, GSAP scroll reveals, and React Bits components.",
+  "description": "Aryan Surya S — full-stack developer & AI builder portfolio. React + Vite, GSAP ScrollTrigger + Lenis scroll choreography, Three.js morphing particle field.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,8 +12,6 @@
   "dependencies": {
     "gsap": "^3.15.0",
     "lenis": "^1.3.25",
-    "motion": "^12.42.2",
-    "ogl": "^1.0.11",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "three": "^0.185.1"
