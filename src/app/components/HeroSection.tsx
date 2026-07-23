@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
+import VariableFontHoverByLetter from './VariableFontHoverByLetter';
 
 export default function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -30,20 +31,24 @@ export default function HeroSection() {
   return (
     <section
       className="relative flex items-center min-h-screen hero-section"
-      style={{ paddingTop: 'calc(var(--nav-h) + 3rem)', paddingBottom: '4rem' }}>
-
+      style={{ paddingTop: 'calc(var(--nav-h) + 3rem)', paddingBottom: '4rem' }}
+    >
       <div
         className="w-full px-[var(--edge)]"
-        style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
-
-        <div
-          ref={contentRef}
-          className="max-w-[720px] reveal-hidden hero-copy">
-
+        style={{ maxWidth: 'var(--container)', margin: '0 auto' }}
+      >
+        <div ref={contentRef} className="max-w-[720px] reveal-hidden hero-copy">
           {/* Big bold uppercase name */}
-          <h1 className="hero-name">
-
-            Aryan Surya S
+          <h1 className="hero-name" style={{ display: 'block', minHeight: '1.2em' }}>
+            <VariableFontHoverByLetter
+              label="ARYAN SURYA S"
+              fromWeight={400}
+              toWeight={900}
+              fontSize="clamp(3.8rem, 10vw, 8.5rem)"
+              color="var(--ink)"
+              staggerDuration={30}
+              staggerFrom="random"
+            />
           </h1>
 
           {/* Subtitle with pipe separators — dark font */}
@@ -55,9 +60,9 @@ export default function HeroSection() {
               fontWeight: 600,
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
-              color: 'var(--ink)'
-            }}>
-
+              color: 'var(--ink)',
+            }}
+          >
             <span>AI Builder</span>
             <span style={{ margin: '0 0.75rem', color: 'var(--ink-soft)' }}>|</span>
             <span>MASTERING DSA</span>
@@ -73,11 +78,11 @@ export default function HeroSection() {
               lineHeight: 1.7,
               color: 'var(--ink-soft)',
               fontWeight: 400,
-              maxWidth: '58ch'
-            }}>
-
-            Full-stack developer and AI systems builder based in Bengaluru.
-            I build fast, scalable products with thoughtful interfaces and dependable architecture.
+              maxWidth: '58ch',
+            }}
+          >
+            Full-stack developer and AI systems builder based in Bengaluru. I build fast, scalable
+            products with thoughtful interfaces and dependable architecture.
           </p>
 
           {/* CTAs */}
@@ -88,7 +93,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-3 px-9 py-4 rounded font-semibold text-sm uppercase tracking-[0.05em] transition-all duration-300"
               style={{
                 background: 'var(--wine)',
-                color: 'var(--paper)'
+                color: 'var(--paper)',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background = 'var(--wine-dark)';
@@ -99,8 +104,8 @@ export default function HeroSection() {
                 (e.currentTarget as HTMLElement).style.background = 'var(--wine)';
                 (e.currentTarget as HTMLElement).style.transform = '';
                 (e.currentTarget as HTMLElement).style.boxShadow = '';
-              }}>
-
+              }}
+            >
               Resume / CV
               <span>→</span>
             </a>
@@ -111,7 +116,7 @@ export default function HeroSection() {
               className="magnetic-btn inline-flex items-center gap-3 px-9 py-4 rounded font-semibold text-sm uppercase tracking-[0.05em] transition-all duration-300"
               style={{
                 border: '1px solid var(--ink)',
-                color: 'var(--ink)'
+                color: 'var(--ink)',
               }}
               onMouseMove={handleMagneticMove}
               onMouseLeave={(e) => {
@@ -122,8 +127,8 @@ export default function HeroSection() {
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background = 'var(--ink)';
                 (e.currentTarget as HTMLElement).style.color = 'var(--paper)';
-              }}>
-
+              }}
+            >
               Get In Touch
             </a>
           </div>

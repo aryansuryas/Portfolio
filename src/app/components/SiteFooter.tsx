@@ -11,57 +11,23 @@ export default function SiteFooter() {
       }}
     >
       <div
-        className="px-[var(--edge)] flex flex-col sm:flex-row justify-between items-center gap-6"
+        className="px-[var(--edge)] flex justify-center items-center"
         style={{ maxWidth: 'var(--container)', margin: '0 auto' }}
       >
-
-
-        {/* Links */}
-        <div className="flex items-center gap-6">
-          <a
-            href="#about"
-            className="text-sm font-medium transition-colors duration-200"
-            style={{ color: 'var(--ink-soft)' }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
-            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--ink-soft)')}
-          >
-            About
-          </a>
-          <a
-            href="#projects"
-            className="text-sm font-medium transition-colors duration-200"
-            style={{ color: 'var(--ink-soft)' }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
-            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--ink-soft)')}
-          >
-            Projects
-          </a>
-          <a
-            href="#contact"
-            className="text-sm font-medium transition-colors duration-200"
-            style={{ color: 'var(--ink-soft)' }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
-            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--ink-soft)')}
-          >
-            Contact
-          </a>
-        </div>
-
         {/* Copyright */}
         <p
-          className="text-sm"
+          className="text-sm text-center"
           style={{
             fontFamily: 'var(--font-mono), monospace',
             color: 'var(--ink-soft)',
-            fontSize: '0.8rem',
+            fontSize: '0.85rem',
             letterSpacing: '0.05em',
           }}
         >
           © 2026{' '}
-          <span className="brand-name" style={{ fontFamily: 'var(--font-fraunces), serif' }}>
-            Aryan Surya S.
-          </span>{' '}
-          — Engineered in Bengaluru.
+          <span className="brand-name font-semibold transition-all">
+            Aryan Surya S
+          </span>
         </p>
       </div>
     </footer>

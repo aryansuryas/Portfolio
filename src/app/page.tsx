@@ -5,6 +5,7 @@ import PhilosophySection from './components/PhilosophySection';
 import ProjectsSection from './components/ProjectsSection';
 import TechStackSection from './components/TechStackSection';
 import WritingsSection from './components/WritingsSection';
+import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import SiteNav from './components/SiteNav';
 import SiteFooter from './components/SiteFooter';
@@ -30,6 +31,7 @@ export default function HomePage() {
         <ProjectsSection />
         <TechStackSection />
         <WritingsSection />
+        <EducationSection />
         <ContactSection />
       </main>
 

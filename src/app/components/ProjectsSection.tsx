@@ -16,9 +16,7 @@ const PROJECTS: Project[] = [
     description:
       'A focused project centered on gesture recognition, interaction design, and frame-based control. Computer vision pipeline built with real-time hand tracking — presented in the same refined visual language as the rest of the portfolio.',
     tags: ['Computer Vision', 'OpenCV', 'Interaction', 'UI'],
-    links: [
-      { label: 'Open GitHub', href: 'https://github.com/aryansuryas/Hand-Frame' },
-    ],
+    links: [{ label: 'Open GitHub', href: 'https://github.com/aryansuryas/Hand-Frame' }],
   },
   {
     num: '/ 02',
@@ -26,9 +24,7 @@ const PROJECTS: Project[] = [
     description:
       'A world visualization project designed to present geography and location data with clarity, clean spacing, and a polished presentation layer. Focuses on data density without visual clutter.',
     tags: ['Visualization', 'Maps', 'Web', 'D3.js'],
-    links: [
-      { label: 'Open GitHub', href: 'https://github.com/aryansuryas/World-Map' },
-    ],
+    links: [{ label: 'Open GitHub', href: 'https://github.com/aryansuryas/World-Map' }],
   },
   {
     num: '/ 03',
@@ -55,20 +51,15 @@ export default function ProjectsSection() {
       },
       { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
     );
-    cardRefs.current.forEach((c) => { if (c) observer.observe(c); });
+    cardRefs.current.forEach((c) => {
+      if (c) observer.observe(c);
+    });
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section
-      id="projects"
-      className="relative"
-      style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}
-    >
-      <div
-        className="px-[var(--edge)]"
-        style={{ maxWidth: 'var(--container)', margin: '0 auto' }}
-      >
+    <section id="projects" className="relative" style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}>
+      <div className="px-[var(--edge)]" style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
         {/* Header */}
         <div className="flex flex-col gap-2 mb-12">
           <div className="flex items-center gap-3">
@@ -93,14 +84,20 @@ export default function ProjectsSection() {
           {PROJECTS.map((project, i) => (
             <article
               key={project.num}
-              ref={(el) => { cardRefs.current[i] = el; }}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
               className="premium-card reveal-hidden flex flex-col"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               {/* Number */}
               <div className="mb-4">
                 <span
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)', fontSize: '0.85rem' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass)',
+                    fontSize: '0.85rem',
+                  }}
                 >
                   {project.num}
                 </span>
@@ -140,7 +137,10 @@ export default function ProjectsSection() {
 
               {/* Links */}
               {project.links.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-4" style={{ borderTop: '1px solid var(--paper-line)' }}>
+                <div
+                  className="flex flex-wrap gap-2 pt-4"
+                  style={{ borderTop: '1px solid var(--paper-line)' }}
+                >
                   {project.links.map((link) => (
                     <a
                       key={link.label}
@@ -149,8 +149,20 @@ export default function ProjectsSection() {
                       rel="noreferrer noopener"
                       className="project-link-pill"
                     >
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2 10L10 2M10 2H4M10 2V8"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                       {link.label}
                     </a>

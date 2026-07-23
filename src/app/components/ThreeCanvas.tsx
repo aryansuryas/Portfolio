@@ -23,7 +23,12 @@ export default function ThreeCanvas() {
       container.innerHTML = '';
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(55, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(
+        55,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
       camera.position.z = 4.5;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -44,7 +49,7 @@ export default function ThreeCanvas() {
       /* Bigger, thicker wireframe TorusKnot — fills the frame */
       const knotGeo = new THREE.TorusKnotGeometry(1.85, 0.55, 180, 20);
       const knotMat = new THREE.MeshBasicMaterial({
-        color: 0x7A1220,
+        color: 0x7a1220,
         wireframe: true,
         transparent: true,
         opacity: 0.22,
@@ -65,13 +70,17 @@ export default function ThreeCanvas() {
       const v = new THREE.Vector3();
       for (let i = 0; i < count; i++) {
         v.set(basePos[i * 3], basePos[i * 3 + 1], basePos[i * 3 + 2]);
-        const dir = v.clone().normalize().add(
-          new THREE.Vector3(
-            (Math.random() - 0.5) * 1.8,
-            (Math.random() - 0.5) * 1.8,
-            (Math.random() - 0.5) * 1.8,
+        const dir = v
+          .clone()
+          .normalize()
+          .add(
+            new THREE.Vector3(
+              (Math.random() - 0.5) * 1.8,
+              (Math.random() - 0.5) * 1.8,
+              (Math.random() - 0.5) * 1.8
+            )
           )
-        ).normalize();
+          .normalize();
         const dist = 2.5 + Math.random() * 4.5;
         scatterTargets[i * 3] = v.x + dir.x * dist;
         scatterTargets[i * 3 + 1] = v.y + dir.y * dist;
@@ -84,7 +93,7 @@ export default function ThreeCanvas() {
       const particleGeo = new THREE.BufferGeometry();
       particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       const particleMat = new THREE.PointsMaterial({
-        color: 0x7A1220,
+        color: 0x7a1220,
         size: 0.05,
         transparent: true,
         opacity: 0,
@@ -105,7 +114,9 @@ export default function ThreeCanvas() {
       window.addEventListener('resize', onResize);
 
       /* Scroll */
-      const onScroll = () => { scrollY = window.scrollY; };
+      const onScroll = () => {
+        scrollY = window.scrollY;
+      };
       window.addEventListener('scroll', onScroll, { passive: true });
 
       const smoothstep = (t: number) => t * t * (3 - 2 * t);
@@ -141,7 +152,8 @@ export default function ThreeCanvas() {
             const driftX = Math.sin(t * 0.6 + seeds[i]) * 0.1 * local;
             const driftY = Math.cos(t * 0.5 + seeds[i] * 2) * 0.1 * local;
             pos[i3] = basePos[i3] + (scatterTargets[i3] - basePos[i3]) * local + driftX;
-            pos[i3 + 1] = basePos[i3 + 1] + (scatterTargets[i3 + 1] - basePos[i3 + 1]) * local + driftY;
+            pos[i3 + 1] =
+              basePos[i3 + 1] + (scatterTargets[i3 + 1] - basePos[i3 + 1]) * local + driftY;
             pos[i3 + 2] = basePos[i3 + 2] + (scatterTargets[i3 + 2] - basePos[i3 + 2]) * local;
           }
           particleGeo.attributes.position.needsUpdate = true;
@@ -175,11 +187,5 @@ export default function ThreeCanvas() {
     };
   }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      className="webgl-canvas-container"
-      aria-hidden="true"
-    />
-  );
+  return <div ref={containerRef} className="webgl-canvas-container" aria-hidden="true" />;
 }

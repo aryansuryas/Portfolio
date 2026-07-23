@@ -43,15 +43,8 @@ export default function PhilosophySection() {
   }, []);
 
   return (
-    <section
-      id="about"
-      className="relative"
-      style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}
-    >
-      <div
-        className="px-[var(--edge)]"
-        style={{ maxWidth: 'var(--container)', margin: '0 auto' }}
-      >
+    <section id="about" className="relative" style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}>
+      <div className="px-[var(--edge)]" style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
         {/* Section meta */}
         <div className="flex flex-col gap-2 mb-8">
           <div className="flex items-center gap-3">
@@ -73,17 +66,22 @@ export default function PhilosophySection() {
           className="mb-12 max-w-[65ch] leading-relaxed"
           style={{ fontSize: '1.05rem', color: 'var(--ink-soft)', fontWeight: 400 }}
         >
-          A CSE student from Bengaluru building things at the intersection of systems
-          performance, AI tooling, and editorial craft. Every project is an exercise
-          in keeping the structure lean while making the experience feel premium.
+          A CSE student from Bengaluru building things at the intersection of systems performance,
+          AI tooling, and editorial craft. Every project is an exercise in keeping the structure
+          lean while making the experience feel premium.
         </p>
 
         {/* Cards grid */}
-        <div className="grid gap-8" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+        <div
+          className="grid gap-8"
+          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
+        >
           {PHILOSOPHY_CARDS.map((card, i) => (
             <div
               key={card.num}
-              ref={(el) => { cardRefs.current[i] = el; }}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
               className="premium-card reveal-hidden"
               style={{ transitionDelay: `${i * 120}ms` }}
             >

@@ -52,7 +52,9 @@ export default function WritingsSection() {
       },
       { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
     );
-    articleRefs.current.forEach((el) => { if (el) observer.observe(el); });
+    articleRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
     return () => observer.disconnect();
   }, []);
 
@@ -63,10 +65,7 @@ export default function WritingsSection() {
       className="relative"
       style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}
     >
-      <div
-        className="px-[var(--edge)]"
-        style={{ maxWidth: 'var(--container)', margin: '0 auto' }}
-      >
+      <div className="px-[var(--edge)]" style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
         {/* Header */}
         <div className="flex flex-col gap-2 mb-10">
           <div className="flex items-center gap-3">
@@ -88,18 +87,16 @@ export default function WritingsSection() {
           {BLOG_POSTS.map((post, i) => (
             <article
               key={post.heading}
-              ref={(el) => { articleRefs.current[i] = el; }}
+              ref={(el) => {
+                articleRefs.current[i] = el;
+              }}
               className="blog-card-hover blog-card-bg reveal-hidden relative overflow-hidden"
               style={{
                 borderBottom: '1px solid var(--paper-line)',
                 transitionDelay: `${i * 100}ms`,
               }}
             >
-              <a
-                href={post.href}
-                className="block"
-                style={{ padding: '2rem 0' }}
-              >
+              <a href={post.href} className="block" style={{ padding: '2rem 0' }}>
                 <div
                   className="grid items-center gap-4"
                   style={{ gridTemplateColumns: '180px minmax(0, 1fr)' }}
