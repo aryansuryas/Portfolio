@@ -89,7 +89,8 @@ export default function PhilosophySection() {
                 className="block mb-4 text-sm"
                 style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
               >
-                // {card.num}
+                {'// '}
+                {card.num}
               </span>
               <h3
                 className="mb-3"

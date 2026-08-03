@@ -5,8 +5,9 @@ const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Stack', href: '#tech-stack' },
-  { label: 'Writings', href: '#writings' },
+  { label: 'Achievements', href: '#achievements' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Resume', href: '/Aryan_Surya_S_Resume.pdf', external: true, download: true },
 ];
 
 export default function SiteNav() {
@@ -46,18 +47,20 @@ export default function SiteNav() {
           className="flex justify-between items-center px-[var(--edge)] gap-4"
           style={{ height: 'var(--nav-h)', maxWidth: 'var(--container)', margin: '0 auto' }}
         >
-          {/* Logo — name only, no icon */}
-          <a href="#" onClick={closeMenu}>
+          {/* Logo */}
+          <a href="#" onClick={closeMenu} className="inline-flex items-center group">
             <span
+              className="leading-none"
               style={{
                 fontFamily: 'var(--font-kholic), var(--font-fraunces), serif',
                 fontWeight: 700,
-                fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-                letterSpacing: '0.025em',
+                fontSize: 'clamp(1rem, 2.2vw, 1.25rem)',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
                 color: 'var(--ink)',
               }}
             >
-              PORTFOLIO
+              Portfolio
             </span>
           </a>
 
@@ -67,6 +70,9 @@ export default function SiteNav() {
               <li key={link.href}>
                 <a
                   href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  download={link.download ? 'Aryan_Surya_S_Resume.pdf' : undefined}
                   className="nav-link-underline font-medium text-sm transition-colors"
                   style={{ color: 'var(--ink-soft)' }}
                   onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
@@ -97,8 +103,9 @@ export default function SiteNav() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-[110] flex flex-col justify-center items-center md:hidden transition-all duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+        className={`fixed inset-0 z-[110] flex flex-col justify-center items-center md:hidden transition-all duration-500 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
         style={{
           background: 'rgba(251, 247, 236, 0.98)',
           backdropFilter: 'blur(24px)',
@@ -119,6 +126,9 @@ export default function SiteNav() {
             <a
               key={link.href}
               href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+              download={link.download ? 'Aryan_Surya_S_Resume.pdf' : undefined}
               onClick={closeMenu}
               className="text-3xl font-light transition-colors"
               style={{

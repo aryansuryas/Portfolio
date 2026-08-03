@@ -87,41 +87,104 @@ export default function ContactSection() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
+
+  // Input sanitization helper function
+  const sanitizeInput = (input: string): string => {
+    return input
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/<[^>]+>/g, '')
+      .trim();
+  };
+
+  // Honeypot & spam protection states
+  const [honeypot, setHoneypot] = useState('');
+  const [mountTime] = useState<number>(() => Date.now());
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Spam Protection Check 1: Honeypot field must remain empty
+    if (honeypot.trim().length > 0) {
+      // Bot detected: simulate success without sending email
+      setSubmitted(true);
+      return;
+    }
+
+    // Spam Protection Check 2: Minimum submission time (1.5 seconds)
+    if (Date.now() - mountTime < 1500) {
+      setSubmitted(true);
+      return;
+    }
+
+    // Spam Protection Check 3: Rate Limiting Cooldown (60 seconds)
+    const lastSubmission =
+      typeof window !== 'undefined' ? localStorage.getItem('last_submission_time') : null;
+    if (lastSubmission && Date.now() - parseInt(lastSubmission, 10) < 60000) {
+      setError('Please wait a minute before transmitting another signal.');
+      return;
+    }
+
     if (!isEmailValid) {
       setEmailTouched(true);
+      return;
+    }
+
+    // Sanitize user inputs
+    const cleanName = sanitizeInput(name);
+    const cleanEmail = sanitizeInput(email);
+    const cleanMessage = sanitizeInput(message);
+
+    if (!cleanName || !cleanEmail || !cleanMessage) {
+      setError('Please fill in all required fields.');
       return;
     }
 
     setIsSending(true);
     setError(null);
 
-    const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_8as8dyh';
-    const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_wht60x4';
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'ehl_7LR3VU-ZJ18qM';
+    const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceID || !templateID || !publicKey) {
+      setIsSending(false);
+      setError('Contact service is not configured. Please reach out directly via email.');
+      return;
+    }
 
     const templateParams = {
-      from_name: name,
-      name: name,
-      user_name: name,
-      from_email: email,
-      email: email,
-      user_email: email,
-      message: message,
-      description: message,
-      notes: message,
+      from_name: cleanName,
+      name: cleanName,
+      user_name: cleanName,
+      from_email: cleanEmail,
+      email: cleanEmail,
+      user_email: cleanEmail,
+      message: cleanMessage,
+      description: cleanMessage,
+      notes: cleanMessage,
     };
 
     emailjs.send(serviceID, templateID, templateParams, publicKey).then(
       () => {
         setIsSending(false);
         setSubmitted(true);
+        setName('');
+        setEmail('');
+        setMessage('');
+        setEmailTouched(false);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('last_submission_time', Date.now().toString());
+        }
       },
-      (err) => {
-        console.error('EmailJS Error:', err);
+      () => {
         setIsSending(false);
-        setError('Failed to transmit signal. Please check your credentials or try again later.');
+        setError('Failed to transmit signal. Please try again later or send an email directly.');
       }
     );
   };
@@ -239,9 +302,7 @@ export default function ContactSection() {
           {/* Right — form without outer card border */}
           <div className="animate-levitate">
             {submitted ? (
-              <div
-                className="py-8 text-left"
-              >
+              <div className="py-8 text-left">
                 <div className="text-4xl mb-4 text-emerald-600">✓</div>
                 <h3
                   className="mb-2"
@@ -259,6 +320,19 @@ export default function ContactSection() {
               </div>
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8 text-left">
+                {/* Honeypot field — hidden from real users, tricks spam bots */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <label htmlFor="website">Do not fill this out if you are human</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    autoComplete="off"
+                  />
+                </div>
                 {/* Name + Email row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-2 text-left">
@@ -274,6 +348,7 @@ export default function ContactSection() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g., Jane Doe"
+                      maxLength={100}
                       required
                       suppressHydrationWarning
                       className="input-underline"
@@ -297,10 +372,12 @@ export default function ContactSection() {
                         }}
                         onBlur={() => setEmailTouched(true)}
                         placeholder="e.g., jane@company.com"
+                        maxLength={100}
                         required
                         suppressHydrationWarning
-                        className="input-underline pr-8"
+                        className="input-underline w-full min-w-0 pr-12"
                         style={{
+                          paddingRight: '2.75rem',
                           borderBottomColor: email
                             ? isEmailValid
                               ? '#22c55e'
@@ -311,10 +388,10 @@ export default function ContactSection() {
                         }}
                       />
                       {email && (
-                        <span className="absolute right-0 flex items-center justify-center pointer-events-none">
+                        <span className="pointer-events-none absolute right-0 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center">
                           {isEmailValid ? (
                             <svg
-                              className="w-4 h-4 text-emerald-500"
+                              className="h-4 w-4 text-emerald-500"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -329,7 +406,7 @@ export default function ContactSection() {
                           ) : (
                             emailTouched && (
                               <svg
-                                className="w-4 h-4 text-red-500"
+                                className="h-4 w-4 text-red-500"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -363,6 +440,7 @@ export default function ContactSection() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Detail your technical ambitions, project scope, or questions..."
+                    maxLength={2000}
                     required
                     suppressHydrationWarning
                     className="input-underline resize-none leading-relaxed"

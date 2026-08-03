@@ -4,7 +4,7 @@ import HeroSection from './components/HeroSection';
 import PhilosophySection from './components/PhilosophySection';
 import ProjectsSection from './components/ProjectsSection';
 import TechStackSection from './components/TechStackSection';
-import WritingsSection from './components/WritingsSection';
+import AchievementsSection from './components/AchievementsSection';
 import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import SiteNav from './components/SiteNav';
@@ -30,7 +30,7 @@ export default function HomePage() {
         <PhilosophySection />
         <ProjectsSection />
         <TechStackSection />
-        <WritingsSection />
+        <AchievementsSection />
         <EducationSection />
         <ContactSection />
       </main>

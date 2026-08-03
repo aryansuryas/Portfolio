@@ -21,7 +21,7 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
       'Pursuing my engineering major in Computer Science & Engineering. Building deep competencies in Data Structures & Algorithms, Full-Stack Architectures, and LLM automation systems.',
   },
   {
-    year: '2021 - 2023',
+    year: '2022 - 2024',
     degree: 'Pre-University College (PUC)',
     institution: 'Deeksha CFL PU College',
     score: '93%',
@@ -30,7 +30,7 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
       'Completed pre-university education with a core focus on Physics, Chemistry, Mathematics, and Computer Science.',
   },
   {
-    year: '2020 - 2021',
+    year: '2021 - 2022',
     degree: 'Secondary School Education (10th)',
     institution: 'Jain Vidyaniketan',
     score: '96.96%',

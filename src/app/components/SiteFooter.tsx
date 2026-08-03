@@ -24,10 +24,7 @@ export default function SiteFooter() {
             letterSpacing: '0.05em',
           }}
         >
-          © 2026{' '}
-          <span className="brand-name font-semibold transition-all">
-            Aryan Surya S
-          </span>
+          © 2026 <span className="brand-name font-semibold transition-all">Aryan Surya S</span>
         </p>
       </div>
     </footer>

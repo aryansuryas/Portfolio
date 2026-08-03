@@ -87,9 +87,12 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <div className="flex gap-4 flex-wrap">
-            {/* Resume — NO magnetic, NO cursor follow */}
+            {/* Resume — Direct download / open document */}
             <a
-              href="#projects"
+              href="/Aryan_Surya_S_Resume.pdf"
+              download="Aryan_Surya_S_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-9 py-4 rounded font-semibold text-sm uppercase tracking-[0.05em] transition-all duration-300"
               style={{
                 background: 'var(--wine)',
@@ -106,8 +109,8 @@ export default function HeroSection() {
                 (e.currentTarget as HTMLElement).style.boxShadow = '';
               }}
             >
-              Resume / CV
-              <span>→</span>
+              Download Resume / CV
+              <span>↓</span>
             </a>
 
             {/* Get In Touch — magnetic cursor follow */}
