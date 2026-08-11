@@ -47,4 +47,7 @@ This project is ready for deployment on Vercel.
 
 
 How I Did ? 
-Generate Inages
+Intro Idea
+genearte prompt form
+Generate Images from chatgpt
+voleect in order generate video 
