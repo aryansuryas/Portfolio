@@ -44,3 +44,7 @@ This project is ready for deployment on Vercel.
 ## Notes
 - Keep `.env.local` out of version control.
 - The repository uses `.gitignore` to exclude local environment files and build output.
+
+
+How I Did ? 
+Generate Inages
