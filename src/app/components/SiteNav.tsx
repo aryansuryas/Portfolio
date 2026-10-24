@@ -1,65 +1,69 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Download, Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import { motion } from 'framer-motion';
+
+const NAV_LINKS = [
+  { name: 'Work', href: '#projects' },
+  { name: 'Tech', href: '#tech-stack' },
+  { name: 'Achievements', href: '#achievements' },
+  { name: 'Education', href: '#education' },
+];
 
 export default function SiteNav() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, cycleTheme } = useTheme();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
   return (
-    <header className={`site-nav ${scrolled ? 'site-nav-scrolled' : ''}`}>
-      <div className="site-nav-inner">
-        <a href="#top" className="nav-monogram" aria-label="Back to top">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 border-b border-[var(--paper-line)] transition-all duration-300 ${
+        scrolled
+          ? 'bg-[var(--background)]/80 backdrop-blur-xl border-b border-[var(--paper-line)] py-3'
+          : 'py-6'
+      }`}
+    >
+      <div className="content-shell flex items-center justify-between">
+        <a href="#top" className="text-xl font-bold tracking-tighter text-[var(--ink)]">
           AS
         </a>
-        <div className="nav-actions">
-          <button
-            className="theme-toggle"
-            onClick={cycleTheme}
-            aria-label={`Switch theme. Current theme: ${theme}`}
+
+        <nav className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-[var(--ink-soft)] hover:text-[var(--wine)] transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <a
+            className="button resume-download-button py-2 px-5"
+            href="/Aryan_Surya_S_Resume.pdf"
+            download="Aryan_Surya_S_Resume.pdf"
           >
-            {theme === 'light' ? <Sun size={17} /> : <Moon size={17} />}
-            <span>{theme === 'light' ? 'Light' : 'Dark'}</span>
-          </button>
-          <a className="nav-cta" href="#contact">
-            Let&apos;s talk
+            <Download size={16} strokeWidth={2.25} aria-hidden="true" />
+            Resume
           </a>
           <button
-            className="mobile-menu-button"
-            onClick={() => setOpen(true)}
-            aria-label="Open navigation"
+            className="p-2.5 rounded-full border border-[var(--paper-line)] text-[var(--ink)] hover:border-[var(--wine)] hover:text-[var(--wine)] transition-all"
+            onClick={cycleTheme}
+            aria-label="Toggle theme"
           >
-            <Menu size={22} />
+            {theme === 'light' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
-      </div>
-      <div className={`mobile-nav ${open ? 'mobile-nav-open' : ''}`}>
-        <button
-          className="mobile-close"
-          onClick={() => setOpen(false)}
-          aria-label="Close navigation"
-        >
-          <X size={24} />
-        </button>
-        <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>
-          Let&apos;s talk
-        </a>
       </div>
     </header>
   );

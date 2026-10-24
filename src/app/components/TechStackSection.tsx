@@ -1,155 +1,42 @@
 'use client';
 
-import React, { useState } from 'react';
-import type { LucideIcon } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Braces, Database, GitBranch, Layers, Server, Sparkles } from 'lucide-react';
 import AppImage from '@/components/ui/AppImage';
 
 const DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
 const SI = 'https://cdn.simpleicons.org/';
 
-interface StackItem {
-  name: string;
-  logo?: string;
-  tint?: string;
-}
-
-interface StackCategory {
-  name: string;
-  mark: string;
-  description: string;
-  icon: LucideIcon;
-  items: StackItem[];
-}
+interface StackItem { name: string; logo?: string; }
+interface StackCategory { name: string; mark: string; icon: any; items: StackItem[]; }
 
 const STACK_DATA: StackCategory[] = [
-  {
-    name: 'Languages',
-    mark: '01',
-    description: 'Core languages for structured problem solving.',
-    icon: Braces,
-    items: [
-      { name: 'Java', logo: `${DEV}java/java-original.svg` },
-      { name: 'Python', logo: `${DEV}python/python-original.svg` },
-      { name: 'C', logo: `${DEV}c/c-original.svg` },
-      { name: 'C++', logo: `${DEV}cplusplus/cplusplus-original.svg` },
-    ],
-  },
-  {
-    name: 'Frontend',
-    mark: '02',
-    description: 'Interfaces built for clarity, speed, and responsiveness.',
-    icon: Layers,
-    items: [
-      { name: 'React', logo: `${DEV}react/react-original.svg` },
-      { name: 'Next.js', logo: `${DEV}nextjs/nextjs-original.svg` },
-      { name: 'TypeScript', logo: `${DEV}typescript/typescript-original.svg` },
-      { name: 'Tailwind CSS', logo: `${DEV}tailwindcss/tailwindcss-original.svg` },
-    ],
-  },
-  {
-    name: 'Backend & Security',
-    mark: '03',
-    description: 'Reliable server systems and protected request flows.',
-    icon: Server,
-    items: [
-      { name: 'Node.js', logo: `${DEV}nodejs/nodejs-original.svg` },
-      { name: 'Express', logo: `${DEV}express/express-original.svg` },
-      { name: 'REST APIs', tint: '#BC0202' },
-      { name: 'Authentication', tint: '#BC0202' },
-      { name: 'Security', tint: '#BC0202' },
-      { name: 'Rate limiting', tint: '#BC0202' },
-    ],
-  },
-  {
-    name: 'Data & Delivery',
-    mark: '04',
-    description: 'Storage, version control, testing, and shipping.',
-    icon: Database,
-    items: [
-      { name: 'SQL', logo: `${DEV}mysql/mysql-original.svg` },
-      { name: 'MongoDB', logo: `${DEV}mongodb/mongodb-original.svg` },
-      { name: 'Git', logo: `${DEV}git/git-original.svg` },
-      { name: 'GitHub', logo: `${SI}github` },
-      { name: 'Postman', logo: `${DEV}postman/postman-original.svg` },
-    ],
-  },
-  {
-    name: 'AI & Tools',
-    mark: '05',
-    description: 'AI assistants and frameworks that accelerate delivery.',
-    icon: Sparkles,
-    items: [
-      { name: 'ChatGPT', logo: `${SI}openai` },
-      { name: 'Copilot', logo: `${SI}githubcopilot` },
-      { name: 'LangChain', logo: `${SI}langchain` },
-      { name: 'LeetCode', logo: `${SI}leetcode` },
-    ],
-  },
-  {
-    name: 'Systems Thinking',
-    mark: '06',
-    description: 'Architecture, APIs, performance, and maintainability.',
-    icon: GitBranch,
-    items: [
-      { name: 'API design', tint: '#BC0202' },
-      { name: 'Data structures', tint: '#BC0202' },
-      { name: 'Testing', tint: '#BC0202' },
-      { name: 'Performance', tint: '#BC0202' },
-    ],
-  },
+  { name: 'Languages', mark: '01', icon: Braces, items: [{ name: 'Java', logo: `${DEV}java/java-original.svg` }, { name: 'Python', logo: `${DEV}python/python-original.svg` }, { name: 'C++', logo: `${DEV}cplusplus/cplusplus-original.svg` }] },
+  { name: 'Frontend', mark: '02', icon: Layers, items: [{ name: 'React', logo: `${DEV}react/react-original.svg` }, { name: 'Next.js', logo: `${DEV}nextjs/nextjs-original.svg` }, { name: 'TypeScript', logo: `${DEV}typescript/typescript-original.svg` }] },
+  { name: 'Backend', mark: '03', icon: Server, items: [{ name: 'Node.js', logo: `${DEV}nodejs/nodejs-original.svg` }, { name: 'Express', logo: `${DEV}express/express-original.svg` }, { name: 'PostgreSQL', logo: `${DEV}postgresql/postgresql-original.svg` }] },
+  { name: 'AI/Tools', mark: '04', icon: Sparkles, items: [{ name: 'LangChain', logo: `${SI}langchain` }, { name: 'OpenCV', logo: `${DEV}opencv/opencv-original.svg` }, { name: 'Git', logo: `${DEV}git/git-original.svg` }] },
 ];
-
-function TechBadge({ item }: { item: StackItem }) {
-  const [failed, setFailed] = useState(false);
-  return (
-    <li className="tech-badge" style={{ ['--tint' as string]: item.tint || 'var(--wine)' }}>
-      {item.logo && !failed ? (
-        <AppImage
-          src={item.logo}
-          alt=""
-          width={16}
-          height={16}
-          unoptimized
-          onError={() => setFailed(true)}
-        />
-      ) : (
-        <span className="tech-badge-fallback">{item.name.slice(0, 2).toUpperCase()}</span>
-      )}
-      <span>{item.name}</span>
-    </li>
-  );
-}
 
 export default function TechStackSection() {
   return (
-    <section id="tech-stack" className="section technologies-section">
+    <section id="tech-stack" className="section bg-[var(--background)]">
       <div className="content-shell">
-        <div className="section-heading">
-          <p className="eyebrow">02 / Technologies</p>
-          <h2>Tools &amp; Technologies</h2>
-        </div>
-        <div className="technology-bento">
-          {STACK_DATA.map((category) => {
-            const Icon = category.icon;
-            return (
-              <article className="technology-card" key={category.name}>
-                <div className="technology-card-header">
-                  <span className="technology-icon">
-                    <Icon size={18} />
-                  </span>
-                  <span className="technology-mark">{category.mark}</span>
-                </div>
-                <h3>{category.name}</h3>
-                <p>{category.description}</p>
-                <ul>
-                  {category.items.map((item) => (
-                    <TechBadge key={item.name} item={item} />
-                  ))}
-                </ul>
-              </article>
-            );
-          })}
+        <h2 className="sec-head mb-16">Tech Stack</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {STACK_DATA.map((category, i) => (
+            <div key={category.name} className="bg-[var(--paper-panel)] border border-[var(--paper-line)] rounded-3xl p-8">
+              <div className="w-12 h-12 rounded-2xl bg-[var(--background)] border border-[var(--paper-line)] flex items-center justify-center text-[var(--wine)] mb-6">
+                <category.icon size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-6">{category.name}</h3>
+              <div className="flex flex-wrap gap-2">
+                {category.items.map((item) => (
+                    <div key={item.name} className="px-3 py-1.5 bg-[var(--background)] border border-[var(--paper-line)] rounded-full text-xs font-semibold">{item.name}</div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

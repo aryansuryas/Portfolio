@@ -1,5 +1,6 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface EducationMilestone {
   year: string;
@@ -17,8 +18,7 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Dayananda Sagar University',
     score: '8.56 CGPA',
     scoreLabel: 'Current CGPA',
-    details:
-      'Pursuing my engineering major in Computer Science & Engineering. Building deep competencies in Data Structures & Algorithms, Full-Stack Architectures, and LLM automation systems.',
+    details: 'Pursuing my engineering major in Computer Science & Engineering. Building deep competencies in Data Structures & Algorithms, Full-Stack Architectures, and LLM automation systems.',
   },
   {
     year: '2022 - 2024',
@@ -26,8 +26,7 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Deeksha CFL PU College',
     score: '93%',
     scoreLabel: 'Final Percentage',
-    details:
-      'Completed pre-university education with a core focus on Physics, Chemistry, Mathematics, and Computer Science.',
+    details: 'Completed pre-university education with a core focus on Physics, Chemistry, Mathematics, and Computer Science.',
   },
   {
     year: '2021 - 2022',
@@ -35,210 +34,67 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Jain Vidyaniketan',
     score: '96.96%',
     scoreLabel: 'Board Score',
-    details:
-      'Completed secondary school board examinations with outstanding performance and general academic excellence.',
+    details: 'Completed secondary school board examinations with outstanding performance and general academic excellence.',
   },
 ];
 
-export default function EducationSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activeHoverIndex, setActiveHoverIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-            entry.target.classList.remove('reveal-hidden');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
+function EducationCard({ item, index }: { item: EducationMilestone; index: number }) {
   return (
-    <section
-      id="education"
-      ref={sectionRef}
-      className="relative reveal-hidden"
-      style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)', borderTop: '1px solid var(--paper-line)' }}
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="relative pl-12 pb-16 last:pb-0"
     >
-      <div className="px-[var(--edge)]" style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
-        {/* Header */}
-        <div className="flex flex-col gap-2 mb-12">
-          <div className="flex items-center gap-3">
-            <div className="section-divider" style={{ marginBottom: 0 }} />
-            <span
-              className="text-xs uppercase tracking-[0.1em]"
-              style={{ fontFamily: 'var(--font-mono), monospace', color: 'var(--wine)' }}
-            >
-              04 / Education
-            </span>
+      {/* Timeline Connector */}
+      <div className="absolute left-[10px] top-2 bottom-0 w-px bg-[var(--paper-line)] group-last:hidden" />
+
+      {/* Timeline Node */}
+      <div className="absolute left-0 top-2 w-[21px] h-[21px] rounded-full bg-[var(--ink)] border-4 border-[var(--background)] shadow-[0_0_0_2px_var(--wine)] z-10" />
+
+      <div className="bg-[var(--paper-panel)] border border-[var(--paper-line)] rounded-2xl p-8 hover:border-[var(--wine)] hover:shadow-xl hover:shadow-[var(--wine-glow)] transition-all duration-500 group">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <span className="font-mono text-sm font-bold text-[var(--brass)] tracking-widest">
+            {item.year}
+          </span>
+          <div className="bg-[var(--wine-glow)] text-[var(--wine)] px-4 py-1.5 rounded-full text-xs font-bold border border-[var(--wine)]/10">
+            <span className="opacity-70 mr-2 font-medium">{item.scoreLabel}:</span>
+            {item.score}
           </div>
-          <h2 className="sec-head section-title-bold" style={{ color: 'var(--ink)' }}>
-            Journey &amp; Qualifications
-          </h2>
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: 'var(--ink-soft)',
-              lineHeight: 1.7,
-              maxWidth: '45ch',
-              margin: '0.5rem 0 0 0',
-            }}
-          >
-            My academic trajectory and qualifications. A path of continuous study, structured
-            logical learning, and specialized engineering focus.
-          </p>
         </div>
 
-        {/* Destination Vertical Timeline (Placed on the left side of the section) */}
-        <div className="relative pl-6 pr-2 md:pl-8 overflow-visible max-w-[850px]">
-          {/* Vertical red path line */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '21px', // perfectly aligned with the center of the nodes
-              top: '12px',
-              bottom: '12px',
-              width: '4px',
-              background: 'var(--wine)', // dark red/wine path
-              borderRadius: '999px',
-              zIndex: 0,
-            }}
-          />
+        <h3 className="font-display text-2xl font-bold text-[var(--ink)] mb-1 leading-tight">
+          {item.degree}
+        </h3>
+        <h4 className="text-[var(--wine)] font-semibold mb-4 tracking-wide">
+          {item.institution}
+        </h4>
+        <p className="text-[var(--ink-soft)] leading-relaxed max-w-2xl">
+          {item.details}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
-          {/* Milestones list */}
-          <div className="flex flex-col gap-10">
-            {EDUCATION_HISTORY.map((item, index) => {
-              const isHovered = activeHoverIndex === index;
-              return (
-                <div
-                  key={item.institution}
-                  className="relative pl-8"
-                  onMouseEnter={() => setActiveHoverIndex(index)}
-                  onMouseLeave={() => setActiveHoverIndex(null)}
-                  style={{
-                    transition: 'all 0.3s ease',
-                    zIndex: 1,
-                  }}
-                >
-                  {/* Destination Circular Node (Solid Black on Red Line) */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: '-2.5px', // centers the 21px circle on the 4px line
-                      top: '12px',
-                      width: '21px',
-                      height: '21px',
-                      borderRadius: '50%',
-                      background: '#000000', // solid black circle
-                      border: '3px solid var(--paper)',
-                      boxShadow: isHovered
-                        ? '0 0 0 4px var(--wine), 0 0 12px rgba(0,0,0,0.4)'
-                        : '0 0 0 2px var(--wine)',
-                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                      transform: isHovered ? 'scale(1.25)' : 'none',
-                      cursor: 'pointer',
-                      zIndex: 2,
-                    }}
-                  />
+export default function EducationSection() {
+  return (
+    <section id="education" className="section border-t border-[var(--paper-line)]">
+      <div className="content-shell">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16">
+          <div>
+            <p className="eyebrow">04 / Journey</p>
+            <h2 className="sec-head mb-6">Academic Foundation</h2>
+            <p className="text-lg text-[var(--ink-soft)] leading-relaxed max-w-md">
+              A trajectory of continuous study, structured logical learning, and a specialized engineering focus on modern computing systems.
+            </p>
+          </div>
 
-                  {/* Milestone Card */}
-                  <div
-                    style={{
-                      background: 'var(--paper-panel)',
-                      border: isHovered ? '1px solid var(--wine)' : '1px solid var(--paper-line)',
-                      borderRadius: '16px',
-                      padding: '1.75rem',
-                      backdropFilter: 'blur(10px)',
-                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                      transform: isHovered ? 'translateX(8px)' : 'none',
-                      boxShadow: isHovered ? '0 12px 28px rgba(30,25,18,0.06)' : 'none',
-                    }}
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-mono), monospace',
-                          fontSize: '0.78rem',
-                          fontWeight: 600,
-                          color: 'var(--brass)',
-                          letterSpacing: '0.05em',
-                        }}
-                      >
-                        {item.year}
-                      </span>
-
-                      {/* Score highlight badge */}
-                      <div
-                        style={{
-                          background: 'rgba(122, 18, 32, 0.08)',
-                          color: 'var(--wine)',
-                          padding: '0.35rem 0.75rem',
-                          borderRadius: '999px',
-                          fontSize: '0.8rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.02em',
-                          border: '1px solid rgba(122, 18, 32, 0.15)',
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: '0.7rem',
-                            fontWeight: 500,
-                            opacity: 0.8,
-                            marginRight: '0.3rem',
-                          }}
-                        >
-                          {item.scoreLabel}:
-                        </span>
-                        {item.score}
-                      </div>
-                    </div>
-
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-fraunces), serif',
-                        fontSize: '1.35rem',
-                        fontWeight: 600,
-                        color: 'var(--ink)',
-                        margin: '0 0 0.25rem 0',
-                        lineHeight: 1.2,
-                      }}
-                    >
-                      {item.degree}
-                    </h3>
-
-                    <h4
-                      style={{
-                        fontSize: '0.98rem',
-                        fontWeight: 500,
-                        color: 'var(--wine)',
-                        margin: '0 0 0.85rem 0',
-                      }}
-                    >
-                      {item.institution}
-                    </h4>
-
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--ink-soft)',
-                        lineHeight: 1.6,
-                        margin: 0,
-                      }}
-                    >
-                      {item.details}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="relative">
+            {EDUCATION_HISTORY.map((item, index) => (
+              <EducationCard key={item.institution} item={item} index={index} />
+            ))}
           </div>
         </div>
       </div>
