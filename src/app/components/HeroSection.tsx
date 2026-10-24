@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className="content-shell hero-grid">
         <div className="hero-copy">
           <h1>
-            Aryan Surya <span>S</span>
+            Aryan S <span>S</span> <span>S</span><span>S</span>
           </h1>
           <p className="eyebrow hero-kicker">Computer Science · AI Builder</p>
           <div className="hero-actions">
