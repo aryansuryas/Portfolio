@@ -1,178 +1,160 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+
+import React, { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUpRight, GitBranch, Globe, X } from 'lucide-react';
 
 interface Project {
-  num: string;
   title: string;
   description: string;
+  details: string;
+  architecture: string;
+  challenge: string;
   tags: string[];
-  links: { label: string; href: string }[];
+  github?: string;
+  demo?: string;
 }
 
 const PROJECTS: Project[] = [
   {
-    num: '/ 01',
     title: 'Hand-Frame',
-    description:
-      'A focused project centered on gesture recognition, interaction design, and frame-based control. Computer vision pipeline built with real-time hand tracking — presented in the same refined visual language as the rest of the portfolio.',
-    tags: ['Computer Vision', 'OpenCV', 'Interaction', 'UI'],
-    links: [{ label: 'Open GitHub', href: 'https://github.com/aryansuryas/Hand-Frame' }],
+    description: 'Real-time gesture recognition for frame-based interaction.',
+    details:
+      'A focused computer-vision experience that turns hand movement into a reliable, low-latency interface.',
+    architecture:
+      'Camera input → OpenCV processing → hand landmark interpretation → responsive UI state.',
+    challenge:
+      'Making interaction feel immediate while keeping noisy tracking data from producing accidental actions.',
+    tags: ['Computer Vision', 'OpenCV', 'Interaction'],
+    github: 'https://github.com/aryansuryas/Hand-Frame',
   },
   {
-    num: '/ 02',
     title: 'World-Map',
-    description:
-      'A world visualization project designed to present geography and location data with clarity, clean spacing, and a polished presentation layer. Focuses on data density without visual clutter.',
-    tags: ['Visualization', 'Maps', 'Web', 'D3.js'],
-    links: [{ label: 'Open GitHub', href: 'https://github.com/aryansuryas/World-Map' }],
+    description: 'A clear, polished visualization layer for geography and location data.',
+    details:
+      'An exploration of information density, hierarchy, and visual storytelling on a global canvas.',
+    architecture:
+      'Structured location data → projection layer → interactive map primitives → responsive presentation.',
+    challenge:
+      'Balancing useful detail with a calm interface that remains legible at every viewport size.',
+    tags: ['Visualization', 'Maps', 'D3.js'],
+    github: 'https://github.com/aryansuryas/World-Map',
   },
   {
-    num: '/ 03',
     title: 'Portfolio System',
-    description:
-      'This portfolio itself — a layout focused on strong editorial typography, scroll-driven motion, and a lightweight structure deployable in minutes. Three.js TorusKnot shatter as the defining visual.',
-    tags: ['Next.js', 'TypeScript', 'Three.js', 'CSS'],
-    links: [],
+    description: 'This portfolio: editorial typography, motion, and production-minded structure.',
+    details:
+      'A responsive Next.js experience designed to communicate capability quickly without unnecessary visual noise.',
+    architecture:
+      'Next.js App Router → composable sections → design tokens → progressively enhanced motion.',
+    challenge:
+      'Creating a distinctive visual system that stays fast, accessible, and easy to maintain.',
+    tags: ['Next.js', 'TypeScript', 'Design Systems'],
   },
 ];
 
 export default function ProjectsSection() {
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [selected, setSelected] = React.useState<Project | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-            entry.target.classList.remove('reveal-hidden');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-    );
-    cardRefs.current.forEach((c) => {
-      if (c) observer.observe(c);
-    });
-    return () => observer.disconnect();
-  }, []);
+    document.body.style.overflow = selected ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selected]);
 
   return (
-    <section id="projects" className="relative" style={{ paddingBlock: 'clamp(5rem, 10vw, 9rem)' }}>
-      <div className="px-[var(--edge)]" style={{ maxWidth: 'var(--container)', margin: '0 auto' }}>
-        {/* Header */}
-        <div className="flex flex-col gap-2 mb-12">
-          <div className="flex items-center gap-3">
-            <div className="section-divider" />
-            <span
-              className="text-xs uppercase tracking-[0.1em]"
-              style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--wine)' }}
-            >
-              02 / Selected Work
-            </span>
-          </div>
-          <h2 className="sec-head" style={{ color: 'var(--ink)' }}>
-            Projects
-          </h2>
+    <section id="projects" className="section">
+      <div className="content-shell">
+        <div className="section-heading">
+          <p className="eyebrow">01 / Selected work</p>
+          <h2>Things I&apos;ve Built</h2>
         </div>
-
-        {/* Projects grid */}
-        <div
-          className="grid gap-6"
-          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
-        >
-          {PROJECTS.map((project, i) => (
-            <article
-              key={project.num}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              className="premium-card reveal-hidden flex flex-col"
-              style={{ transitionDelay: `${i * 100}ms` }}
+        <div className="project-grid">
+          {PROJECTS.map((project, index) => (
+            <motion.button
+              key={project.title}
+              className="project-card"
+              onClick={() => setSelected(project)}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
             >
-              {/* Number */}
-              <div className="mb-4">
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono-ibm), monospace',
-                    color: 'var(--brass)',
-                    fontSize: '0.85rem',
-                  }}
-                >
-                  {project.num}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3
-                className="mb-3"
-                style={{
-                  fontFamily: 'var(--font-fraunces), serif',
-                  fontSize: '1.55rem',
-                  fontWeight: 600,
-                  color: 'var(--ink)',
-                  letterSpacing: '-0.01em',
-                  lineHeight: 1.2,
-                }}
-              >
-                {project.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                className="mb-5 flex-1"
-                style={{ color: 'var(--ink-soft)', lineHeight: 1.65, fontSize: '0.95rem' }}
-              >
-                {project.description}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-5">
+              <span className="project-number">0{index + 1}</span>
+              <span className="project-card-content">
+                <strong>{project.title}</strong>
+                <span>{project.description}</span>
+              </span>
+              <span className="project-arrow">
+                <ArrowUpRight size={20} />
+              </span>
+              <span className="project-tags">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="proj-tag" style={{ color: 'var(--ink-soft)' }}>
-                    {tag}
-                  </span>
+                  <span key={tag}>{tag}</span>
                 ))}
-              </div>
-
-              {/* Links */}
-              {project.links.length > 0 && (
-                <div
-                  className="flex flex-wrap gap-2 pt-4"
-                  style={{ borderTop: '1px solid var(--paper-line)' }}
-                >
-                  {project.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="project-link-pill"
-                    >
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M2 10L10 2M10 2H4M10 2V8"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </article>
+              </span>
+            </motion.button>
           ))}
         </div>
       </div>
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="modal-backdrop"
+            role="presentation"
+            onClick={() => setSelected(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.article
+              className="project-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-title"
+              onClick={(event) => event.stopPropagation()}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            >
+              <button
+                className="modal-close"
+                onClick={() => setSelected(null)}
+                aria-label="Close project details"
+              >
+                <X size={20} />
+              </button>
+              <p className="eyebrow">Project details</p>
+              <h2 id="project-title">{selected.title}</h2>
+              <p className="modal-lede">{selected.details}</p>
+              <div className="modal-details">
+                <div>
+                  <span>Architecture</span>
+                  <p>{selected.architecture}</p>
+                </div>
+                <div>
+                  <span>Challenge solved</span>
+                  <p>{selected.challenge}</p>
+                </div>
+              </div>
+              <div className="modal-links">
+                {selected.github && (
+                  <a href={selected.github} target="_blank" rel="noreferrer">
+                    <GitBranch size={17} /> GitHub
+                  </a>
+                )}
+                {selected.demo && (
+                  <a href={selected.demo} target="_blank" rel="noreferrer">
+                    <Globe size={17} /> Live demo
+                  </a>
+                )}
+              </div>
+            </motion.article>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

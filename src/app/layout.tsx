@@ -1,19 +1,11 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, IBM_Plex_Mono, Inter } from 'next/font/google';
+import { IBM_Plex_Mono, Inter } from 'next/font/google';
 import '../styles/tailwind.css';
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
-  display: 'swap',
-});
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-jakarta',
   display: 'swap',
 });
@@ -32,7 +24,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: 'Aryan Surya S — Full-Stack Developer & AI Builder',
+  title: 'Aryan Surya Mashbir Black — Computer Science & AI Builder',
   description:
     'CSE student, full-stack developer and AI systems builder from Bengaluru. Engineering fast, hyper-scalable apps wrapped in modern design.',
   icons: {
@@ -42,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <body className={inter.className}>{children}</body>
     </html>
   );

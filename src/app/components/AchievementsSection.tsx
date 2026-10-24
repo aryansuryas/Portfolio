@@ -96,11 +96,11 @@ export default function AchievementsSection() {
               className="text-xs uppercase tracking-[0.12em] font-semibold"
               style={{ fontFamily: 'var(--font-mono), monospace', color: 'var(--wine)' }}
             >
-              04 / Achievements
+              03 / Key Achievements
             </span>
           </div>
-          <h2 className="sec-head" style={{ color: 'var(--ink)' }}>
-            Key Achievements & Certifications
+          <h2 className="sec-head section-title-bold" style={{ color: 'var(--ink)' }}>
+            Key Achievements
           </h2>
         </div>
 

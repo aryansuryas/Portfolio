@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import HeroSection from './components/HeroSection';
-import PhilosophySection from './components/PhilosophySection';
 import ProjectsSection from './components/ProjectsSection';
 import TechStackSection from './components/TechStackSection';
 import AchievementsSection from './components/AchievementsSection';
@@ -9,33 +8,21 @@ import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import SiteNav from './components/SiteNav';
 import SiteFooter from './components/SiteFooter';
-import ThreeCanvas from './components/ThreeCanvas';
+import { ThemeProvider } from './components/ThemeProvider';
 
 export default function HomePage() {
   return (
-    <>
-      {/* Fixed atmospheric layers */}
-      <div className="blueprint-grid" aria-hidden="true" />
-      <div className="grain-overlay" aria-hidden="true" />
-
-      {/* Three.js TorusKnot — fixed, fills the hero frame */}
-      <ThreeCanvas />
-
-      {/* Navigation */}
+    <ThemeProvider>
       <SiteNav />
-
-      {/* Main content — z-index above canvas */}
-      <main className="relative" style={{ zIndex: 2 }}>
+      <main>
         <HeroSection />
-        <PhilosophySection />
         <ProjectsSection />
         <TechStackSection />
         <AchievementsSection />
         <EducationSection />
         <ContactSection />
       </main>
-
       <SiteFooter />
-    </>
+    </ThemeProvider>
   );
 }

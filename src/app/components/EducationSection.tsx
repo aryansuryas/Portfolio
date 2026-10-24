@@ -76,11 +76,11 @@ export default function EducationSection() {
               className="text-xs uppercase tracking-[0.1em]"
               style={{ fontFamily: 'var(--font-mono), monospace', color: 'var(--wine)' }}
             >
-              05 / Journey
+              04 / Education
             </span>
           </div>
-          <h2 className="sec-head" style={{ color: 'var(--ink)' }}>
-            Education
+          <h2 className="sec-head section-title-bold" style={{ color: 'var(--ink)' }}>
+            Journey &amp; Qualifications
           </h2>
           <p
             style={{

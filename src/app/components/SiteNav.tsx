@@ -1,148 +1,66 @@
 'use client';
-import React, { useState, useEffect } from 'react';
 
-const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Stack', href: '#tech-stack' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Contact', href: '#contact' },
-  { label: 'Resume', href: '/Aryan_Surya_S_Resume.pdf', external: true, download: true },
-];
+import React, { useEffect, useState } from 'react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 export default function SiteNav() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, cycleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = open ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [menuOpen]);
-
-  const closeMenu = () => setMenuOpen(false);
+  }, [open]);
 
   return (
-    <>
-      <nav
-        className="fixed top-0 left-0 w-full z-[100] transition-all duration-500"
-        style={{
-          borderBottom: '1px solid var(--paper-line)',
-          background: scrolled ? 'rgba(251, 247, 236, 0.92)' : 'rgba(251, 247, 236, 0.75)',
-          backdropFilter: 'blur(20px)',
-        }}
-      >
-        <div
-          className="flex justify-between items-center px-[var(--edge)] gap-4"
-          style={{ height: 'var(--nav-h)', maxWidth: 'var(--container)', margin: '0 auto' }}
-        >
-          {/* Logo */}
-          <a href="#" onClick={closeMenu} className="inline-flex items-center group">
-            <span
-              className="leading-none"
-              style={{
-                fontFamily: 'var(--font-kholic), var(--font-fraunces), serif',
-                fontWeight: 700,
-                fontSize: 'clamp(1rem, 2.2vw, 1.25rem)',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ink)',
-              }}
-            >
-              Portfolio
-            </span>
-          </a>
-
-          {/* Desktop links */}
-          <ul className="hidden md:flex gap-8 list-none items-center">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
-                  download={link.download ? 'Aryan_Surya_S_Resume.pdf' : undefined}
-                  className="nav-link-underline font-medium text-sm transition-colors"
-                  style={{ color: 'var(--ink-soft)' }}
-                  onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
-                  onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--ink-soft)')}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile toggle */}
+    <header className={`site-nav ${scrolled ? 'site-nav-scrolled' : ''}`}>
+      <div className="site-nav-inner">
+        <a href="#top" className="nav-monogram" aria-label="Back to top">
+          AS
+        </a>
+        <div className="nav-actions">
           <button
-            className="md:hidden flex items-center justify-center w-11 h-11 rounded-full border transition-all duration-200"
-            style={{
-              border: '1px solid var(--paper-line)',
-              background: 'rgba(251, 247, 236, 0.9)',
-              color: 'var(--ink)',
-            }}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={menuOpen}
+            className="theme-toggle"
+            onClick={cycleTheme}
+            aria-label={`Switch theme. Current theme: ${theme}`}
           >
-            <span className="text-base leading-none select-none">{menuOpen ? '✕' : '☰'}</span>
+            {theme === 'light' ? <Sun size={17} /> : <Moon size={17} />}
+            <span>{theme === 'light' ? 'Light' : 'Dark'}</span>
+          </button>
+          <a className="nav-cta" href="#contact">
+            Let&apos;s talk
+          </a>
+          <button
+            className="mobile-menu-button"
+            onClick={() => setOpen(true)}
+            aria-label="Open navigation"
+          >
+            <Menu size={22} />
           </button>
         </div>
-      </nav>
-
-      {/* Mobile overlay */}
-      <div
-        className={`fixed inset-0 z-[110] flex flex-col justify-center items-center md:hidden transition-all duration-500 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{
-          background: 'rgba(251, 247, 236, 0.98)',
-          backdropFilter: 'blur(24px)',
-          transform: menuOpen ? 'translateY(0)' : 'translateY(-100%)',
-          transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
-        }}
-      >
+      </div>
+      <div className={`mobile-nav ${open ? 'mobile-nav-open' : ''}`}>
         <button
-          className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center rounded-full border text-2xl"
-          style={{ border: '1px solid var(--paper-line)', color: 'var(--ink)' }}
-          onClick={closeMenu}
+          className="mobile-close"
+          onClick={() => setOpen(false)}
           aria-label="Close navigation"
         >
-          ✕
+          <X size={24} />
         </button>
-        <nav className="flex flex-col gap-8 text-center">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target={link.external ? '_blank' : undefined}
-              rel={link.external ? 'noopener noreferrer' : undefined}
-              download={link.download ? 'Aryan_Surya_S_Resume.pdf' : undefined}
-              onClick={closeMenu}
-              className="text-3xl font-light transition-colors"
-              style={{
-                fontFamily: 'var(--font-fraunces), serif',
-                color: 'var(--ink-soft)',
-              }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--wine)')}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--ink-soft)')}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>
+          Let&apos;s talk
+        </a>
       </div>
-    </>
+    </header>
   );
 }
