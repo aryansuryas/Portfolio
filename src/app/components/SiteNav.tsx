@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Download, Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
-import { motion } from 'framer-motion';
 
 const NAV_LINKS = [
   { name: 'Work', href: '#projects' },

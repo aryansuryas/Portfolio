@@ -71,8 +71,9 @@ export default function ContactSection() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       setSubmitted(true);
+      setError('');
     } catch {
-      setError('Failed');
+      setError('Failed to send message. Please try again.');
     } finally {
       setSending(false);
     }
@@ -146,8 +147,9 @@ export default function ContactSection() {
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                 />
                 <button type="submit" className="button button-primary w-full">
-                  <Send size={16} /> Send
+                  <Send size={16} /> {sending ? 'Sending...' : 'Send'}
                 </button>
+                {error && <p className="text-sm text-[var(--wine)]">{error}</p>}
               </form>
             )}
           </div>

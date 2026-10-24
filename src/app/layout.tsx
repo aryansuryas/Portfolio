@@ -32,7 +32,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://aryansurya.com'),
   title: 'Aryan Surya S — Computer Science & AI Builder',
-  description: 'Building high-performance full-stack applications with a focus on computer vision and cosmic web experiences.',
+  description:
+    'Building high-performance full-stack applications with a focus on computer vision and cosmic web experiences.',
   openGraph: {
     title: 'Aryan Surya S',
     description: 'Computer Science & AI Builder',
@@ -50,7 +51,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} ${fraunces.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${ibmPlexMono.variable} ${fraunces.variable} scroll-smooth`}
+    >
       <body className="antialiased selection:bg-[var(--wine)] selection:text-white">
         <div className="grain-overlay" />
         {children}

@@ -24,8 +24,7 @@ export default function HeroSection() {
             style={{ fontFamily: 'var(--font-kholic), var(--font-display)' }}
           >
             <span className="text-[var(--wine)]">A</span>ryan <br />
-            <span className="text-[var(--wine)]">S</span>urya{' '}
-             S 
+            <span className="text-[var(--wine)]">S</span>urya S
           </motion.h1>
 
           <motion.p variants={item} className="text-2xl text-[var(--ink-soft)] max-w-2xl">

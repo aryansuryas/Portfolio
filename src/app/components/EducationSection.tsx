@@ -18,7 +18,8 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Dayananda Sagar University',
     score: '8.56 CGPA',
     scoreLabel: 'Current CGPA',
-    details: 'Pursuing my engineering major in Computer Science & Engineering. Building deep competencies in Data Structures & Algorithms, Full-Stack Architectures, and LLM automation systems.',
+    details:
+      'Pursuing my engineering major in Computer Science & Engineering. Building deep competencies in Data Structures & Algorithms, Full-Stack Architectures, and LLM automation systems.',
   },
   {
     year: '2022 - 2024',
@@ -26,7 +27,8 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Deeksha CFL PU College',
     score: '93%',
     scoreLabel: 'Final Percentage',
-    details: 'Completed pre-university education with a core focus on Physics, Chemistry, Mathematics, and Computer Science.',
+    details:
+      'Completed pre-university education with a core focus on Physics, Chemistry, Mathematics, and Computer Science.',
   },
   {
     year: '2021 - 2022',
@@ -34,7 +36,8 @@ const EDUCATION_HISTORY: EducationMilestone[] = [
     institution: 'Jain Vidyaniketan',
     score: '96.96%',
     scoreLabel: 'Board Score',
-    details: 'Completed secondary school board examinations with outstanding performance and general academic excellence.',
+    details:
+      'Completed secondary school board examinations with outstanding performance and general academic excellence.',
   },
 ];
 
@@ -67,12 +70,8 @@ function EducationCard({ item, index }: { item: EducationMilestone; index: numbe
         <h3 className="font-display text-2xl font-bold text-[var(--ink)] mb-1 leading-tight">
           {item.degree}
         </h3>
-        <h4 className="text-[var(--wine)] font-semibold mb-4 tracking-wide">
-          {item.institution}
-        </h4>
-        <p className="text-[var(--ink-soft)] leading-relaxed max-w-2xl">
-          {item.details}
-        </p>
+        <h4 className="text-[var(--wine)] font-semibold mb-4 tracking-wide">{item.institution}</h4>
+        <p className="text-[var(--ink-soft)] leading-relaxed max-w-2xl">{item.details}</p>
       </div>
     </motion.div>
   );
@@ -87,7 +86,8 @@ export default function EducationSection() {
             <p className="eyebrow">04 / Journey</p>
             <h2 className="sec-head mb-6">Academic Foundation</h2>
             <p className="text-lg text-[var(--ink-soft)] leading-relaxed max-w-md">
-              A trajectory of continuous study, structured logical learning, and a specialized engineering focus on modern computing systems.
+              A trajectory of continuous study, structured logical learning, and a specialized
+              engineering focus on modern computing systems.
             </p>
           </div>
 
