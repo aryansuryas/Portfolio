@@ -14,12 +14,20 @@ build/
 # TypeScript build cache & archives
 *.tsbuildinfo
 *.zip
+.swc/
+.turbo/
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
+*.pid
+
+# Test and coverage output
+coverage/
+.nyc_output/
 
 # OS & Editor files
 .DS_Store

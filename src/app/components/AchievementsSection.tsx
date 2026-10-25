@@ -57,7 +57,7 @@ function AchievementRow({ item, index }: { item: AchievementItem; index: number 
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative py-10 border-b border-[var(--paper-line)] hover:bg-[var(--wine-glow)]/5 transition-all duration-500 px-4 -mx-4 rounded-xl"
@@ -73,7 +73,7 @@ function AchievementRow({ item, index }: { item: AchievementItem; index: number 
         </div>
 
         <div className="flex flex-col gap-2">
-          <h3 className="font-display text-2xl md:text-3xl font-semibold text-[var(--ink)] tracking-tight group-hover:text-[var(--wine)] transition-colors">
+          <h3 className="section-subhead text-2xl md:text-3xl font-semibold text-[var(--ink)] tracking-tight group-hover:text-[var(--wine)] transition-colors">
             {item.title}
           </h3>
           <p className="text-[var(--ink-soft)] leading-relaxed max-w-3xl">{item.description}</p>

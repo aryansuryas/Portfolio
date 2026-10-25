@@ -3,6 +3,7 @@ import React from 'react';
 import HeroSection from './components/HeroSection';
 import ProjectsSection from './components/ProjectsSection';
 import TechStackSection from './components/TechStackSection';
+import LeetCodeStickyCard from './components/LeetCodeStickyCard';
 import AchievementsSection from './components/AchievementsSection';
 import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
@@ -18,6 +19,7 @@ export default function HomePage() {
         <HeroSection />
         <ProjectsSection />
         <TechStackSection />
+        <LeetCodeStickyCard />
         <AchievementsSection />
         <EducationSection />
         <ContactSection />

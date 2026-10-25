@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { IBM_Plex_Mono, Inter, Fraunces } from 'next/font/google';
+import { IBM_Plex_Mono, Inter, Fraunces, Oswald } from 'next/font/google';
 import '../styles/tailwind.css';
 
 const inter = Inter({
@@ -21,6 +21,13 @@ const fraunces = Fraunces({
   variable: '--font-fraunces',
   display: 'swap',
   style: ['normal', 'italic'],
+});
+
+const oswald = Oswald({
+  subsets: ['latin'],
+  variable: '--font-oswald',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const viewport: Viewport = {
@@ -53,7 +60,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${ibmPlexMono.variable} ${fraunces.variable} scroll-smooth`}
+      className={`${inter.variable} ${ibmPlexMono.variable} ${fraunces.variable} ${oswald.variable} scroll-smooth`}
     >
       <body className="antialiased selection:bg-[var(--wine)] selection:text-white">
         <div className="grain-overlay" />

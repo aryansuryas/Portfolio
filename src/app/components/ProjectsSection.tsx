@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, GitBranch, Globe, X } from 'lucide-react';
+import { GitBranch, Globe, X } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -13,6 +13,17 @@ interface Project {
   tags: string[];
   github?: string;
   demo?: string;
+}
+
+function GithubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.01c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.57c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"
+      />
+    </svg>
+  );
 }
 
 const PROJECTS: Project[] = [
@@ -62,15 +73,12 @@ export default function ProjectsSection() {
   }, [selected]);
 
   return (
-    <section id="projects" className="section bg-[var(--background)]">
+    <section id="projects" className="relative z-10 section bg-[var(--background)]">
       <div className="content-shell">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="mb-12">
           <div className="max-w-2xl">
             <p className="eyebrow">01 / Selected Work</p>
             <h2 className="sec-head">Featured Projects</h2>
-          </div>
-          <div className="flex items-center gap-2 text-sm font-mono text-[var(--ink-faint)]">
-            <span>[0{PROJECTS.length}]</span> Total Builds
           </div>
         </div>
 
@@ -78,7 +86,7 @@ export default function ProjectsSection() {
           {PROJECTS.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -95,13 +103,26 @@ export default function ProjectsSection() {
                   <span className="text-xs font-bold tracking-widest text-[var(--wine)] uppercase">
                     Build 0{index + 1}
                   </span>
-                  <div className="w-12 h-12 rounded-full border border-[var(--paper-line)] flex items-center justify-center bg-[var(--background)] group-hover:bg-[var(--wine)] group-hover:text-white group-hover:border-[var(--wine)] transition-all duration-500">
-                    <ArrowUpRight size={20} />
-                  </div>
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${project.title} on GitHub`}
+                      onClick={(event) => event.stopPropagation()}
+                      className="w-12 h-12 rounded-full border border-[var(--paper-line)] flex items-center justify-center bg-[var(--background)] group-hover:bg-[var(--wine)] group-hover:text-white group-hover:border-[var(--wine)] transition-all duration-500"
+                    >
+                      <GithubIcon />
+                    </a>
+                  ) : (
+                    <div className="w-12 h-12 rounded-full border border-[var(--paper-line)] flex items-center justify-center bg-[var(--background)] group-hover:bg-[var(--wine)] group-hover:text-white group-hover:border-[var(--wine)] transition-all duration-500">
+                      <GithubIcon />
+                    </div>
+                  )}
                 </div>
 
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold text-[var(--ink)] mb-4 tracking-tight leading-none group-hover:translate-x-2 transition-transform duration-500">
+                  <h3 className="section-subhead text-3xl font-bold text-[var(--ink)] mb-4 tracking-tight leading-none group-hover:translate-x-2 transition-transform duration-500">
                     {project.title}
                   </h3>
                   <p className="text-[var(--ink-soft)] text-lg leading-relaxed mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
