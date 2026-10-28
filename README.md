@@ -1,4 +1,4 @@
-# Aryan Surya S — Portfolio
+# AS Portfolio
 This is my Portfolio
 A modern, editorial-style portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
 
