@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Mono, Inter, Fraunces, Oswald } from 'next/font/google';
+import { SITE_URL } from '@/lib/site';
 import '../styles/tailwind.css';
 
 const inter = Inter({
@@ -37,14 +38,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://aryansurya.com'),
+  metadataBase: SITE_URL,
   title: 'Aryan Surya S — Computer Science & AI Builder',
   description:
     'Building high-performance full-stack applications with a focus on computer vision and cosmic web experiences.',
   openGraph: {
     title: 'Aryan Surya S',
     description: 'Computer Science & AI Builder',
-    url: 'https://aryansurya.com',
+    url: SITE_URL.toString(),
     siteName: 'Aryan Surya Portfolio',
     locale: 'en_US',
     type: 'website',

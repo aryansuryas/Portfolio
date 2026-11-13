@@ -8,39 +8,6 @@ module.exports = {
       padding: '1rem',
     },
     extend: {
-      colors: {
-        background: { DEFAULT: 'var(--background)' },
-        foreground: { DEFAULT: 'var(--foreground)' },
-        primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
-        },
-        secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
-        },
-        accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
-        },
-        muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
-        },
-        card: {
-          DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
-        },
-        border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
-        wine: 'var(--wine)',
-        'wine-dark': 'var(--wine-dark)',
-        brass: 'var(--brass)',
-        ink: 'var(--ink)',
-        'ink-soft': 'var(--ink-soft)',
-        paper: 'var(--paper)',
-      },
       borderRadius: {
         DEFAULT: 'var(--radius)',
         lg: 'calc(var(--radius) * 2)',

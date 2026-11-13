@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import Icon from '@/components/ui/AppIcon';
+import { ArrowLeft, Home } from 'lucide-react';
 
 export default function NotFound() {
   const router = useRouter();
@@ -12,43 +12,36 @@ export default function NotFound() {
   };
 
   const handleGoBack = () => {
-    if (typeof window !== 'undefined') {
-      window.history?.back();
-    }
+    if (window.history.length > 1) window.history.back();
+    else router.push('/');
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-[var(--background)] p-4">
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <h1 className="text-9xl font-bold text-primary opacity-20">404</h1>
+            <h1 className="text-9xl font-bold text-[var(--wine)] opacity-20">404</h1>
           </div>
         </div>
 
-        <h2 className="text-2xl font-medium text-onBackground mb-2">Page Not Found</h2>
-        <p className="text-onBackground/70 mb-8">
+        <h2 className="text-2xl font-medium text-[var(--ink)] mb-2">Page Not Found</h2>
+        <p className="text-[var(--ink-soft)] mb-8">
           The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get you back!
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={handleGoBack}
-            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200"
-          >
-            <Icon name="ArrowLeftIcon" size={16} />
+          <button onClick={handleGoBack} className="button button-primary">
+            <ArrowLeft size={16} aria-hidden="true" />
             Go Back
           </button>
 
-          <button
-            onClick={handleGoHome}
-            className="inline-flex items-center justify-center gap-2 border border-border bg-background text-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
-          >
-            <Icon name="HomeIcon" size={16} />
+          <button onClick={handleGoHome} className="button button-secondary">
+            <Home size={16} aria-hidden="true" />
             Back to Home
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
