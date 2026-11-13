@@ -51,7 +51,7 @@ function EducationCard({ item, index }: { item: EducationMilestone; index: numbe
 
       <div className="bg-[var(--paper-panel)] border border-[var(--paper-line)] rounded-2xl p-8 hover:border-[var(--wine)] hover:shadow-xl hover:shadow-[var(--wine-glow)] transition-all duration-500 group">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <span className="font-mono text-sm font-bold text-[var(--brass)] tracking-widest">
+          <span className="font-mono text-sm font-bold text-[var(--brass-ink)] tracking-widest">
             {item.year}
           </span>
           <div className="bg-[var(--wine-glow)] text-[var(--wine)] px-4 py-1.5 rounded-full text-xs font-bold border border-[var(--wine)]/10">
@@ -75,7 +75,7 @@ export default function EducationSection() {
       <div className="content-shell">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16">
           <div>
-            <p className="eyebrow">04 / Journey</p>
+            <p className="eyebrow">06 / Journey</p>
             <h2 className="sec-head mb-6">Education</h2>
           </div>
 

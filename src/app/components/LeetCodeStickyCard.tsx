@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 interface ProfileCard {
   title: string;
@@ -10,21 +11,24 @@ interface ProfileCard {
   href: string;
   image: string;
   imageAlt: string;
+  imageAvailable: boolean;
   background: string;
+  foreground: string;
   fallback: string;
 }
 
 const PROFILE_CARDS: ProfileCard[] = [
   {
-    title: 'LeetCode',
-    meta: 'DATA STRUCTURES & ALGORITHMS',
-    handle: '@aryansuryas',
-    description: 'Algorithmic problem solving and competitive programming.',
-    href: 'https://leetcode.com/u/aryansuryas/',
-    image: '/leetcode-profile.png',
-    imageAlt: 'LeetCode profile screenshot for aryansuryas',
-    background: '#f4f0ea',
-    fallback: 'Add the real LeetCode screenshot at public/leetcode-profile.png.',
+    title: 'YouTube',
+    meta: 'VIDEO CONTENT',
+    description: 'Technology projects, experiments and creative development.',
+    href: 'https://www.youtube.com/@aryansuryas',
+    image: '/youtube-channel.png',
+    imageAlt: 'YouTube channel artwork',
+    imageAvailable: false,
+    background: '#FF0000',
+    foreground: '#18191D',
+    fallback: 'YouTube channel artwork will appear here.',
   },
   {
     title: 'LinkedIn',
@@ -33,18 +37,23 @@ const PROFILE_CARDS: ProfileCard[] = [
     href: 'https://www.linkedin.com/in/aryansuryas/',
     image: '/linkedin-profile.png',
     imageAlt: 'LinkedIn profile artwork',
-    background: '#ffe600',
-    fallback: 'Add your LinkedIn artwork at public/linkedin-profile.png.',
+    imageAvailable: false,
+    background: '#0077B5',
+    foreground: '#FFFDF7',
+    fallback: 'LinkedIn profile artwork will appear here.',
   },
   {
-    title: 'YouTube',
-    meta: 'VIDEO CONTENT',
-    description: 'Technology projects, experiments and creative development.',
-    href: 'https://www.youtube.com/@aryansuryas',
-    image: '/youtube-channel.png',
-    imageAlt: 'YouTube channel artwork',
-    background: '#e9e8e4',
-    fallback: 'Add your channel artwork at public/youtube-channel.png.',
+    title: 'LeetCode',
+    meta: 'DATA STRUCTURES & ALGORITHMS',
+    handle: '@aryansuryas',
+    description: 'Algorithmic problem solving and competitive programming.',
+    href: 'https://leetcode.com/u/aryansuryas/',
+    image: '/leetcode-profile.png',
+    imageAlt: 'LeetCode profile screenshot for aryansuryas',
+    imageAvailable: true,
+    background: '#FFC021',
+    foreground: '#18191D',
+    fallback: 'Add the real LeetCode screenshot at public/leetcode-profile.png.',
   },
   {
     title: 'GitHub',
@@ -54,13 +63,15 @@ const PROFILE_CARDS: ProfileCard[] = [
     href: 'https://github.com/aryansuryas',
     image: '/github-profile.png',
     imageAlt: 'GitHub profile contribution graph',
-    background: '#f4f0ea',
-    fallback: 'Add your GitHub profile image at public/github-profile.png.',
+    imageAvailable: false,
+    background: '#18191D',
+    foreground: '#FFFDF7',
+    fallback: 'GitHub profile artwork will appear here.',
   },
 ];
 
 function ProfileImage({ card }: { card: ProfileCard }) {
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState(card.imageAvailable);
 
   if (!available) {
     return (
@@ -71,7 +82,7 @@ function ProfileImage({ card }: { card: ProfileCard }) {
   }
 
   return (
-    <img
+    <Image
       src={card.image}
       alt={card.imageAlt}
       width={1600}
@@ -85,9 +96,57 @@ function ProfileImage({ card }: { card: ProfileCard }) {
 }
 
 export default function LeetCodeStickyCard() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const cards = section.querySelectorAll<HTMLElement>('.profile-folder-card');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      cards.forEach((card) => card.classList.add('is-revealed'));
+      return;
+    }
+
+    section.classList.add('profile-folder-section--observing');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.15) return;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -12% 0px' }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => {
+      observer.disconnect();
+      section.classList.remove('profile-folder-section--observing');
+    };
+  }, []);
+
   return (
-    <section id="leetcode" className="profile-folder-section">
+    <section
+      id="leetcode"
+      className="profile-folder-section"
+      ref={sectionRef}
+      aria-labelledby="profile-folder-heading"
+    >
       <div className="content-shell">
+        <header className="profile-folder-header">
+          <div>
+            <p className="eyebrow">04 / Profiles</p>
+            <h2 className="sec-head" id="profile-folder-heading">
+              Around the web
+            </h2>
+          </div>
+          <p className="profile-folder-header-copy">
+            A few places where I share projects, ideas, and the work behind them.
+          </p>
+        </header>
         <div className="profile-folder-stack">
           <ul className="profile-folder-list">
             {PROFILE_CARDS.map((card, index) => (
@@ -98,6 +157,7 @@ export default function LeetCodeStickyCard() {
                   {
                     '--folder-index': index,
                     '--folder-background': card.background,
+                    '--folder-foreground': card.foreground,
                   } as React.CSSProperties
                 }
               >

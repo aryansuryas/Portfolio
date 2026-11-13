@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Download, Menu, Moon, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 const NAV_LINKS = [
@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { name: 'Tech', href: '#tech-stack' },
   { name: 'Achievements', href: '#achievements' },
   { name: 'Education', href: '#education' },
+  { name: 'Tokens', href: '/styleguide' },
 ];
 
 export default function SiteNav() {
@@ -46,10 +47,6 @@ export default function SiteNav() {
       }`}
     >
       <div className="content-shell flex items-center justify-between">
-        <a href="#top" className="text-sm font-semibold tracking-[0.08em] text-[var(--ink)]">
-          Aryan Surya S
-        </a>
-
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {NAV_LINKS.map((link) => (
             <a
@@ -63,14 +60,6 @@ export default function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            className="button resume-download-button py-2 px-3 sm:px-5"
-            href="/Aryan_Surya_S_Resume.pdf"
-            download="Aryan_Surya_S_Resume.pdf"
-          >
-            <Download size={16} strokeWidth={2.25} aria-hidden="true" />
-            Resume
-          </a>
           <button
             className="p-2.5 rounded-full border border-[var(--paper-line)] text-[var(--ink)] hover:border-[var(--wine)] hover:text-[var(--wine)] transition-all"
             onClick={cycleTheme}
@@ -122,15 +111,6 @@ export default function SiteNav() {
             </a>
           ))}
         </nav>
-        <a
-          className="button resume-download-button w-full py-3"
-          href="/Aryan_Surya_S_Resume.pdf"
-          download="Aryan_Surya_S_Resume.pdf"
-          onClick={closeMenu}
-        >
-          <Download size={16} strokeWidth={2.25} aria-hidden="true" />
-          Download Resume
-        </a>
       </div>
     </header>
   );

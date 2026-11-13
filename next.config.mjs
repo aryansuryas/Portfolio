@@ -12,6 +12,7 @@ const imageHosts = [
   { protocol: 'https', hostname: 'img.rocket.new' },
   { protocol: 'https', hostname: 'cdn.jsdelivr.net' },
   { protocol: 'https', hostname: 'cdn.simpleicons.org' },
+  { protocol: 'https', hostname: 'picsum.photos' },
 ];
 
 const nextConfig = {

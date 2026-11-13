@@ -432,7 +432,10 @@ export default function ResumePage() {
                 </div>
                 <div
                   className="text-xs font-semibold"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   2024 - 2028 | <span className="text-[var(--wine)]">CGPA: 8.56</span>
                 </div>
@@ -452,7 +455,10 @@ export default function ResumePage() {
                 </div>
                 <div
                   className="text-xs font-semibold"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   2022 - 2024 | <span className="text-[var(--wine)]">93.00%</span>
                 </div>
@@ -472,7 +478,10 @@ export default function ResumePage() {
                 </div>
                 <div
                   className="text-xs font-semibold"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   2021 - 2022 | <span className="text-[var(--wine)]">96.96%</span>
                 </div>
@@ -496,7 +505,10 @@ export default function ResumePage() {
               <div className="p-4 rounded-lg bg-[rgba(30,25,18,0.02)] border border-[var(--paper-line)]">
                 <span
                   className="block font-semibold uppercase text-xs mb-1"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   Programming Languages
                 </span>
@@ -508,7 +520,10 @@ export default function ResumePage() {
               <div className="p-4 rounded-lg bg-[rgba(30,25,18,0.02)] border border-[var(--paper-line)]">
                 <span
                   className="block font-semibold uppercase text-xs mb-1"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   Frameworks & Libraries
                 </span>
@@ -520,7 +535,10 @@ export default function ResumePage() {
               <div className="p-4 rounded-lg bg-[rgba(30,25,18,0.02)] border border-[var(--paper-line)]">
                 <span
                   className="block font-semibold uppercase text-xs mb-1"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   Databases
                 </span>
@@ -530,7 +548,10 @@ export default function ResumePage() {
               <div className="p-4 rounded-lg bg-[rgba(30,25,18,0.02)] border border-[var(--paper-line)]">
                 <span
                   className="block font-semibold uppercase text-xs mb-1"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   Tools & Platforms
                 </span>
@@ -542,7 +563,10 @@ export default function ResumePage() {
               <div className="p-4 rounded-lg bg-[rgba(30,25,18,0.02)] border border-[var(--paper-line)] sm:col-span-2">
                 <span
                   className="block font-semibold uppercase text-xs mb-1"
-                  style={{ fontFamily: 'var(--font-mono-ibm), monospace', color: 'var(--brass)' }}
+                  style={{
+                    fontFamily: 'var(--font-mono-ibm), monospace',
+                    color: 'var(--brass-ink)',
+                  }}
                 >
                   Core Competencies
                 </span>

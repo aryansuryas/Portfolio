@@ -88,7 +88,7 @@ export default function AchievementsSection() {
     <section id="achievements" className="section relative overflow-hidden">
       <div className="content-shell">
         <div className="mb-16">
-          <p className="eyebrow">03 / Distinction</p>
+          <p className="eyebrow">05 / Distinction</p>
           <h2 className="sec-head">Key Achievements</h2>
         </div>
 

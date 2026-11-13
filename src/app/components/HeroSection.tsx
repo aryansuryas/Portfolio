@@ -19,11 +19,19 @@ export default function HeroSection() {
         <motion.div variants={container} initial={false} animate="show" className="max-w-4xl">
           <motion.h1
             variants={item}
-            className="hero-name text-[clamp(3.5rem,13vw,10rem)] font-semibold leading-[0.9] tracking-tighter mb-8 text-[var(--ink)]"
+            className="hero-name whitespace-nowrap text-[clamp(2.65rem,12.5vw,10rem)] font-semibold leading-none tracking-tighter mb-5 text-[var(--ink)]"
           >
-            Aryan <br />
-            Surya S
+            ARYAN SURYA S
           </motion.h1>
+
+          <motion.a
+            variants={item}
+            className="button resume-download-button mb-7"
+            href="/Aryan_Surya_S_Resume.pdf"
+            download="Aryan_Surya_S_Resume.pdf"
+          >
+            Resume
+          </motion.a>
 
           <motion.p variants={item} className="text-2xl text-[var(--ink-soft)] max-w-2xl">
             Computer Science & AI Builder. Engineering fast, hyper-scalable applications.
